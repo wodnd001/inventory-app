@@ -1,0 +1,22 @@
+{
+  "name": "New Balance 재고관리",
+  "short_name": "NB 재고관리",
+  "description": "New Balance 매장 재고관리 앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#E21836",
+  "theme_color": "#E21836",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
