@@ -57,8 +57,7 @@
     .result-card-header { padding: 14px 16px; border-bottom: 1px solid #f0f2f5; }
     .result-style { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 2px; }
     .result-substyle { font-size: 13px; color: #888; margin-bottom: 4px; }
-    .result-stylename { font-size: 13px; color: #555; margin-bottom: 4px; }
-    .result-meta-row { display: flex; gap: 16px; font-size: 12px; color: #888; }
+    .result-meta-row { display: flex; gap: 16px; font-size: 12px; color: #888; flex-wrap: wrap; }
     .result-card-body { padding: 12px 16px; }
     .result-info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f8f8f8; font-size: 13px; }
     .result-info-row:last-child { border-bottom: none; }
@@ -81,21 +80,21 @@
     .bin-value { color: #333; font-weight: bold; }
     .memo-badge { display: inline-block; background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-top: 4px; }
 
-    /* 타매장 재고 */
-    .other-store-section { border-top: 1px solid #f0f2f5; }
-    .other-store-header { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #f8f8f8; }
-    .other-store-title { font-size: 13px; font-weight: bold; color: #333; }
-    .other-store-toggle { font-size: 12px; color: #888; }
-    .other-store-list { display: none; }
-    .other-store-item { padding: 12px 16px; border-top: 1px solid #f0f2f5; }
-    .other-store-name { font-size: 13px; font-weight: bold; color: #333; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-    .other-store-stock-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
-    .other-store-stock-item { text-align: center; padding: 6px 4px; background: #f8f8f8; border-radius: 6px; }
-    .other-store-stock-item .s-size { font-size: 11px; color: #888; }
-    .other-store-stock-item .s-qty { font-size: 14px; font-weight: bold; color: #333; }
-    .other-store-stock-item .s-qty.low { color: #E21836; }
-    .transfer-btn { padding: 6px 14px; border: none; border-radius: 20px; font-size: 12px; font-weight: bold; cursor: pointer; }
+    /* 타매장 재고 조회 */
+    .other-store-result-card { background: white; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; }
+    .other-store-result-header { padding: 14px 16px; border-bottom: 1px solid #f0f2f5; background: #f8f8f8; display: flex; justify-content: space-between; align-items: center; }
+    .other-store-result-name { font-size: 15px; font-weight: bold; color: #333; }
+    .other-store-result-total { font-size: 13px; color: #888; }
+    .other-store-size-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 16px; }
+    .other-store-size-item { text-align: center; padding: 8px; background: #f8f8f8; border-radius: 8px; }
+    .other-store-size-label { font-size: 11px; color: #888; margin-bottom: 2px; }
+    .other-store-size-qty { font-size: 16px; font-weight: bold; color: #333; }
+    .other-store-size-qty.low { color: #E21836; }
+    .other-store-size-qty.zero { color: #ccc; }
+    .other-store-actions { padding: 10px 16px; border-top: 1px solid #f0f2f5; display: flex; gap: 8px; }
+    .transfer-btn { padding: 8px 16px; border: none; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
     .transfer-btn.rotation { background: #dbeafe; color: #1d4ed8; }
+    .no-stock-store { padding: 12px 16px; color: #aaa; font-size: 13px; text-align: center; }
 
     /* 모달 */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
@@ -134,7 +133,6 @@
     .btn-green { background: #10b981; }
     .btn-green:hover { background: #059669; }
     .btn-red { background: #ef4444; }
-    .btn-blue { background: #3b82f6; }
     .btn-sm { padding: 8px 14px; font-size: 13px; border-radius: 6px; border: none; cursor: pointer; color: white; background: #E21836; }
     .page-content { padding: 20px; }
     .loading { text-align: center; color: #888; padding: 40px 0; font-size: 15px; }
@@ -151,7 +149,6 @@
     .product-card-info { flex: 1; }
     .product-name-main { font-size: 15px; font-weight: bold; color: #333; margin-bottom: 2px; }
     .product-style-sub { font-size: 12px; color: #888; margin-bottom: 2px; }
-    .product-barcode { font-size: 11px; color: #bbb; }
     .product-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
     .meta-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: #f0f2f5; color: #666; }
     .meta-badge.red { background: #ffe4e4; color: #E21836; }
@@ -193,28 +190,13 @@
     .status-size-qty.low { color: #E21836; }
     .status-total { padding: 10px 16px; background: #fafafa; border-top: 1px solid #f0f2f5; display: flex; justify-content: space-between; font-size: 13px; }
 
-    /* 재고 변동 이력 */
-    .log-card { background: white; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .log-type-badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: bold; margin-bottom: 6px; }
-    .log-type-badge.receiving { background: #d1fae5; color: #065f46; }
-    .log-type-badge.rotation-out { background: #fee2e2; color: #991b1b; }
-    .log-type-badge.rotation-in { background: #dbeafe; color: #1d4ed8; }
-    .log-type-badge.inventory { background: #f3f4f6; color: #374151; }
-    .log-product { font-size: 14px; font-weight: bold; color: #333; margin-bottom: 4px; }
-    .log-detail { font-size: 12px; color: #666; margin-bottom: 2px; }
-    .log-qty-change { font-size: 15px; font-weight: bold; margin-top: 6px; }
-    .log-qty-change.plus { color: #10b981; }
-    .log-qty-change.minus { color: #ef4444; }
-    .log-memo { font-size: 12px; color: #3b82f6; font-style: italic; margin-top: 4px; padding: 4px 8px; background: #eff6ff; border-radius: 6px; }
-
     /* 요청 관리 */
     .request-tab { display: flex; background: white; border-bottom: 1px solid #eee; position: sticky; top: 56px; z-index: 99; }
     .request-tab-btn { flex: 1; padding: 12px; border: none; background: none; font-size: 14px; color: #888; cursor: pointer; border-bottom: 2px solid transparent; }
     .request-tab-btn.active { color: #E21836; border-bottom-color: #E21836; font-weight: bold; }
     .request-card { background: white; border-radius: 10px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .request-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-    .request-type-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
-    .request-type-badge.rotation { background: #dbeafe; color: #1d4ed8; }
+    .request-type-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; background: #dbeafe; color: #1d4ed8; }
     .request-status-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
     .request-status-badge.pending { background: #fef3c7; color: #92400e; }
     .request-status-badge.approved { background: #d1fae5; color: #065f46; }
@@ -238,7 +220,7 @@
     .compare-item.match { background: #d1fae5; }
     .compare-item.mismatch { background: #fee2e2; }
     .compare-size { font-size: 12px; color: #555; margin-bottom: 4px; }
-    .compare-values { display: flex; justify-content: center; gap: 8px; font-size: 13px; font-weight: bold; }
+    .compare-values { display: flex; justify-content: center; gap: 8px; font-size: 13px; font-weight: bold; flex-wrap: wrap; }
     .compare-diff { font-size: 11px; margin-top: 2px; }
     .compare-diff.plus { color: #10b981; }
     .compare-diff.minus { color: #ef4444; }
@@ -315,8 +297,8 @@
       <button class="side-menu-item" onclick="openSubPage('inventory-page')"><span class="menu-icon">🔍</span> 재고조사</button>
       <button class="side-menu-item" onclick="openSubPage('status-page')"><span class="menu-icon">📊</span> 재고 현황</button>
       <button class="side-menu-item" onclick="openSubPage('receiving-page')"><span class="menu-icon">📥</span> 입고관리</button>
+      <button class="side-menu-item" onclick="openSubPage('other-store-page')"><span class="menu-icon">🏪</span> 타매장 재고 조회</button>
       <button class="side-menu-item" onclick="openSubPage('requests-page')"><span class="menu-icon">🔄</span> 요청 관리 <span id="request-badge" style="display:none; background:#E21836; color:white; border-radius:10px; padding:1px 7px; font-size:11px; margin-left:4px;"></span></button>
-      
       <div class="side-menu-divider"></div>
       <button class="side-menu-item" onclick="openSubPage('settings-page')"><span class="menu-icon">⚙️</span> 설정</button>
     </div>
@@ -325,7 +307,7 @@
     </div>
   </div>
 
-  <!-- 상품 목록 -->
+  <!-- 재고 목록 -->
   <div id="products-page" class="page">
     <div class="header">
       <h2>📦 재고 목록</h2>
@@ -430,26 +412,33 @@
     </div>
   </div>
 
-  <!-- 재고 변동 이력 -->
-  <div id="logs-page" class="page">
+  <!-- 타매장 재고 조회 -->
+  <div id="other-store-page" class="page">
     <div class="header">
-      <h2>📋 재고 변동 이력</h2>
-      <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
+      <h2>🏪 타매장 재고 조회</h2>
+      <button class="back-btn" onclick="stopScanAndGoBack('other-store')">← 뒤로</button>
     </div>
-    <div style="padding:12px 16px; background:white; border-bottom:1px solid #eee; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-      <select id="log-filter-type" onchange="loadLogs()" style="padding:6px 10px; border:1px solid #ddd; border-radius:20px; font-size:12px; outline:none;">
-        <option value="">전체 유형</option>
-        <option value="입고">입고</option>
-        <option value="재고조사">재고조사</option>
-        <option value="회전출고">회전출고</option>
-        <option value="회전입고">회전입고</option>
-      </select>
-      <input type="date" id="log-date-from" onchange="loadLogs()" style="padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:12px; outline:none;" />
-      <span style="font-size:12px; color:#888;">~</span>
-      <input type="date" id="log-date-to" onchange="loadLogs()" style="padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:12px; outline:none;" />
-      <button onclick="loadLogs()" style="padding:6px 14px; border:none; border-radius:16px; font-size:12px; background:#E21836; color:white; cursor:pointer;">🔍 조회</button>
+    <div style="padding:16px 20px; background:white; border-bottom:1px solid #eee;">
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="other-store-search-input" placeholder="바코드/품번으로 검색..." style="flex:1; padding:10px 16px; border:1px solid #ddd; border-radius:8px; font-size:15px; outline:none;" />
+        <button class="btn-sm" onclick="searchOtherStore()">🔍</button>
+        <button class="btn-sm" id="other-store-scan-btn" onclick="toggleOtherStoreScan()" style="background:#333; font-size:16px;">📷</button>
+      </div>
+      <div id="other-store-reader-container" style="display:none; margin-top:12px;">
+        <div id="other-store-reader" style="width:100%; border-radius:8px; overflow:hidden;"></div>
+        <button onclick="toggleOtherStoreScan()" style="width:100%; margin-top:8px; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; cursor:pointer;">⏹ 스캔 중지</button>
+      </div>
     </div>
-    <div class="page-content" id="logs-list"></div>
+    <div class="page-content">
+      <div id="other-store-product-info" style="display:none; background:white; border-radius:12px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <div id="other-store-pname" style="font-size:16px; font-weight:bold; color:#333; margin-bottom:4px;"></div>
+        <div id="other-store-pstyle" style="font-size:13px; color:#888; margin-bottom:4px;"></div>
+        <div id="other-store-pmeta" style="font-size:12px; color:#aaa;"></div>
+      </div>
+      <div id="other-store-result-content">
+        <p class="search-hint">📷 바코드를 스캔하거나<br>품번으로 검색해주세요</p>
+      </div>
+    </div>
   </div>
 
   <!-- 입고관리 -->
@@ -537,8 +526,6 @@
         <div class="settings-row"><span>매장명</span><span id="settings-storename"></span></div>
         <div class="settings-row"><span>매장 아이디</span><span id="settings-storeid"></span></div>
       </div>
-
-      <!-- API 연동 설정 (뼈대) -->
       <div class="settings-card">
         <h3>🔌 API 연동 설정</h3>
         <div class="settings-row">
@@ -562,28 +549,6 @@
           ⚠️ API 연동은 이랜드 본사 IT팀으로부터 API 키를 발급받은 후 사용 가능합니다.
         </div>
       </div>
-
-      <!-- API 연동 기능 목록 -->
-      <div class="settings-card">
-        <h3>📋 API 연동 후 자동화 기능</h3>
-        <div class="settings-row">
-          <span>바코드 스캔 시 상품 자동 조회</span>
-          <span class="api-status disconnected" id="feat-1-status">대기중</span>
-        </div>
-        <div class="settings-row">
-          <span>판매 시 재고 자동 차감</span>
-          <span class="api-status disconnected" id="feat-2-status">대기중</span>
-        </div>
-        <div class="settings-row">
-          <span>입고 예정 자동 불러오기</span>
-          <span class="api-status disconnected" id="feat-3-status">대기중</span>
-        </div>
-        <div class="settings-row">
-          <span>실시간 재고 동기화</span>
-          <span class="api-status disconnected" id="feat-4-status">대기중</span>
-        </div>
-      </div>
-
       <div class="settings-card">
         <h3>재고 기준 설정</h3>
         <div class="settings-row">
@@ -610,13 +575,13 @@
       <label>스타일 번호</label>
       <input type="text" id="m-style" placeholder="예: M993GL" />
       <label>성별</label>
-      <select id="m-gender" onchange="updateModalSizes()">
+      <select id="m-gender">
         <option value="">성별 선택</option>
         <option value="여성">여성</option>
         <option value="남성">남성</option>
       </select>
       <label>카테고리</label>
-      <select id="m-category" onchange="updateModalSizes()">
+      <select id="m-category">
         <option value="신발">신발</option>
         <option value="의류">의류</option>
         <option value="용품">용품</option>
@@ -641,7 +606,7 @@
   <!-- 회전요청 모달 -->
   <div class="modal-overlay" id="transfer-modal">
     <div class="modal">
-      <h3 id="transfer-modal-title">🔄 회전요청</h3>
+      <h3>🔄 회전요청</h3>
       <div class="modal-info-box" id="transfer-product-info"></div>
       <label>요청 사이즈</label>
       <select id="t-size"></select>
@@ -696,22 +661,13 @@
     var isMainScanning = false;
     var receivingHtml5QrCode = null;
     var isReceivingScanning = false;
+    var otherStoreHtml5QrCode = null;
+    var isOtherStoreScanning = false;
     var editingProductId = null;
     var allProducts = [];
     var allStores = [];
 
-    // API 연동 설정 (뼈대 - 추후 실제 API 키 입력 후 활성화)
-    var API_CONFIG = {
-      enabled: false,
-      key: '',
-      url: '',
-      // API 연동 후 아래 함수들을 실제 API 호출로 교체하면 됩니다
-      getProduct: async function(barcode) { return null; },
-      getInventory: async function(storeId, style) { return null; },
-      updateInventory: async function(storeId, style, size, qty) { return false; },
-      getSalesData: async function(storeId) { return null; },
-      getReceivingOrders: async function(storeId) { return null; }
-    };
+    var API_CONFIG = { enabled: false, key: '', url: '' };
 
     var SIZES = {
       '신발': { '여성': ['220','225','230','235','240','245','250','255'], '남성': ['250','255','260','265','270','275','280','285','290'] },
@@ -724,20 +680,10 @@
       return (SIZES[category] && SIZES[category][gender]) ? SIZES[category][gender] : [];
     }
 
-    // 재고 변동 이력 기록
     async function logInventoryChange(storeId, productStyle, productName, size, changeType, changeQty, beforeQty, afterQty, memo) {
-      await db.from('inventory_logs').insert({
-        store_id: storeId,
-        product_style: productStyle,
-        product_name: productName,
-        size: size,
-        change_type: changeType,
-        change_qty: changeQty,
-        before_qty: beforeQty,
-        after_qty: afterQty,
-        memo: memo || '',
-        created_at: new Date().toLocaleString('ko-KR')
-      });
+      try {
+        await db.from('inventory_logs').insert({ store_id: storeId, product_style: productStyle, product_name: productName, size: size, change_type: changeType, change_qty: changeQty, before_qty: beforeQty, after_qty: afterQty, memo: memo || '', created_at: new Date().toLocaleString('ko-KR') });
+      } catch(e) {}
     }
 
     // 로그인
@@ -777,21 +723,17 @@
       if (productHtml5QrCode && isProductScanning) { productHtml5QrCode.stop().catch(function(){}); isProductScanning = false; }
       if (mainHtml5QrCode && isMainScanning) { mainHtml5QrCode.stop().catch(function(){}); isMainScanning = false; }
       if (receivingHtml5QrCode && isReceivingScanning) { receivingHtml5QrCode.stop().catch(function(){}); isReceivingScanning = false; }
+      if (otherStoreHtml5QrCode && isOtherStoreScanning) { otherStoreHtml5QrCode.stop().catch(function(){}); isOtherStoreScanning = false; }
     }
 
     // API 설정
     function loadApiSettings() {
       var savedKey = localStorage.getItem('nb_api_key') || '';
       var savedUrl = localStorage.getItem('nb_api_url') || '';
-      var savedEnabled = localStorage.getItem('nb_api_enabled') === 'true';
-      document.getElementById('api-key-input') && (document.getElementById('api-key-input').value = savedKey);
-      document.getElementById('api-url-input') && (document.getElementById('api-url-input').value = savedUrl);
       API_CONFIG.key = savedKey;
       API_CONFIG.url = savedUrl;
-      API_CONFIG.enabled = savedEnabled && !!savedKey;
-      updateApiStatusUI();
+      API_CONFIG.enabled = localStorage.getItem('nb_api_enabled') === 'true' && !!savedKey;
     }
-
     function saveApiSettings() {
       var key = document.getElementById('api-key-input').value.trim();
       var url = document.getElementById('api-url-input').value.trim();
@@ -799,50 +741,27 @@
       localStorage.setItem('nb_api_url', url);
       API_CONFIG.key = key;
       API_CONFIG.url = url;
-      if (key) {
-        document.getElementById('api-toggle').disabled = false;
-        alert('✅ API 설정이 저장되었습니다.\nAPI 키를 확인 후 연동 토글을 켜주세요.');
-      } else {
-        alert('API 키를 입력해주세요.');
-      }
+      if (key) { document.getElementById('api-toggle').disabled = false; alert('✅ API 설정이 저장되었습니다.'); }
+      else { alert('API 키를 입력해주세요.'); }
       updateApiStatusUI();
     }
-
     function toggleApiConnection() {
       var toggle = document.getElementById('api-toggle');
       API_CONFIG.enabled = toggle.checked;
       localStorage.setItem('nb_api_enabled', toggle.checked);
       updateApiStatusUI();
-      if (toggle.checked) {
-        alert('✅ API 연동이 활성화되었습니다.\n실제 API 키 연동 후 모든 기능이 자동화됩니다.');
-      }
     }
-
     function updateApiStatusUI() {
       var badge = document.getElementById('api-status-badge');
-      var feats = ['feat-1-status','feat-2-status','feat-3-status','feat-4-status'];
-      if (badge) {
-        if (API_CONFIG.enabled) {
-          badge.textContent = '연동됨';
-          badge.className = 'api-status connected';
-          feats.forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) { el.textContent = '활성'; el.className = 'api-status connected'; }
-          });
-        } else {
-          badge.textContent = '미연동';
-          badge.className = 'api-status disconnected';
-          feats.forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) { el.textContent = '대기중'; el.className = 'api-status disconnected'; }
-          });
-        }
-      }
+      if (!badge) return;
+      if (API_CONFIG.enabled) { badge.textContent = '연동됨'; badge.className = 'api-status connected'; }
+      else { badge.textContent = '미연동'; badge.className = 'api-status disconnected'; }
     }
 
     // 사이드 메뉴
     function openSideMenu() { document.getElementById('side-menu-overlay').classList.add('active'); document.getElementById('side-menu').classList.add('open'); }
     function closeSideMenu() { document.getElementById('side-menu-overlay').classList.remove('active'); document.getElementById('side-menu').classList.remove('open'); }
+
     function openSubPage(pageId) {
       closeSideMenu();
       document.querySelectorAll('.page').forEach(function(p) { p.style.display = 'none'; });
@@ -852,10 +771,11 @@
       if (pageId === 'status-page') loadInventoryStatus();
       if (pageId === 'receiving-page') { resetReceivingUI(); loadReceivingHistory(); }
       if (pageId === 'inventory-page') resetScanUI();
-      if (pageId === 'settings-page') { renderSettings(); loadApiSettings(); }
+      if (pageId === 'settings-page') { renderSettings(); loadApiSettings(); updateApiStatusUI(); }
       if (pageId === 'requests-page') { currentRequestTab = 'received'; loadRequests(); }
-      if (pageId === 'logs-page') loadLogs();
+      if (pageId === 'other-store-page') resetOtherStoreUI();
     }
+
     function closeSubPage() {
       stopAllScans();
       document.querySelectorAll('.page').forEach(function(p) { p.style.display = 'none'; });
@@ -878,7 +798,6 @@
       } else { banner.style.display = 'none'; }
     }
 
-    // 요청 배지
     async function checkPendingRequests() {
       var { data } = await db.from('transfer_requests').select('*').eq('to_store_id', currentStore.store_id).eq('status', '요청중');
       var badge = document.getElementById('request-badge');
@@ -916,28 +835,12 @@
           var qty = item ? item.qty : '-';
           var memo = item ? item.memo : '';
           var isLow = qty !== '-' && qty < threshold;
-          return '<div class="stock-item">' +
-            '<div class="size-label">' + s + '</div>' +
-            '<div class="qty-value' + (isLow ? ' low' : '') + '">' + qty + '</div>' +
-            '<div class="qty-unit">' + (qty !== '-' ? '개' : '') + '</div>' +
-            (memo ? '<div style="font-size:10px; color:#3b82f6; margin-top:2px;">' + memo + '</div>' : '') +
-            '</div>';
+          return '<div class="stock-item"><div class="size-label">' + s + '</div><div class="qty-value' + (isLow ? ' low' : '') + '">' + qty + '</div><div class="qty-unit">' + (qty !== '-' ? '개' : '') + '</div>' + (memo ? '<div style="font-size:10px;color:#3b82f6;">' + memo + '</div>' : '') + '</div>';
         }).join('');
-
-        var otherStores = allStores.filter(function(s) { return s.store_id !== currentStore.store_id; });
-        var pData = JSON.stringify({ style: p.style, name: p.name, gender: p.gender, category: p.category, sizes: sizes }).replace(/"/g, '&quot;');
-        var otherStoreHtml = otherStores.map(function(os) {
-          return '<div class="other-store-item" id="other-store-' + p.style.replace(/[^a-zA-Z0-9]/g, '') + '-' + os.store_id + '">' +
-            '<div class="other-store-name"><span>' + os.name + '</span><button class="btn-sm" style="font-size:11px; padding:4px 10px;" onclick="loadOtherStoreStock(\'' + p.style + '\', \'' + os.store_id + '\', \'' + os.name + '\', ' + JSON.stringify(sizes).replace(/"/g, '&quot;') + ', \'' + pData.replace(/'/g, '&#39;') + '\')">재고 조회</button></div>' +
-            '<div id="other-stock-' + p.style.replace(/[^a-zA-Z0-9]/g, '') + '-' + os.store_id + '" style="color:#aaa; font-size:12px; padding:4px 0;">조회 버튼을 눌러주세요</div>' +
-            '</div>';
-        }).join('');
-
         html += '<div class="result-card">' +
           '<div class="result-card-header">' +
             '<div class="result-style">' + p.name + '</div>' +
             '<div class="result-substyle">' + p.style + '</div>' +
-            '<div class="result-stylename">' + (p.style_name || '') + '</div>' +
             '<div class="result-meta-row"><span>' + (p.gender || '') + '</span><span>' + (p.category || '') + '</span><span>' + (p.season || '') + '</span></div>' +
           '</div>' +
           '<div class="result-card-body">' +
@@ -948,50 +851,159 @@
           '</div>' +
           '<div class="result-card-price"><span class="price-label">정상가</span><span class="price-value">₩' + Number(p.price).toLocaleString() + '</span></div>' +
           (p.bin_location ? '<div class="bin-location-row"><span class="bin-label">📍 BIN 위치</span><span class="bin-value">' + p.bin_location + '</span></div>' : '') +
-          '<div class="stock-section">' +
-            '<div class="stock-section-title">📍 내 매장 재고 (' + currentStore.name + ')</div>' +
-            '<div class="stock-grid">' + stockGridHtml + '</div>' +
-            '<div class="stock-total-row"><span>총 가용재고</span><span style="font-weight:bold;">' + totalQty + ' 개</span></div>' +
-          '</div>' +
-          (otherStores.length > 0 ? '<div class="other-store-section"><div class="other-store-header" onclick="toggleOtherStore(this)"><span class="other-store-title">🏪 타매장 재고 조회</span><span class="other-store-toggle">▼ 펼치기</span></div><div class="other-store-list">' + otherStoreHtml + '</div></div>' : '') +
+          '<div class="stock-section"><div class="stock-section-title">📍 내 매장 재고 (' + currentStore.name + ')</div><div class="stock-grid">' + stockGridHtml + '</div><div class="stock-total-row"><span>총 가용재고</span><span style="font-weight:bold;">' + totalQty + ' 개</span></div></div>' +
           '</div>';
       }
       container.innerHTML = html;
     }
 
-    async function loadOtherStoreStock(style, storeId, storeName, sizes, pDataStr) {
-      var containerId = 'other-stock-' + style.replace(/[^a-zA-Z0-9]/g, '') + '-' + storeId;
-      var container = document.getElementById(containerId);
-      if (!container) return;
-      container.innerHTML = '<span style="color:#aaa; font-size:12px;">불러오는 중...</span>';
-      var { data: osInv } = await db.from('inventory').select('*').eq('store_id', storeId).eq('product_style', style);
-      var osStockMap = {};
-      var osTotalQty = 0;
-      var threshold = 3;
-      if (osInv) { osInv.forEach(function(inv) { osStockMap[inv.size] = inv.quantity; osTotalQty += inv.quantity; }); }
-      var osStockGrid = sizes.map(function(s) {
-        var qty = osStockMap[s] !== undefined ? osStockMap[s] : 0;
-        return '<div class="other-store-stock-item"><div class="s-size">' + s + '</div><div class="s-qty' + (qty < threshold ? ' low' : '') + '">' + qty + '</div></div>';
-      }).join('');
-      var pData = JSON.parse(pDataStr.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
-      container.innerHTML = '<div class="other-store-stock-grid" style="margin-bottom:8px;">' + osStockGrid + '</div>' +
-        '<div style="font-size:12px; color:#888; margin-bottom:8px;">총 ' + osTotalQty + '개</div>' +
-        '<button class="transfer-btn rotation" onclick=\'openTransferModal(' + JSON.stringify(pData).replace(/"/g, '&quot;') + ', "' + storeId + '", "' + storeName + '")\'>🔄 회전요청</button>';
+    // 메인 스캔
+    function toggleMainScan() { if (isMainScanning) { stopMainScan(); } else { startMainScan(); } }
+    function startMainScan() {
+      document.getElementById('main-reader-container').style.display = 'block';
+      mainHtml5QrCode = new Html5Qrcode("main-reader");
+      mainHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 } },
+        async function(decodedText) { stopMainScan(); var { data } = await db.from('products').select('*').eq('barcode', decodedText).single(); if (data) { document.getElementById('main-search-input').value = decodedText; await renderMainResults([data]); } else { alert('등록되지 않은 바코드: ' + decodedText); } },
+        function(error) {}
+      ).then(function() { isMainScanning = true; document.getElementById('main-camera-btn').textContent = '⏹'; })
+      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+    }
+    function stopMainScan() {
+      if (mainHtml5QrCode && isMainScanning) { mainHtml5QrCode.stop().catch(function(){}); isMainScanning = false; document.getElementById('main-reader-container').style.display = 'none'; document.getElementById('main-camera-btn').textContent = '📷'; }
     }
 
-    function toggleOtherStore(header) {
-      var list = header.nextElementSibling;
-      var toggle = header.querySelector('.other-store-toggle');
-      if (list.style.display === 'block') { list.style.display = 'none'; toggle.textContent = '▼ 펼치기'; }
-      else { list.style.display = 'block'; toggle.textContent = '▲ 접기'; }
+    // 타매장 재고 조회
+    function resetOtherStoreUI() {
+      document.getElementById('other-store-search-input').value = '';
+      document.getElementById('other-store-product-info').style.display = 'none';
+      document.getElementById('other-store-result-content').innerHTML = '<p class="search-hint">📷 바코드를 스캔하거나<br>품번으로 검색해주세요</p>';
+    }
+
+    function toggleOtherStoreScan() {
+      if (isOtherStoreScanning) { stopOtherStoreScan(); } else { startOtherStoreScan(); }
+    }
+    function startOtherStoreScan() {
+      document.getElementById('other-store-reader-container').style.display = 'block';
+      otherStoreHtml5QrCode = new Html5Qrcode("other-store-reader");
+      otherStoreHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 } },
+        async function(decodedText) { stopOtherStoreScan(); document.getElementById('other-store-search-input').value = decodedText; await searchOtherStore(); },
+        function(error) {}
+      ).then(function() { isOtherStoreScanning = true; document.getElementById('other-store-scan-btn').style.background = '#ef4444'; })
+      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+    }
+    function stopOtherStoreScan() {
+      if (otherStoreHtml5QrCode && isOtherStoreScanning) {
+        otherStoreHtml5QrCode.stop().catch(function(){});
+        isOtherStoreScanning = false;
+        document.getElementById('other-store-reader-container').style.display = 'none';
+        document.getElementById('other-store-scan-btn').style.background = '#333';
+      }
+    }
+
+    async function searchOtherStore() {
+      var keyword = document.getElementById('other-store-search-input').value.trim().toLowerCase();
+      if (!keyword) { alert('검색어를 입력해주세요.'); return; }
+      var container = document.getElementById('other-store-result-content');
+      container.innerHTML = '<p class="loading">전국 매장 재고 조회 중...</p>';
+      document.getElementById('other-store-product-info').style.display = 'none';
+
+      // 상품 찾기
+      var { data: products } = await db.from('products').select('*');
+      var found = products ? products.find(function(p) {
+        return p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) ||
+               (p.barcode && p.barcode.includes(keyword));
+      }) : null;
+
+      if (!found) { container.innerHTML = '<p class="no-result">상품을 찾을 수 없습니다.</p>'; return; }
+
+      // 상품 정보 표시
+      var pInfo = document.getElementById('other-store-product-info');
+      pInfo.style.display = 'block';
+      document.getElementById('other-store-pname').textContent = found.name;
+      document.getElementById('other-store-pstyle').textContent = found.style + (found.style_name ? ' · ' + found.style_name : '');
+      document.getElementById('other-store-pmeta').textContent = (found.gender || '') + ' · ' + (found.category || '') + ' · ' + (found.season || '') + ' · ₩' + Number(found.price).toLocaleString();
+
+      var sizes = getSizes(found.category, found.gender);
+      var threshold = 3;
+      var otherStores = allStores.filter(function(s) { return s.store_id !== currentStore.store_id; });
+
+      // 전체 매장 재고 조회
+      var { data: allInv } = await db.from('inventory').select('*').eq('product_style', found.style);
+      var storeStockMap = {};
+      if (allInv) {
+        allInv.forEach(function(inv) {
+          if (!storeStockMap[inv.store_id]) storeStockMap[inv.store_id] = {};
+          storeStockMap[inv.store_id][inv.size] = inv.quantity;
+        });
+      }
+
+      var html = '';
+      var hasAnyStock = false;
+
+      // 재고 있는 매장 먼저 정렬
+      var storesWithStock = [];
+      var storesWithoutStock = [];
+      otherStores.forEach(function(store) {
+        var sStock = storeStockMap[store.store_id] || {};
+        var total = Object.values(sStock).reduce(function(a, b) { return a + b; }, 0);
+        if (total > 0) { storesWithStock.push({ store: store, stock: sStock, total: total }); }
+        else { storesWithoutStock.push({ store: store, stock: sStock, total: 0 }); }
+      });
+
+      if (storesWithStock.length > 0) { hasAnyStock = true; }
+
+      // 재고 있는 매장 표시
+      storesWithStock.forEach(function(item) {
+        var store = item.store;
+        var sStock = item.stock;
+        var total = item.total;
+        var sizeGridHtml = sizes.map(function(s) {
+          var qty = sStock[s] !== undefined ? sStock[s] : 0;
+          var isLow = qty > 0 && qty < threshold;
+          var isZero = qty === 0;
+          return '<div class="other-store-size-item">' +
+            '<div class="other-store-size-label">' + s + '</div>' +
+            '<div class="other-store-size-qty' + (isLow ? ' low' : '') + (isZero ? ' zero' : '') + '">' + qty + '</div>' +
+            '</div>';
+        }).join('');
+        var pData = JSON.stringify({ style: found.style, name: found.name, gender: found.gender, category: found.category, sizes: sizes }).replace(/"/g, '&quot;');
+        html += '<div class="other-store-result-card">' +
+          '<div class="other-store-result-header">' +
+            '<span class="other-store-result-name">🟢 ' + store.name + '</span>' +
+            '<span class="other-store-result-total">총 ' + total + '개</span>' +
+          '</div>' +
+          '<div class="other-store-size-grid">' + sizeGridHtml + '</div>' +
+          '<div class="other-store-actions">' +
+            '<button class="transfer-btn rotation" onclick=\'openTransferModal(' + pData + ', "' + store.store_id + '", "' + store.name + '")\'>🔄 회전요청</button>' +
+          '</div>' +
+          '</div>';
+      });
+
+      // 재고 없는 매장 표시
+      if (storesWithoutStock.length > 0) {
+        html += '<div style="margin-top:8px; margin-bottom:8px; font-size:12px; color:#aaa; text-align:center;">── 재고 없는 매장 ──</div>';
+        storesWithoutStock.forEach(function(item) {
+          html += '<div class="other-store-result-card" style="opacity:0.5;">' +
+            '<div class="other-store-result-header">' +
+              '<span class="other-store-result-name">⚪ ' + item.store.name + '</span>' +
+              '<span class="other-store-result-total">재고 없음</span>' +
+            '</div>' +
+            '<div class="no-stock-store">해당 상품 재고 없음</div>' +
+            '</div>';
+        });
+      }
+
+      if (!hasAnyStock) {
+        html = '<div style="text-align:center; padding:20px; background:white; border-radius:12px; color:#888; font-size:14px;">전국 모든 매장에 재고가 없습니다.</div>' + html;
+      }
+
+      container.innerHTML = html;
     }
 
     // 회전요청 모달
     function openTransferModal(productData, toStoreId, toStoreName) {
       currentTransferTarget = { product: productData, toStoreId: toStoreId, toStoreName: toStoreName };
-      document.getElementById('transfer-modal-title').textContent = '🔄 회전요청';
-      document.getElementById('transfer-product-info').innerHTML =
-        '<strong>' + productData.name + '</strong> (' + productData.style + ')<br>대상 매장: <strong>' + toStoreName + '</strong>';
+      document.getElementById('transfer-product-info').innerHTML = '<strong>' + productData.name + '</strong> (' + productData.style + ')<br>대상 매장: <strong>' + toStoreName + '</strong>';
       var sizes = productData.sizes || getSizes(productData.category, productData.gender);
       document.getElementById('t-size').innerHTML = sizes.map(function(s) { return '<option value="' + s + '">' + s + '</option>'; }).join('');
       document.getElementById('t-qty').value = 1;
@@ -999,25 +1011,16 @@
       document.getElementById('transfer-modal').classList.add('active');
     }
     function closeTransferModal() { document.getElementById('transfer-modal').classList.remove('active'); }
-
     async function submitTransferRequest() {
       if (!currentTransferTarget) return;
       var size = document.getElementById('t-size').value;
       var qty = parseInt(document.getElementById('t-qty').value) || 1;
       var message = document.getElementById('t-message').value.trim();
       await db.from('transfer_requests').insert({
-        request_type: '회전요청',
-        from_store_id: currentStore.store_id,
-        from_store_name: currentStore.name,
-        to_store_id: currentTransferTarget.toStoreId,
-        to_store_name: currentTransferTarget.toStoreName,
-        product_style: currentTransferTarget.product.style,
-        product_name: currentTransferTarget.product.name,
-        size: size,
-        quantity: qty,
-        status: '요청중',
-        message: message,
-        created_at: new Date().toLocaleString('ko-KR')
+        request_type: '회전요청', from_store_id: currentStore.store_id, from_store_name: currentStore.name,
+        to_store_id: currentTransferTarget.toStoreId, to_store_name: currentTransferTarget.toStoreName,
+        product_style: currentTransferTarget.product.style, product_name: currentTransferTarget.product.name,
+        size: size, quantity: qty, status: '요청중', message: message, created_at: new Date().toLocaleString('ko-KR')
       });
       alert('✅ 회전요청이 전송되었습니다!\n' + currentTransferTarget.toStoreName + '에 회전요청을 보냈어요.');
       closeTransferModal();
@@ -1031,15 +1034,11 @@
       else { var from = new Date(); from.setDate(from.getDate() - days); document.getElementById('filter-date-from').value = from.toISOString().split('T')[0]; }
       loadRequests();
     }
-
     function switchRequestTab(tab) {
       currentRequestTab = tab;
-      document.querySelectorAll('.request-tab-btn').forEach(function(btn, i) {
-        btn.classList.toggle('active', (i === 0 && tab === 'received') || (i === 1 && tab === 'sent'));
-      });
+      document.querySelectorAll('.request-tab-btn').forEach(function(btn, i) { btn.classList.toggle('active', (i === 0 && tab === 'received') || (i === 1 && tab === 'sent')); });
       loadRequests();
     }
-
     async function loadRequests() {
       var container = document.getElementById('requests-list');
       container.innerHTML = '<p class="loading">불러오는 중...</p>';
@@ -1055,9 +1054,7 @@
           try {
             var numbers = req.created_at.match(/\d+/g);
             if (numbers && numbers.length >= 3) {
-              var year = numbers[0];
-              var month = numbers[1].length === 1 ? '0' + numbers[1] : numbers[1];
-              var day = numbers[2].length === 1 ? '0' + numbers[2] : numbers[2];
+              var year = numbers[0]; var month = numbers[1].length === 1 ? '0' + numbers[1] : numbers[1]; var day = numbers[2].length === 1 ? '0' + numbers[2] : numbers[2];
               var reqDate = year + '-' + month + '-' + day;
               return (!dateFrom || reqDate >= dateFrom) && (!dateTo || reqDate <= dateTo);
             }
@@ -1072,13 +1069,9 @@
           : '<span class="request-status-badge rejected">❌ 거절</span>';
         var actionBtns = '';
         if (currentRequestTab === 'received' && req.status === '요청중') {
-          actionBtns = '<div class="request-actions">' +
-            '<button class="btn-sm" style="background:#10b981;" onclick="handleRequest(' + req.id + ', \'승인\')">✅ 승인 (재고 반영)</button>' +
-            '<button class="btn-sm btn-red" onclick="handleRequest(' + req.id + ', \'거절\')">❌ 거절</button>' +
-            '</div>';
+          actionBtns = '<div class="request-actions"><button class="btn-sm" style="background:#10b981;" onclick="handleRequest(' + req.id + ', \'승인\')">✅ 승인</button><button class="btn-sm btn-red" onclick="handleRequest(' + req.id + ', \'거절\')">❌ 거절</button></div>';
         }
-        return '<div class="request-card">' +
-          '<div class="request-card-header"><span class="request-type-badge rotation">🔄 회전요청</span>' + statusBadge + '</div>' +
+        return '<div class="request-card"><div class="request-card-header"><span class="request-type-badge">🔄 회전요청</span>' + statusBadge + '</div>' +
           '<div class="request-product">' + req.product_name + ' (' + req.product_style + ')</div>' +
           '<div class="request-detail">사이즈: ' + req.size + ' | 수량: ' + req.quantity + '개</div>' +
           '<div class="request-detail">' + (currentRequestTab === 'received' ? '요청 매장: ' + req.from_store_name : '요청 대상: ' + req.to_store_name) + '</div>' +
@@ -1090,138 +1083,35 @@
 
     async function handleRequest(requestId, action) {
       if (!confirm(action + ' 처리하시겠습니까?')) return;
-
       if (action === '승인') {
-        // 요청 정보 가져오기
         var { data: req } = await db.from('transfer_requests').select('*').eq('id', requestId).single();
         if (req) {
-          // 1. 요청한 매장 (from_store) 재고 감소
-          var fromExisting = await db.from('inventory').select('*')
-            .eq('store_id', req.from_store_id)
-            .eq('product_style', req.product_style)
-            .eq('size', req.size).single();
+          var fromExisting = await db.from('inventory').select('*').eq('store_id', req.from_store_id).eq('product_style', req.product_style).eq('size', req.size).single();
           if (fromExisting.data) {
             var newFromQty = Math.max(0, fromExisting.data.quantity - req.quantity);
-            await db.from('inventory').update({
-              quantity: newFromQty,
-              updated_at: new Date().toLocaleString('ko-KR')
-            }).eq('id', fromExisting.data.id);
-            // 이력 기록 - 회전출고
+            await db.from('inventory').update({ quantity: newFromQty, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', fromExisting.data.id);
             await logInventoryChange(req.from_store_id, req.product_style, req.product_name, req.size, '회전출고', -req.quantity, fromExisting.data.quantity, newFromQty, '회전출고 → ' + req.to_store_name);
           }
-
-          // 2. 받는 매장 (to_store = 현재 매장) 재고 증가 + 회전완불건 메모
-          var toExisting = await db.from('inventory').select('*')
-            .eq('store_id', req.to_store_id)
-            .eq('product_style', req.product_style)
-            .eq('size', req.size).single();
+          var toExisting = await db.from('inventory').select('*').eq('store_id', req.to_store_id).eq('product_style', req.product_style).eq('size', req.size).single();
           var memo = '회전완불건 (' + req.from_store_name + ')';
           if (toExisting.data) {
             var newToQty = toExisting.data.quantity + req.quantity;
-            await db.from('inventory').update({
-              quantity: newToQty,
-              memo: memo,
-              updated_at: new Date().toLocaleString('ko-KR')
-            }).eq('id', toExisting.data.id);
-            // 이력 기록 - 회전입고
+            await db.from('inventory').update({ quantity: newToQty, memo: memo, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', toExisting.data.id);
             await logInventoryChange(req.to_store_id, req.product_style, req.product_name, req.size, '회전입고', req.quantity, toExisting.data.quantity, newToQty, memo);
           } else {
-            // 재고 없으면 새로 생성
             var { data: productData } = await db.from('products').select('*').eq('style', req.product_style).single();
-            await db.from('inventory').insert({
-              store_id: req.to_store_id,
-              product_id: productData ? productData.id : null,
-              product_style: req.product_style,
-              product_name: req.product_name,
-              gender: productData ? productData.gender : '',
-              category: productData ? productData.category : '',
-              size: req.size,
-              quantity: req.quantity,
-              memo: memo,
-              updated_at: new Date().toLocaleString('ko-KR')
-            });
+            await db.from('inventory').insert({ store_id: req.to_store_id, product_id: productData ? productData.id : null, product_style: req.product_style, product_name: req.product_name, gender: productData ? productData.gender : '', category: productData ? productData.category : '', size: req.size, quantity: req.quantity, memo: memo, updated_at: new Date().toLocaleString('ko-KR') });
             await logInventoryChange(req.to_store_id, req.product_style, req.product_name, req.size, '회전입고', req.quantity, 0, req.quantity, memo);
           }
         }
       }
-
       await db.from('transfer_requests').update({ status: action, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', requestId);
       alert('✅ ' + action + ' 처리되었습니다.' + (action === '승인' ? '\n재고가 자동으로 반영되었습니다.' : ''));
       loadRequests();
       checkPendingRequests();
     }
 
-    // 재고 변동 이력
-    async function loadLogs() {
-      var container = document.getElementById('logs-list');
-      container.innerHTML = '<p class="loading">불러오는 중...</p>';
-      var filterType = document.getElementById('log-filter-type').value;
-      var dateFrom = document.getElementById('log-date-from').value;
-      var dateTo = document.getElementById('log-date-to').value;
-      var query = db.from('inventory_logs').select('*').eq('store_id', currentStore.store_id).order('id', { ascending: false }).limit(100);
-      if (filterType) query = query.eq('change_type', filterType);
-      var { data } = await query;
-      if (data && (dateFrom || dateTo)) {
-        data = data.filter(function(log) {
-          if (!log.created_at) return true;
-          try {
-            var numbers = log.created_at.match(/\d+/g);
-            if (numbers && numbers.length >= 3) {
-              var year = numbers[0];
-              var month = numbers[1].length === 1 ? '0' + numbers[1] : numbers[1];
-              var day = numbers[2].length === 1 ? '0' + numbers[2] : numbers[2];
-              var logDate = year + '-' + month + '-' + day;
-              return (!dateFrom || logDate >= dateFrom) && (!dateTo || logDate <= dateTo);
-            }
-            return true;
-          } catch(e) { return true; }
-        });
-      }
-      if (!data || data.length === 0) { container.innerHTML = '<p class="no-result">변동 이력이 없습니다.</p>'; return; }
-      var typeMap = { '입고': 'receiving', '재고조사': 'inventory', '회전출고': 'rotation-out', '회전입고': 'rotation-in' };
-      container.innerHTML = data.map(function(log) {
-        var badgeClass = typeMap[log.change_type] || 'inventory';
-        var isPlus = log.change_qty > 0;
-        return '<div class="log-card">' +
-          '<span class="log-type-badge ' + badgeClass + '">' + log.change_type + '</span>' +
-          '<div class="log-product">' + log.product_name + ' (' + log.product_style + ')</div>' +
-          '<div class="log-detail">사이즈: ' + log.size + '</div>' +
-          '<div class="log-detail">' + (log.before_qty !== null ? log.before_qty + '개 → ' + log.after_qty + '개' : '') + '</div>' +
-          '<div class="log-qty-change ' + (isPlus ? 'plus' : 'minus') + '">' + (isPlus ? '+' : '') + log.change_qty + '개</div>' +
-          (log.memo ? '<div class="log-memo">📝 ' + log.memo + '</div>' : '') +
-          '<div style="font-size:11px; color:#aaa; margin-top:6px;">' + (log.created_at || '') + '</div>' +
-          '</div>';
-      }).join('');
-    }
-
-    // 메인 스캔
-    function toggleMainScan() { if (isMainScanning) { stopMainScan(); } else { startMainScan(); } }
-    function startMainScan() {
-      document.getElementById('main-reader-container').style.display = 'block';
-      mainHtml5QrCode = new Html5Qrcode("main-reader");
-      mainHtml5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 150 } },
-        async function(decodedText) {
-          stopMainScan();
-          var { data } = await db.from('products').select('*').eq('barcode', decodedText).single();
-          if (data) { document.getElementById('main-search-input').value = decodedText; await renderMainResults([data]); }
-          else { alert('등록되지 않은 바코드: ' + decodedText); }
-        },
-        function(error) {}
-      ).then(function() { isMainScanning = true; document.getElementById('main-camera-btn').textContent = '⏹'; })
-      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
-    }
-    function stopMainScan() {
-      if (mainHtml5QrCode && isMainScanning) {
-        mainHtml5QrCode.stop().catch(function(){});
-        isMainScanning = false;
-        document.getElementById('main-reader-container').style.display = 'none';
-        document.getElementById('main-camera-btn').textContent = '📷';
-      }
-    }
-
-    // 상품 목록
+    // 재고 목록
     async function loadProducts() {
       document.getElementById('product-list').innerHTML = '<p class="loading">불러오는 중...</p>';
       var { data } = await db.from('products').select('*').order('id');
@@ -1267,7 +1157,6 @@
       }
       container.innerHTML = html;
     }
-
     function searchProducts() {
       var keyword = document.getElementById('search-input').value.trim().toLowerCase();
       var category = document.getElementById('filter-category').value;
@@ -1275,7 +1164,7 @@
       var size = document.getElementById('filter-size').value;
       var price = document.getElementById('filter-price').value;
       var filtered = allProducts.filter(function(p) {
-        var keywordMatch = !keyword || p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) || (p.style_name && p.style_name.toLowerCase().includes(keyword)) || (p.barcode && p.barcode.includes(keyword));
+        var keywordMatch = !keyword || p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) || (p.barcode && p.barcode.includes(keyword));
         var categoryMatch = !category || p.category === category;
         var genderMatch = !gender || p.gender === gender;
         var sizeMatch = !size || (p.size && p.size.includes(size));
@@ -1284,14 +1173,12 @@
       });
       renderProducts(filtered);
     }
-
     function updateFilterSize() {
       var category = document.getElementById('filter-category').value || '신발';
       var gender = document.getElementById('filter-gender').value;
       var sizes = getSizes(category, gender);
       document.getElementById('filter-size').innerHTML = '<option value="">전체 사이즈</option>' + sizes.map(function(s) { return '<option value="' + s + '">' + s + '</option>'; }).join('');
     }
-
     function resetFilters() {
       document.getElementById('search-input').value = '';
       document.getElementById('filter-category').value = '';
@@ -1302,7 +1189,6 @@
     }
 
     // 상품 추가/수정
-    function updateModalSizes() {}
     function openAddModal() {
       editingProductId = null;
       document.getElementById('modal-title').textContent = '상품 추가';
@@ -1333,18 +1219,7 @@
       var name = document.getElementById('m-name').value.trim();
       var style = document.getElementById('m-style').value.trim();
       if (!name || !style) { alert('상품명과 스타일 번호는 필수입니다.'); return; }
-      var productData = {
-        name: name, style: style,
-        style_name: '',
-        gender: document.getElementById('m-gender').value,
-        category: document.getElementById('m-category').value,
-        size: '',
-        color: document.getElementById('m-color').value.trim(),
-        season: document.getElementById('m-season').value.trim(),
-        price: parseInt(document.getElementById('m-price').value.replace(/,/g, '')) || 0,
-        barcode: document.getElementById('m-barcode').value.trim(),
-        bin_location: document.getElementById('m-bin').value.trim()
-      };
+      var productData = { name: name, style: style, style_name: '', gender: document.getElementById('m-gender').value, category: document.getElementById('m-category').value, size: '', color: document.getElementById('m-color').value.trim(), season: document.getElementById('m-season').value.trim(), price: parseInt(document.getElementById('m-price').value.replace(/,/g, '')) || 0, barcode: document.getElementById('m-barcode').value.trim(), bin_location: document.getElementById('m-bin').value.trim() };
       if (editingProductId) { await db.from('products').update(productData).eq('id', editingProductId); }
       else { await db.from('products').insert(productData); }
       closeModal();
@@ -1360,28 +1235,18 @@
     function toggleScan() { if (isScanning) { stopScan(); } else { startScan(); } }
     function startScan() {
       html5QrCode = new Html5Qrcode("reader");
-      html5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        function(decodedText) { stopScan(); findProductByBarcode(decodedText); },
-        function(error) {}
-      ).then(function() {
-        isScanning = true;
-        document.getElementById('scanBtn').textContent = '⏹ 스캔 중지';
-        document.getElementById('scanBtn').classList.add('stop');
-      }).catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } },
+        function(decodedText) { stopScan(); findProductByBarcode(decodedText); }, function(error) {}
+      ).then(function() { isScanning = true; document.getElementById('scanBtn').textContent = '⏹ 스캔 중지'; document.getElementById('scanBtn').classList.add('stop'); })
+      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
     }
     function stopScan() {
-      if (html5QrCode && isScanning) {
-        html5QrCode.stop().catch(function(){});
-        isScanning = false;
-        document.getElementById('scanBtn').textContent = '스캔 시작';
-        document.getElementById('scanBtn').classList.remove('stop');
-      }
+      if (html5QrCode && isScanning) { html5QrCode.stop().catch(function(){}); isScanning = false; document.getElementById('scanBtn').textContent = '스캔 시작'; document.getElementById('scanBtn').classList.remove('stop'); }
     }
     function stopScanAndGoBack(type) {
       if (type === 'inventory') stopScan();
       if (type === 'receiving') stopReceivingScan();
+      if (type === 'other-store') stopOtherStoreScan();
       closeSubPage();
     }
     async function findProductByBarcode(barcode) {
@@ -1426,7 +1291,6 @@
         var invData = { store_id: currentStore.store_id, product_id: currentProduct.id, product_style: currentProduct.style, product_name: currentProduct.name, gender: currentProduct.gender, color: currentProduct.color, category: currentProduct.category, size: s, quantity: qty, updated_at: new Date().toLocaleString('ko-KR') };
         if (existing.data) { await db.from('inventory').update(invData).eq('id', existing.data.id); }
         else { await db.from('inventory').insert(invData); }
-        // 이력 기록
         await logInventoryChange(currentStore.store_id, currentProduct.style, currentProduct.name, s, '재고조사', qty - beforeQty, beforeQty, qty, '');
       }
       alert('✅ 저장 완료!');
@@ -1459,10 +1323,7 @@
         var hasMemo = Object.values(pStock).some(function(item) { return item && item.memo; });
         if (Object.keys(pStock).length > 0) count++;
         html += '<div class="status-card">' +
-          '<div class="status-card-header">' +
-            '<div class="status-product">' + p.name + (hasMemo ? ' <span class="memo-badge">🔄 회전완불건</span>' : '') + '</div>' +
-            '<div class="status-style">' + p.style + ' | ' + (p.gender || '') + (p.bin_location ? ' | 📍 ' + p.bin_location : '') + '</div>' +
-          '</div>' +
+          '<div class="status-card-header"><div class="status-product">' + p.name + (hasMemo ? ' <span class="memo-badge">🔄 회전완불건</span>' : '') + '</div><div class="status-style">' + p.style + ' | ' + (p.gender || '') + (p.bin_location ? ' | 📍 ' + p.bin_location : '') + '</div></div>' +
           '<div class="status-size-grid">' + sizeHtml + '</div>' +
           '<div class="status-total"><span>총 가용재고</span><span style="font-weight:bold;">' + totalQty + ' 개</span></div>' +
           '</div>';
@@ -1486,36 +1347,18 @@
     }
 
     // 입고관리
-    function resetReceivingUI() {
-      stopReceivingScan();
-      document.getElementById('receiving-orders-section').style.display = 'none';
-      document.getElementById('receiving-compare-section').style.display = 'none';
-      document.getElementById('receiving-manual-barcode').value = '';
-      currentBoxBarcode = null;
-      selectedOrder = null;
-    }
+    function resetReceivingUI() { stopReceivingScan(); document.getElementById('receiving-orders-section').style.display = 'none'; document.getElementById('receiving-compare-section').style.display = 'none'; document.getElementById('receiving-manual-barcode').value = ''; currentBoxBarcode = null; selectedOrder = null; }
     function resetReceivingStep2() { document.getElementById('receiving-compare-section').style.display = 'none'; selectedOrder = null; }
     function toggleReceivingScan() { if (isReceivingScanning) { stopReceivingScan(); } else { startReceivingScan(); } }
     function startReceivingScan() {
       receivingHtml5QrCode = new Html5Qrcode("receiving-reader");
-      receivingHtml5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        async function(decodedText) { stopReceivingScan(); await processBoxBarcode(decodedText); },
-        function(error) {}
-      ).then(function() {
-        isReceivingScanning = true;
-        document.getElementById('receivingScanBtn').textContent = '⏹ 스캔 중지';
-        document.getElementById('receivingScanBtn').classList.add('stop');
-      }).catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      receivingHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } },
+        async function(decodedText) { stopReceivingScan(); await processBoxBarcode(decodedText); }, function(error) {}
+      ).then(function() { isReceivingScanning = true; document.getElementById('receivingScanBtn').textContent = '⏹ 스캔 중지'; document.getElementById('receivingScanBtn').classList.add('stop'); })
+      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
     }
     function stopReceivingScan() {
-      if (receivingHtml5QrCode && isReceivingScanning) {
-        receivingHtml5QrCode.stop().catch(function(){});
-        isReceivingScanning = false;
-        document.getElementById('receivingScanBtn').textContent = '스캔 시작';
-        document.getElementById('receivingScanBtn').classList.remove('stop');
-      }
+      if (receivingHtml5QrCode && isReceivingScanning) { receivingHtml5QrCode.stop().catch(function(){}); isReceivingScanning = false; document.getElementById('receivingScanBtn').textContent = '스캔 시작'; document.getElementById('receivingScanBtn').classList.remove('stop'); }
     }
     async function receivingManualSearch() {
       var barcode = document.getElementById('receiving-manual-barcode').value.trim();
@@ -1533,17 +1376,10 @@
         return;
       }
       var grouped = {};
-      data.forEach(function(item) {
-        if (!grouped[item.product_style]) grouped[item.product_style] = { style: item.product_style, name: item.product_name, gender: item.gender, category: item.category, sizes: {} };
-        grouped[item.product_style].sizes[item.size] = item.expected_qty;
-      });
+      data.forEach(function(item) { if (!grouped[item.product_style]) grouped[item.product_style] = { style: item.product_style, name: item.product_name, gender: item.gender, category: item.category, sizes: {} }; grouped[item.product_style].sizes[item.size] = item.expected_qty; });
       listContainer.innerHTML = Object.values(grouped).map(function(g) {
         var sizesText = Object.entries(g.sizes).map(function(e) { return e[0] + ': ' + e[1] + '개'; }).join(' | ');
-        return '<div class="order-card" onclick="selectOrder(\'' + g.style + '\', ' + JSON.stringify(g).replace(/"/g, '&quot;') + ')">' +
-          '<div class="order-number">카톤: ' + barcode + '</div>' +
-          '<div class="order-product">' + g.name + ' (' + g.style + ')</div>' +
-          '<div class="order-sizes">' + sizesText + '</div>' +
-          '</div>';
+        return '<div class="order-card" onclick="selectOrder(\'' + g.style + '\', ' + JSON.stringify(g).replace(/"/g, '&quot;') + ')"><div class="order-number">카톤: ' + barcode + '</div><div class="order-product">' + g.name + ' (' + g.style + ')</div><div class="order-sizes">' + sizesText + '</div></div>';
       }).join('') + '<button class="btn" style="margin-top:12px; background:#555;" onclick="openOrderModal(\'' + barcode + '\')">+ 추가 등록</button>';
     }
     async function selectOrder(style, groupData) {
@@ -1582,13 +1418,8 @@
         await db.from('receiving').insert({ store_id: currentStore.store_id, product_style: selectedOrder.style, product_name: selectedOrder.name, size: s, received_qty: actualQty, status: '완료', received_at: new Date().toLocaleString('ko-KR') });
         var existing = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).eq('product_style', selectedOrder.style).eq('size', s).single();
         var beforeQty = existing.data ? existing.data.quantity : 0;
-        if (existing.data) {
-          await db.from('inventory').update({ quantity: existing.data.quantity + actualQty, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', existing.data.id);
-        } else {
-          var { data: productData } = await db.from('products').select('*').eq('style', selectedOrder.style).single();
-          await db.from('inventory').insert({ store_id: currentStore.store_id, product_id: productData ? productData.id : null, product_style: selectedOrder.style, product_name: selectedOrder.name, gender: selectedOrder.gender, category: selectedOrder.category, size: s, quantity: actualQty, updated_at: new Date().toLocaleString('ko-KR') });
-        }
-        // 이력 기록
+        if (existing.data) { await db.from('inventory').update({ quantity: existing.data.quantity + actualQty, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', existing.data.id); }
+        else { var { data: productData } = await db.from('products').select('*').eq('style', selectedOrder.style).single(); await db.from('inventory').insert({ store_id: currentStore.store_id, product_id: productData ? productData.id : null, product_style: selectedOrder.style, product_name: selectedOrder.name, gender: selectedOrder.gender, category: selectedOrder.category, size: s, quantity: actualQty, updated_at: new Date().toLocaleString('ko-KR') }); }
         await logInventoryChange(currentStore.store_id, selectedOrder.style, selectedOrder.name, s, '입고', actualQty, beforeQty, beforeQty + actualQty, '카톤 입고');
         await db.from('receiving_orders').update({ status: '완료' }).eq('store_id', currentStore.store_id).eq('order_number', currentBoxBarcode).eq('product_style', selectedOrder.style).eq('size', s);
       }
@@ -1596,13 +1427,7 @@
       resetReceivingUI();
       loadReceivingHistory();
     }
-    function openOrderModal(barcode) {
-      document.getElementById('o-box-barcode').value = barcode;
-      document.getElementById('o-style').value = '';
-      document.getElementById('o-product-found').style.display = 'none';
-      document.getElementById('o-size-grid').innerHTML = '';
-      document.getElementById('order-modal').classList.add('active');
-    }
+    function openOrderModal(barcode) { document.getElementById('o-box-barcode').value = barcode; document.getElementById('o-style').value = ''; document.getElementById('o-product-found').style.display = 'none'; document.getElementById('o-size-grid').innerHTML = ''; document.getElementById('order-modal').classList.add('active'); }
     function closeOrderModal() { document.getElementById('order-modal').classList.remove('active'); }
     async function searchOrderProduct() {
       var style = document.getElementById('o-style').value.trim();
@@ -1637,14 +1462,12 @@
       container.innerHTML = Object.values(grouped).map(function(g) { return '<div style="padding:10px 0; border-bottom:1px solid #f0f2f5;"><div style="font-size:14px; font-weight:bold; color:#333;">' + g.name + ' (' + g.style + ')</div><div style="font-size:12px; color:#666; margin-top:2px;">' + g.sizes.join(' | ') + '</div><div style="font-size:11px; color:#aaa; margin-top:2px;">' + g.at + '</div></div>'; }).join('');
     }
 
-    // 상품 목록 스캔
+    // 재고 목록 스캔
     function toggleProductScan() { if (isProductScanning) { stopProductScan(); } else { startProductScan(); } }
     function startProductScan() {
       document.getElementById('product-reader-container').style.display = 'block';
       productHtml5QrCode = new Html5Qrcode("product-reader");
-      productHtml5QrCode.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 150 } },
+      productHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 } },
         async function(decodedText) { stopProductScan(); var { data } = await db.from('products').select('*').eq('barcode', decodedText).single(); if (data) { document.getElementById('search-input').value = decodedText; await renderProducts([data]); } else { alert('등록되지 않은 바코드: ' + decodedText); } },
         function(error) {}
       ).then(function() { isProductScanning = true; document.getElementById('product-scan-btn').style.background = '#ef4444'; })
@@ -1658,6 +1481,13 @@
     function renderSettings() {
       document.getElementById('settings-storename').textContent = currentStore.name;
       document.getElementById('settings-storeid').textContent = currentStore.store_id;
+      var savedKey = localStorage.getItem('nb_api_key') || '';
+      var savedUrl = localStorage.getItem('nb_api_url') || '';
+      document.getElementById('api-key-input').value = savedKey;
+      document.getElementById('api-url-input').value = savedUrl;
+      if (savedKey) document.getElementById('api-toggle').disabled = false;
+      document.getElementById('api-toggle').checked = API_CONFIG.enabled;
+      updateApiStatusUI();
     }
     async function clearInventory() {
       if (confirm('정말 재고 데이터를 초기화하시겠습니까?')) {
