@@ -416,11 +416,11 @@
     </div>
     <div class="page-content">
       <div class="receiving-step">
-        <h3>📦 STEP 1. 입고박스 스캔</h3>
+        <h3>📦 STEP 1. 카톤 바코드 스캔</h3>
         <div id="receiving-reader"></div>
         <button class="scan-btn" id="receivingScanBtn" onclick="toggleReceivingScan()">스캔 시작</button>
         <div class="manual-input">
-          <input type="text" id="receiving-manual-barcode" placeholder="박스 바코드 입력..." />
+          <input type="text" id="receiving-manual-barcode" placeholder="카톤 바코드 입력..." />
           <button class="btn-sm" onclick="receivingManualSearch()">조회</button>
         </div>
       </div>
@@ -460,6 +460,21 @@
     <div class="request-tab">
       <button class="request-tab-btn active" onclick="switchRequestTab('received')">받은 요청</button>
       <button class="request-tab-btn" onclick="switchRequestTab('sent')">보낸 요청</button>
+    </div>
+    <div style="padding:12px 16px; background:white; border-bottom:1px solid #eee; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#555;">
+        <span>기간</span>
+        <input type="date" id="filter-date-from" onchange="loadRequests()" style="padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:13px; outline:none;" />
+        <span>~</span>
+        <input type="date" id="filter-date-to" onchange="loadRequests()" style="padding:6px 10px; border:1px solid #ddd; border-radius:8px; font-size:13px; outline:none;" />
+      </div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;">
+        <button onclick="setDateRange(7)" style="padding:5px 10px; border:1px solid #ddd; border-radius:16px; font-size:12px; background:white; cursor:pointer;">7일</button>
+        <button onclick="setDateRange(30)" style="padding:5px 10px; border:1px solid #ddd; border-radius:16px; font-size:12px; background:white; cursor:pointer;">30일</button>
+        <button onclick="setDateRange(90)" style="padding:5px 10px; border:1px solid #ddd; border-radius:16px; font-size:12px; background:white; cursor:pointer;">90일</button>
+        <button onclick="setDateRange(0)" style="padding:5px 10px; border:1px solid #E21836; border-radius:16px; font-size:12px; color:#E21836; background:white; cursor:pointer;">전체</button>
+        <button onclick="loadRequests()" style="padding:5px 14px; border:none; border-radius:16px; font-size:12px; background:#E21836; color:white; cursor:pointer; font-weight:bold;">🔍 조회</button>
+      </div>
     </div>
     <div class="page-content">
       <div id="requests-list"></div>
@@ -558,7 +573,7 @@
   <div class="modal-overlay" id="order-modal">
     <div class="modal">
       <h3>입고 예정 등록</h3>
-      <label>박스 바코드</label>
+      <label>카톤 바코드</label>
       <input type="text" id="o-box-barcode" readonly style="background:#f0f2f5;" />
       <label>상품 스타일 번호</label>
       <input type="text" id="o-style" placeholder="예: M993GL" oninput="searchOrderProduct()" />
@@ -846,9 +861,25 @@
       loadRequests();
     }
 
+    function setDateRange(days) {
+      var to = new Date();
+      var toStr = to.toISOString().split('T')[0];
+      document.getElementById('filter-date-to').value = toStr;
+      if (days === 0) {
+        document.getElementById('filter-date-from').value = '';
+      } else {
+        var from = new Date();
+        from.setDate(from.getDate() - days);
+        document.getElementById('filter-date-from').value = from.toISOString().split('T')[0];
+      }
+      loadRequests();
+    }
+
     async function loadRequests() {
       var container = document.getElementById('requests-list');
       container.innerHTML = '<p class="loading">불러오는 중...</p>';
+      var dateFrom = document.getElementById('filter-date-from').value;
+      var dateTo = document.getElementById('filter-date-to').value;
       var query;
       if (currentRequestTab === 'received') {
         query = db.from('transfer_requests').select('*').eq('to_store_id', currentStore.store_id).order('id', { ascending: false });
@@ -856,6 +887,33 @@
         query = db.from('transfer_requests').select('*').eq('from_store_id', currentStore.store_id).order('id', { ascending: false });
       }
       var { data } = await query;
+
+      // 기간 필터링
+      if (data && (dateFrom || dateTo)) {
+        data = data.filter(function(req) {
+          if (!req.created_at) return true;
+          try {
+            // 한국어 날짜 형식 파싱: "2026. 5. 7. 오전 9:46:00" 등
+            var rawDate = req.created_at;
+            var year, month, day;
+
+            // 숫자만 추출해서 파싱
+            var numbers = rawDate.match(/\d+/g);
+            if (numbers && numbers.length >= 3) {
+              year = numbers[0];
+              month = numbers[1].length === 1 ? '0' + numbers[1] : numbers[1];
+              day = numbers[2].length === 1 ? '0' + numbers[2] : numbers[2];
+              var reqDate = year + '-' + month + '-' + day;
+              var afterFrom = !dateFrom || reqDate >= dateFrom;
+              var beforeTo = !dateTo || reqDate <= dateTo;
+              return afterFrom && beforeTo;
+            }
+            return true;
+          } catch(e) {
+            return true;
+          }
+        });
+      }
       if (!data || data.length === 0) {
         container.innerHTML = '<p class="no-result">요청 내역이 없습니다.</p>';
         return;
@@ -1224,7 +1282,7 @@
       var listContainer = document.getElementById('receiving-orders-list');
       section.style.display = 'block';
       if (!data || data.length === 0) {
-        listContainer.innerHTML = '<p style="color:#888; font-size:14px; margin-bottom:12px;">바코드 <strong>' + barcode + '</strong> 에 해당하는 입고 예정이 없습니다.</p><button class="btn" onclick="openOrderModal(\'' + barcode + '\')">+ 입고 예정 등록</button>';
+        listContainer.innerHTML = '<p style="color:#888; font-size:14px; margin-bottom:12px;">카톤 바코드 <strong>' + barcode + '</strong> 에 해당하는 입고 예정이 없습니다.</p><button class="btn" onclick="openOrderModal(\'' + barcode + '\')">+ 입고 예정 등록</button>';
         return;
       }
       var grouped = {};
