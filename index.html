@@ -311,12 +311,12 @@
       <div class="side-menu-store" id="side-store-info"></div>
     </div>
     <div class="side-menu-items">
-      <button class="side-menu-item" onclick="openSubPage('products-page')"><span class="menu-icon">📦</span> 상품 목록</button>
+      <button class="side-menu-item" onclick="openSubPage('products-page')"><span class="menu-icon">📦</span> 재고 목록</button>
       <button class="side-menu-item" onclick="openSubPage('inventory-page')"><span class="menu-icon">🔍</span> 재고조사</button>
       <button class="side-menu-item" onclick="openSubPage('status-page')"><span class="menu-icon">📊</span> 재고 현황</button>
       <button class="side-menu-item" onclick="openSubPage('receiving-page')"><span class="menu-icon">📥</span> 입고관리</button>
       <button class="side-menu-item" onclick="openSubPage('requests-page')"><span class="menu-icon">🔄</span> 요청 관리 <span id="request-badge" style="display:none; background:#E21836; color:white; border-radius:10px; padding:1px 7px; font-size:11px; margin-left:4px;"></span></button>
-      <button class="side-menu-item" onclick="openSubPage('logs-page')"><span class="menu-icon">📋</span> 재고 변동 이력</button>
+      
       <div class="side-menu-divider"></div>
       <button class="side-menu-item" onclick="openSubPage('settings-page')"><span class="menu-icon">⚙️</span> 설정</button>
     </div>
@@ -328,7 +328,7 @@
   <!-- 상품 목록 -->
   <div id="products-page" class="page">
     <div class="header">
-      <h2>📦 상품 목록</h2>
+      <h2>📦 재고 목록</h2>
       <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
     </div>
     <div class="search-bar">
@@ -860,6 +860,8 @@
       stopAllScans();
       document.querySelectorAll('.page').forEach(function(p) { p.style.display = 'none'; });
       document.getElementById('main-page').style.display = 'block';
+      document.getElementById('main-search-input').value = '';
+      document.getElementById('main-result-content').innerHTML = '<p class="search-hint">📷 바코드를 스캔하거나<br>바코드/품번으로 검색해주세요</p>';
       checkLowStock();
       checkPendingRequests();
     }
