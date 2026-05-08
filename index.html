@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>New Balance 재고관리</title>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#E21836">
@@ -925,24 +925,13 @@
         }).join('');
 
         var otherStores = allStores.filter(function(s) { return s.store_id !== currentStore.store_id; });
-        var otherStoreHtml = '';
-        for (var j = 0; j < otherStores.length; j++) {
-          var os = otherStores[j];
-          var { data: osInv } = await db.from('inventory').select('*').eq('store_id', os.store_id).eq('product_style', p.style);
-          var osStockMap = {};
-          var osTotalQty = 0;
-          if (osInv) { osInv.forEach(function(inv) { osStockMap[inv.size] = inv.quantity; osTotalQty += inv.quantity; }); }
-          var osStockGrid = sizes.map(function(s) {
-            var qty = osStockMap[s] !== undefined ? osStockMap[s] : 0;
-            return '<div class="other-store-stock-item"><div class="s-size">' + s + '</div><div class="s-qty' + (qty < threshold ? ' low' : '') + '">' + qty + '</div></div>';
-          }).join('');
-          var pData = JSON.stringify({ style: p.style, name: p.name, gender: p.gender, category: p.category, sizes: sizes }).replace(/"/g, '&quot;');
-          otherStoreHtml += '<div class="other-store-item">' +
-            '<div class="other-store-name"><span>' + os.name + '</span><span style="font-size:12px; color:#888;">총 ' + osTotalQty + '개</span></div>' +
-            '<div class="other-store-stock-grid">' + osStockGrid + '</div>' +
-            '<button class="transfer-btn rotation" onclick=\'openTransferModal(' + pData + ', "' + os.store_id + '", "' + os.name + '")\'>🔄 회전요청</button>' +
+        var pData = JSON.stringify({ style: p.style, name: p.name, gender: p.gender, category: p.category, sizes: sizes }).replace(/"/g, '&quot;');
+        var otherStoreHtml = otherStores.map(function(os) {
+          return '<div class="other-store-item" id="other-store-' + p.style.replace(/[^a-zA-Z0-9]/g, '') + '-' + os.store_id + '">' +
+            '<div class="other-store-name"><span>' + os.name + '</span><button class="btn-sm" style="font-size:11px; padding:4px 10px;" onclick="loadOtherStoreStock(\'' + p.style + '\', \'' + os.store_id + '\', \'' + os.name + '\', ' + JSON.stringify(sizes).replace(/"/g, '&quot;') + ', \'' + pData.replace(/'/g, '&#39;') + '\')">재고 조회</button></div>' +
+            '<div id="other-stock-' + p.style.replace(/[^a-zA-Z0-9]/g, '') + '-' + os.store_id + '" style="color:#aaa; font-size:12px; padding:4px 0;">조회 버튼을 눌러주세요</div>' +
             '</div>';
-        }
+        }).join('');
 
         html += '<div class="result-card">' +
           '<div class="result-card-header">' +
@@ -968,6 +957,26 @@
           '</div>';
       }
       container.innerHTML = html;
+    }
+
+    async function loadOtherStoreStock(style, storeId, storeName, sizes, pDataStr) {
+      var containerId = 'other-stock-' + style.replace(/[^a-zA-Z0-9]/g, '') + '-' + storeId;
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '<span style="color:#aaa; font-size:12px;">불러오는 중...</span>';
+      var { data: osInv } = await db.from('inventory').select('*').eq('store_id', storeId).eq('product_style', style);
+      var osStockMap = {};
+      var osTotalQty = 0;
+      var threshold = 3;
+      if (osInv) { osInv.forEach(function(inv) { osStockMap[inv.size] = inv.quantity; osTotalQty += inv.quantity; }); }
+      var osStockGrid = sizes.map(function(s) {
+        var qty = osStockMap[s] !== undefined ? osStockMap[s] : 0;
+        return '<div class="other-store-stock-item"><div class="s-size">' + s + '</div><div class="s-qty' + (qty < threshold ? ' low' : '') + '">' + qty + '</div></div>';
+      }).join('');
+      var pData = JSON.parse(pDataStr.replace(/&quot;/g, '"').replace(/&#39;/g, "'"));
+      container.innerHTML = '<div class="other-store-stock-grid" style="margin-bottom:8px;">' + osStockGrid + '</div>' +
+        '<div style="font-size:12px; color:#888; margin-bottom:8px;">총 ' + osTotalQty + '개</div>' +
+        '<button class="transfer-btn rotation" onclick=\'openTransferModal(' + JSON.stringify(pData).replace(/"/g, '&quot;') + ', "' + storeId + '", "' + storeName + '")\'>🔄 회전요청</button>';
     }
 
     function toggleOtherStore(header) {
