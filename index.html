@@ -24,7 +24,6 @@
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; min-height: 100vh; }
     .page { display: none; }
 
-    /* 로그인 */
     #login-page { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #E21836; }
     .login-box { background: transparent; padding: 40px 32px; width: 100%; max-width: 380px; display: flex; flex-direction: column; align-items: center; }
     .login-logo { text-align: center; margin-bottom: 48px; }
@@ -36,7 +35,6 @@
     .login-btn { width: 100%; padding: 14px; background: white; color: #E21836; border: none; border-radius: 30px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 8px; }
     .error { color: white; font-size: 13px; text-align: center; margin-top: 10px; display: none; }
 
-    /* 메인 */
     #main-page { display: none; background: #E21836; min-height: 100vh; }
     .main-header { background: #E21836; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
     .hamburger-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 4px; }
@@ -52,12 +50,11 @@
     .alert-banner { background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px 16px; margin-bottom: 16px; border-radius: 6px; font-size: 13px; color: #b91c1c; display: none; }
     .search-hint { text-align: center; color: #aaa; padding: 60px 0; font-size: 14px; line-height: 1.8; }
 
-    /* 검색결과 카드 */
     .result-card { background: white; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; }
     .result-card-header { padding: 14px 16px; border-bottom: 1px solid #f0f2f5; }
     .result-style { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 2px; }
     .result-substyle { font-size: 13px; color: #888; margin-bottom: 4px; }
-    .result-meta-row { display: flex; gap: 16px; font-size: 12px; color: #888; flex-wrap: wrap; }
+    .result-meta-row { display: flex; gap: 12px; font-size: 12px; color: #888; flex-wrap: wrap; }
     .result-card-body { padding: 12px 16px; }
     .result-info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f8f8f8; font-size: 13px; }
     .result-info-row:last-child { border-bottom: none; }
@@ -78,9 +75,9 @@
     .bin-location-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; background: #fffbeb; border-top: 1px solid #fef3c7; font-size: 13px; }
     .bin-label { color: #92400e; font-weight: bold; }
     .bin-value { color: #333; font-weight: bold; }
-    .memo-badge { display: inline-block; background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-top: 4px; }
+    .memo-badge { display: inline-block; background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
 
-    /* 타매장 재고 조회 */
+    /* 타매장 */
     .other-store-result-card { background: white; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; }
     .other-store-result-header { padding: 14px 16px; border-bottom: 1px solid #f0f2f5; background: #f8f8f8; display: flex; justify-content: space-between; align-items: center; }
     .other-store-result-name { font-size: 15px; font-weight: bold; color: #333; }
@@ -91,10 +88,28 @@
     .other-store-size-qty { font-size: 16px; font-weight: bold; color: #333; }
     .other-store-size-qty.low { color: #E21836; }
     .other-store-size-qty.zero { color: #ccc; }
-    .other-store-actions { padding: 10px 16px; border-top: 1px solid #f0f2f5; display: flex; gap: 8px; }
-    .transfer-btn { padding: 8px 16px; border: none; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; }
-    .transfer-btn.rotation { background: #dbeafe; color: #1d4ed8; }
-    .no-stock-store { padding: 12px 16px; color: #aaa; font-size: 13px; text-align: center; }
+    .other-store-actions { padding: 10px 16px; border-top: 1px solid #f0f2f5; }
+    .transfer-btn { padding: 8px 16px; border: none; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; background: #dbeafe; color: #1d4ed8; }
+
+    /* BIN 관련 */
+    .bin-search-bar { padding: 16px 20px; background: white; border-bottom: 1px solid #eee; display: flex; gap: 8px; align-items: center; }
+    .bin-search-bar input { flex: 1; padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; }
+    .bin-card { background: white; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; position: relative; }
+    .bin-card-header { padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; }
+    .bin-code-title { font-size: 18px; font-weight: bold; color: #E21836; }
+    .bin-edit-btn { background: none; border: none; font-size: 20px; cursor: pointer; padding: 4px; }
+    .bin-product-list { padding: 8px 0; }
+    .bin-product-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid #f8f8f8; position: relative; overflow: hidden; transition: transform 0.3s; }
+    .bin-product-item:last-child { border-bottom: none; }
+    .bin-product-info { flex: 1; }
+    .bin-product-name { font-size: 14px; font-weight: bold; color: #333; }
+    .bin-product-style { font-size: 12px; color: #888; margin-top: 2px; }
+    .bin-product-delete { position: absolute; right: 0; top: 0; bottom: 0; width: 80px; background: #ef4444; color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; cursor: pointer; transform: translateX(100%); transition: transform 0.3s; }
+    .bin-product-item.swiped .bin-product-delete { transform: translateX(0); }
+    .bin-product-item.swiped { transform: translateX(-80px); }
+    .bin-empty { text-align: center; color: #aaa; padding: 20px; font-size: 13px; }
+    .bin-add-btn { width: 100%; padding: 12px; background: #f0f2f5; border: none; border-radius: 0 0 12px 12px; color: #666; font-size: 13px; cursor: pointer; }
+    .bin-add-btn:hover { background: #e5e7eb; }
 
     /* 모달 */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
@@ -107,7 +122,7 @@
     .modal-btns { display: flex; gap: 10px; margin-top: 4px; }
     .modal-info-box { background: #f8f8f8; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 13px; color: #555; line-height: 1.8; }
 
-    /* 햄버거 메뉴 */
+    /* 사이드 메뉴 */
     .side-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 300; }
     .side-menu-overlay.active { display: block; }
     .side-menu { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: white; z-index: 301; transition: left 0.3s ease; display: flex; flex-direction: column; }
@@ -129,16 +144,13 @@
     .header h2 { font-size: 18px; }
     .back-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
     .btn { width: 100%; padding: 13px; background-color: #E21836; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-    .btn:hover { background-color: #c2102e; }
     .btn-green { background: #10b981; }
-    .btn-green:hover { background: #059669; }
     .btn-red { background: #ef4444; }
     .btn-sm { padding: 8px 14px; font-size: 13px; border-radius: 6px; border: none; cursor: pointer; color: white; background: #E21836; }
     .page-content { padding: 20px; }
     .loading { text-align: center; color: #888; padding: 40px 0; font-size: 15px; }
     .no-result { text-align: center; color: #888; padding: 40px 0; font-size: 15px; }
 
-    /* 상품목록 */
     .search-bar { padding: 12px 16px; background: white; border-bottom: 1px solid #eee; position: sticky; top: 56px; z-index: 99; display: flex; gap: 8px; }
     .search-bar input { background: #f0f2f5; border: none; padding: 10px 16px; flex: 1; border-radius: 8px; outline: none; font-size: 15px; }
     .filter-bar { padding: 10px 16px; background: white; border-bottom: 1px solid #eee; display: flex; gap: 8px; overflow-x: auto; }
@@ -163,7 +175,6 @@
     .size-stock-item .s-qty { font-size: 14px; font-weight: bold; color: #333; }
     .size-stock-item .s-qty.low { color: #E21836; }
 
-    /* 재고조사 */
     .scan-section { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .scan-section h3 { font-size: 15px; font-weight: bold; color: #333; margin-bottom: 12px; }
     .scan-btn { width: 100%; padding: 12px; background: #E21836; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; margin-top: 10px; }
@@ -178,7 +189,6 @@
     .size-qty-btn { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #E21836; background: white; color: #E21836; font-size: 18px; cursor: pointer; }
     .size-qty-display { font-size: 20px; font-weight: bold; color: #333; min-width: 36px; text-align: center; }
 
-    /* 재고현황 */
     .status-card { background: white; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; }
     .status-card-header { padding: 14px 16px; border-bottom: 1px solid #f0f2f5; }
     .status-product { font-size: 15px; font-weight: bold; color: #333; }
@@ -190,7 +200,6 @@
     .status-size-qty.low { color: #E21836; }
     .status-total { padding: 10px 16px; background: #fafafa; border-top: 1px solid #f0f2f5; display: flex; justify-content: space-between; font-size: 13px; }
 
-    /* 요청 관리 */
     .request-tab { display: flex; background: white; border-bottom: 1px solid #eee; position: sticky; top: 56px; z-index: 99; }
     .request-tab-btn { flex: 1; padding: 12px; border: none; background: none; font-size: 14px; color: #888; cursor: pointer; border-bottom: 2px solid transparent; }
     .request-tab-btn.active { color: #E21836; border-bottom-color: #E21836; font-weight: bold; }
@@ -206,12 +215,9 @@
     .request-message { font-size: 12px; color: #888; font-style: italic; margin-top: 6px; padding: 6px 10px; background: #f8f8f8; border-radius: 6px; }
     .request-actions { display: flex; gap: 8px; margin-top: 10px; }
 
-    /* 입고관리 */
     .receiving-step { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .receiving-step h3 { font-size: 15px; font-weight: bold; color: #333; margin-bottom: 12px; }
     .order-card { border: 2px solid #f0f2f5; border-radius: 10px; padding: 14px; margin-bottom: 10px; cursor: pointer; }
-    .order-card.matched { border-color: #10b981; background: #f0fdf4; }
-    .order-card.mismatched { border-color: #ef4444; background: #fef2f2; }
     .order-number { font-size: 12px; color: #888; margin-bottom: 4px; }
     .order-product { font-size: 14px; font-weight: bold; color: #333; }
     .order-sizes { font-size: 12px; color: #666; margin-top: 4px; }
@@ -225,7 +231,6 @@
     .compare-diff.plus { color: #10b981; }
     .compare-diff.minus { color: #ef4444; }
 
-    /* 설정 */
     .settings-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .settings-card h3 { font-size: 15px; font-weight: bold; color: #333; margin-bottom: 16px; }
     .settings-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f2f5; font-size: 14px; color: #444; }
@@ -247,14 +252,8 @@
   <div id="login-page">
     <div class="login-box">
       <div class="login-logo"><h1>NB</h1><p>New Balance</p></div>
-      <div class="input-wrapper">
-        <span class="input-icon">👤</span>
-        <input type="text" id="store" class="login-input" placeholder="매장 아이디" />
-      </div>
-      <div class="input-wrapper">
-        <span class="input-icon">🔒</span>
-        <input type="password" id="password" class="login-input" placeholder="비밀번호" />
-      </div>
+      <div class="input-wrapper"><span class="input-icon">👤</span><input type="text" id="store" class="login-input" placeholder="매장 아이디" /></div>
+      <div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" id="password" class="login-input" placeholder="비밀번호" /></div>
       <button class="login-btn" id="loginBtn">로그인</button>
       <p class="error" id="error-msg">아이디 또는 비밀번호가 틀렸습니다.</p>
     </div>
@@ -263,33 +262,25 @@
   <!-- 메인 -->
   <div id="main-page">
     <div class="main-header">
-      <button class="hamburger-btn" onclick="openSideMenu()">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger-btn" onclick="openSideMenu()"><span></span><span></span><span></span></button>
       <div class="main-search-wrapper">
         <input type="text" id="main-search-input" placeholder="바코드/품번" oninput="mainSearch()" />
         <button class="search-icon-btn" onclick="mainSearch()">🔍</button>
       </div>
       <button class="camera-btn" id="main-camera-btn" onclick="toggleMainScan()">📷</button>
     </div>
-    <div id="main-reader-container">
-      <div id="main-reader"></div>
-      <button class="stop-scan-btn" onclick="toggleMainScan()">⏹ 스캔 중지</button>
-    </div>
+    <div id="main-reader-container"><div id="main-reader"></div><button class="stop-scan-btn" onclick="toggleMainScan()">⏹ 스캔 중지</button></div>
     <div class="main-results">
       <div class="alert-banner" id="alert-banner"></div>
-      <div id="main-result-content">
-        <p class="search-hint">📷 바코드를 스캔하거나<br>바코드/품번으로 검색해주세요</p>
-      </div>
+      <div id="main-result-content"><p class="search-hint">📷 바코드를 스캔하거나<br>바코드/품번으로 검색해주세요</p></div>
     </div>
   </div>
 
-  <!-- 햄버거 메뉴 -->
+  <!-- 사이드 메뉴 -->
   <div class="side-menu-overlay" id="side-menu-overlay" onclick="closeSideMenu()"></div>
   <div class="side-menu" id="side-menu">
     <div class="side-menu-header">
-      <h3>New Balance</h3>
-      <p>재고관리 시스템</p>
+      <h3>New Balance</h3><p>재고관리 시스템</p>
       <div class="side-menu-store" id="side-store-info"></div>
     </div>
     <div class="side-menu-items">
@@ -298,55 +289,32 @@
       <button class="side-menu-item" onclick="openSubPage('status-page')"><span class="menu-icon">📊</span> 재고 현황</button>
       <button class="side-menu-item" onclick="openSubPage('receiving-page')"><span class="menu-icon">📥</span> 입고관리</button>
       <button class="side-menu-item" onclick="openSubPage('other-store-page')"><span class="menu-icon">🏪</span> 타매장 재고 조회</button>
+      <button class="side-menu-item" onclick="openSubPage('bin-page')"><span class="menu-icon">📍</span> BIN 정보</button>
       <button class="side-menu-item" onclick="openSubPage('requests-page')"><span class="menu-icon">🔄</span> 요청 관리 <span id="request-badge" style="display:none; background:#E21836; color:white; border-radius:10px; padding:1px 7px; font-size:11px; margin-left:4px;"></span></button>
       <div class="side-menu-divider"></div>
       <button class="side-menu-item" onclick="openSubPage('settings-page')"><span class="menu-icon">⚙️</span> 설정</button>
     </div>
-    <div class="side-menu-footer">
-      <button class="logout-menu-btn" id="logoutBtn">🚪 로그아웃</button>
-    </div>
+    <div class="side-menu-footer"><button class="logout-menu-btn" id="logoutBtn">🚪 로그아웃</button></div>
   </div>
 
   <!-- 재고 목록 -->
   <div id="products-page" class="page">
-    <div class="header">
-      <h2>📦 재고 목록</h2>
-      <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
-    </div>
+    <div class="header"><h2>📦 재고 목록</h2><button class="back-btn" onclick="closeSubPage()">← 뒤로</button></div>
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="🔍 상품명, 스타일번호 검색..." oninput="searchProducts()" />
       <button class="btn-sm" onclick="openAddModal()">+ 추가</button>
       <button class="btn-sm" id="product-scan-btn" onclick="toggleProductScan()" style="background:#333; font-size:16px;">📷</button>
     </div>
     <div class="filter-bar">
-      <select id="filter-category" onchange="updateFilterSize(); searchProducts()">
-        <option value="">전체 카테고리</option>
-        <option value="신발">신발</option>
-        <option value="의류">의류</option>
-        <option value="용품">용품</option>
-      </select>
-      <select id="filter-gender" onchange="updateFilterSize(); searchProducts()">
-        <option value="">전체 성별</option>
-        <option value="여성">여성</option>
-        <option value="남성">남성</option>
-      </select>
-      <select id="filter-size" onchange="searchProducts()">
-        <option value="">전체 사이즈</option>
-      </select>
+      <select id="filter-category" onchange="updateFilterSize(); searchProducts()"><option value="">전체 카테고리</option><option value="신발">신발</option><option value="의류">의류</option><option value="용품">용품</option></select>
+      <select id="filter-gender" onchange="updateFilterSize(); searchProducts()"><option value="">전체 성별</option><option value="여성">여성</option><option value="남성">남성</option></select>
+      <select id="filter-size" onchange="searchProducts()"><option value="">전체 사이즈</option></select>
       <select id="filter-price" onchange="searchProducts()">
         <option value="">전체 가격대</option>
-        <option value="34000">34,000원</option>
-        <option value="49000">49,000원</option>
-        <option value="59000">59,000원</option>
-        <option value="99000">99,000원</option>
-        <option value="109000">109,000원</option>
-        <option value="129000">129,000원</option>
-        <option value="139000">139,000원</option>
-        <option value="149000">149,000원</option>
-        <option value="159000">159,000원</option>
-        <option value="169000">169,000원</option>
-        <option value="179000">179,000원</option>
-        <option value="189000">189,000원</option>
+        <option value="34000">34,000원</option><option value="49000">49,000원</option><option value="59000">59,000원</option>
+        <option value="99000">99,000원</option><option value="109000">109,000원</option><option value="129000">129,000원</option>
+        <option value="139000">139,000원</option><option value="149000">149,000원</option><option value="159000">159,000원</option>
+        <option value="169000">169,000원</option><option value="179000">179,000원</option><option value="189000">189,000원</option>
         <option value="209000">209,000원</option>
       </select>
       <button class="filter-reset-btn" onclick="resetFilters()">초기화</button>
@@ -360,34 +328,21 @@
 
   <!-- 재고조사 -->
   <div id="inventory-page" class="page">
-    <div class="header">
-      <h2>🔍 재고조사</h2>
-      <button class="back-btn" onclick="stopScanAndGoBack('inventory')">← 뒤로</button>
-    </div>
+    <div class="header"><h2>🔍 재고조사</h2><button class="back-btn" onclick="stopScanAndGoBack('inventory')">← 뒤로</button></div>
     <div class="page-content">
       <div class="scan-section">
         <h3>📷 바코드 스캔</h3>
         <div id="reader"></div>
         <button class="scan-btn" id="scanBtn" onclick="toggleScan()">스캔 시작</button>
-        <div class="manual-input">
-          <input type="text" id="manual-barcode" placeholder="바코드 직접 입력..." />
-          <button class="btn-sm" onclick="manualSearch()">조회</button>
-        </div>
+        <div class="manual-input"><input type="text" id="manual-barcode" placeholder="바코드 직접 입력..." /><button class="btn-sm" onclick="manualSearch()">조회</button></div>
       </div>
       <div class="scanned-result" id="scanned-result">
         <div class="result-card-header">
           <div class="result-style" id="inv-name"></div>
           <div class="result-substyle" id="inv-style"></div>
-          <div class="result-meta-row" style="margin-top:6px;">
-            <span id="inv-gender"></span>
-            <span id="inv-category"></span>
-            <span id="inv-season"></span>
-          </div>
+          <div class="result-meta-row" style="margin-top:6px;"><span id="inv-gender"></span><span id="inv-category"></span><span id="inv-season"></span></div>
         </div>
-        <div class="result-card-price">
-          <span class="price-label">정상가</span>
-          <span class="price-value" id="inv-price"></span>
-        </div>
+        <div class="result-card-price"><span class="price-label">정상가</span><span class="price-value" id="inv-price"></span></div>
         <div style="padding:16px;">
           <h3 style="font-size:14px; font-weight:bold; color:#333; margin-bottom:12px;">📝 사이즈별 재고 입력</h3>
           <div class="size-input-grid" id="size-input-grid"></div>
@@ -399,10 +354,7 @@
 
   <!-- 재고 현황 -->
   <div id="status-page" class="page">
-    <div class="header">
-      <h2>📊 재고 현황</h2>
-      <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
-    </div>
+    <div class="header"><h2>📊 재고 현황</h2><button class="back-btn" onclick="closeSubPage()">← 뒤로</button></div>
     <div class="page-content">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
         <span style="font-size:14px; color:#555;">총 <strong id="status-count">0</strong>개 상품</span>
@@ -414,10 +366,7 @@
 
   <!-- 타매장 재고 조회 -->
   <div id="other-store-page" class="page">
-    <div class="header">
-      <h2>🏪 타매장 재고 조회</h2>
-      <button class="back-btn" onclick="stopScanAndGoBack('other-store')">← 뒤로</button>
-    </div>
+    <div class="header"><h2>🏪 타매장 재고 조회</h2><button class="back-btn" onclick="stopScanAndGoBack('other-store')">← 뒤로</button></div>
     <div style="padding:16px 20px; background:white; border-bottom:1px solid #eee;">
       <div style="display:flex; gap:8px;">
         <input type="text" id="other-store-search-input" placeholder="바코드/품번으로 검색..." style="flex:1; padding:10px 16px; border:1px solid #ddd; border-radius:8px; font-size:15px; outline:none;" />
@@ -435,27 +384,35 @@
         <div id="other-store-pstyle" style="font-size:13px; color:#888; margin-bottom:4px;"></div>
         <div id="other-store-pmeta" style="font-size:12px; color:#aaa;"></div>
       </div>
-      <div id="other-store-result-content">
-        <p class="search-hint">📷 바코드를 스캔하거나<br>품번으로 검색해주세요</p>
+      <div id="other-store-result-content"><p class="search-hint">📷 바코드를 스캔하거나<br>품번으로 검색해주세요</p></div>
+    </div>
+  </div>
+
+  <!-- BIN 정보 -->
+  <div id="bin-page" class="page">
+    <div class="header">
+      <h2>📍 BIN 정보</h2>
+      <div style="display:flex; gap:8px;">
+        <button class="back-btn" id="bin-edit-toggle" onclick="toggleBinEditMode()">✏️ 수정</button>
+        <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
       </div>
     </div>
+    <div class="bin-search-bar">
+      <input type="text" id="bin-search-input" placeholder="🔍 BIN 코드 또는 상품명 검색..." oninput="searchBins()" />
+      <button class="btn-sm" onclick="openAddBinModal()">+ BIN 추가</button>
+    </div>
+    <div class="page-content" id="bin-list"></div>
   </div>
 
   <!-- 입고관리 -->
   <div id="receiving-page" class="page">
-    <div class="header">
-      <h2>📥 입고관리</h2>
-      <button class="back-btn" onclick="stopScanAndGoBack('receiving')">← 뒤로</button>
-    </div>
+    <div class="header"><h2>📥 입고관리</h2><button class="back-btn" onclick="stopScanAndGoBack('receiving')">← 뒤로</button></div>
     <div class="page-content">
       <div class="receiving-step">
         <h3>📦 STEP 1. 카톤 바코드 스캔</h3>
         <div id="receiving-reader"></div>
         <button class="scan-btn" id="receivingScanBtn" onclick="toggleReceivingScan()">스캔 시작</button>
-        <div class="manual-input">
-          <input type="text" id="receiving-manual-barcode" placeholder="카톤 바코드 입력..." />
-          <button class="btn-sm" onclick="receivingManualSearch()">조회</button>
-        </div>
+        <div class="manual-input"><input type="text" id="receiving-manual-barcode" placeholder="카톤 바코드 입력..." /><button class="btn-sm" onclick="receivingManualSearch()">조회</button></div>
       </div>
       <div class="receiving-step" id="receiving-orders-section" style="display:none;">
         <h3>📋 STEP 2. 입고 예정 내역</h3>
@@ -464,9 +421,7 @@
       <div class="receiving-step" id="receiving-compare-section" style="display:none;">
         <h3>🔍 STEP 3. 수량 확인</h3>
         <div id="receiving-product-info" style="margin-bottom:12px;"></div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; color:#888; margin-bottom:8px; padding:0 4px;">
-          <span>사이즈</span><span>예정 → 실제</span>
-        </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:#888; margin-bottom:8px;"><span>사이즈</span><span>예정 → 실제</span></div>
         <div class="compare-grid" id="compare-grid"></div>
         <div id="compare-summary" style="padding:12px; border-radius:8px; text-align:center; font-size:15px; font-weight:bold; margin-bottom:16px;"></div>
         <div style="display:flex; gap:10px;">
@@ -486,10 +441,7 @@
 
   <!-- 요청 관리 -->
   <div id="requests-page" class="page">
-    <div class="header">
-      <h2>🔄 요청 관리</h2>
-      <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
-    </div>
+    <div class="header"><h2>🔄 요청 관리</h2><button class="back-btn" onclick="closeSubPage()">← 뒤로</button></div>
     <div class="request-tab">
       <button class="request-tab-btn active" onclick="switchRequestTab('received')">받은 요청</button>
       <button class="request-tab-btn" onclick="switchRequestTab('sent')">보낸 요청</button>
@@ -509,17 +461,12 @@
         <button onclick="loadRequests()" style="padding:5px 14px; border:none; border-radius:16px; font-size:12px; background:#E21836; color:white; cursor:pointer; font-weight:bold;">🔍 조회</button>
       </div>
     </div>
-    <div class="page-content">
-      <div id="requests-list"></div>
-    </div>
+    <div class="page-content"><div id="requests-list"></div></div>
   </div>
 
   <!-- 설정 -->
   <div id="settings-page" class="page">
-    <div class="header">
-      <h2>⚙️ 설정</h2>
-      <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
-    </div>
+    <div class="header"><h2>⚙️ 설정</h2><button class="back-btn" onclick="closeSubPage()">← 뒤로</button></div>
     <div class="page-content">
       <div class="settings-card">
         <h3>매장 정보</h3>
@@ -528,40 +475,23 @@
       </div>
       <div class="settings-card">
         <h3>🔌 API 연동 설정</h3>
-        <div class="settings-row">
-          <span>연동 상태</span>
-          <span class="api-status disconnected" id="api-status-badge">미연동</span>
-        </div>
-        <div class="settings-row">
-          <span>API 자동 연동</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="api-toggle" onchange="toggleApiConnection()" disabled />
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
+        <div class="settings-row"><span>연동 상태</span><span class="api-status disconnected" id="api-status-badge">미연동</span></div>
+        <div class="settings-row"><span>API 자동 연동</span><label class="toggle-switch"><input type="checkbox" id="api-toggle" onchange="toggleApiConnection()" disabled /><span class="toggle-slider"></span></label></div>
         <div class="settings-row" style="flex-direction:column; align-items:flex-start; gap:8px;">
           <span style="color:#888; font-size:12px;">API 키 (이랜드 본사 발급)</span>
           <input type="text" id="api-key-input" placeholder="API 키를 입력해주세요" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:13px; outline:none; margin:0;" />
           <input type="text" id="api-url-input" placeholder="API URL을 입력해주세요" style="width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:13px; outline:none; margin:0;" />
           <button class="btn-sm" onclick="saveApiSettings()" style="margin-top:4px;">저장</button>
         </div>
-        <div style="margin-top:12px; padding:10px; background:#fffbeb; border-radius:8px; font-size:12px; color:#92400e;">
-          ⚠️ API 연동은 이랜드 본사 IT팀으로부터 API 키를 발급받은 후 사용 가능합니다.
-        </div>
+        <div style="margin-top:12px; padding:10px; background:#fffbeb; border-radius:8px; font-size:12px; color:#92400e;">⚠️ API 연동은 이랜드 본사 IT팀으로부터 API 키를 발급받은 후 사용 가능합니다.</div>
       </div>
       <div class="settings-card">
         <h3>재고 기준 설정</h3>
-        <div class="settings-row">
-          <span>저재고 기준 수량</span>
-          <input type="number" id="low-stock-threshold" value="3" style="width:70px; margin:0; padding:6px; text-align:center; border:1px solid #ddd; border-radius:6px;" />
-        </div>
+        <div class="settings-row"><span>저재고 기준 수량</span><input type="number" id="low-stock-threshold" value="3" style="width:70px; margin:0; padding:6px; text-align:center; border:1px solid #ddd; border-radius:6px;" /></div>
       </div>
       <div class="settings-card">
         <h3>데이터 관리</h3>
-        <div class="settings-row">
-          <span>재고 데이터 초기화</span>
-          <button class="btn-sm" style="background:#ef4444;" onclick="clearInventory()">초기화</button>
-        </div>
+        <div class="settings-row"><span>재고 데이터 초기화</span><button class="btn-sm" style="background:#ef4444;" onclick="clearInventory()">초기화</button></div>
       </div>
     </div>
   </div>
@@ -570,36 +500,18 @@
   <div class="modal-overlay" id="product-modal">
     <div class="modal">
       <h3 id="modal-title">상품 추가</h3>
-      <label>상품명</label>
-      <input type="text" id="m-name" placeholder="예: 993" />
-      <label>스타일 번호</label>
-      <input type="text" id="m-style" placeholder="예: M993GL" />
+      <label>상품명</label><input type="text" id="m-name" placeholder="예: 993" />
+      <label>스타일 번호</label><input type="text" id="m-style" placeholder="예: M993GL" />
       <label>성별</label>
-      <select id="m-gender">
-        <option value="">성별 선택</option>
-        <option value="여성">여성</option>
-        <option value="남성">남성</option>
-      </select>
+      <select id="m-gender"><option value="">성별 선택</option><option value="여성">여성</option><option value="남성">남성</option></select>
       <label>카테고리</label>
-      <select id="m-category">
-        <option value="신발">신발</option>
-        <option value="의류">의류</option>
-        <option value="용품">용품</option>
-      </select>
-      <label>컬러</label>
-      <input type="text" id="m-color" placeholder="예: Grey" />
-      <label>시즌</label>
-      <input type="text" id="m-season" placeholder="예: 25SS" />
-      <label>가격</label>
-      <input type="text" id="m-price" placeholder="예: 109,000" oninput="formatPrice(this)" />
-      <label>바코드 (UPC)</label>
-      <input type="text" id="m-barcode" placeholder="예: 0123456789012" />
-      <label>BIN 위치</label>
-      <input type="text" id="m-bin" placeholder="예: A-01-03" />
-      <div class="modal-btns">
-        <button class="btn" onclick="saveProduct()">저장</button>
-        <button class="btn btn-red" onclick="closeModal()">취소</button>
-      </div>
+      <select id="m-category"><option value="신발">신발</option><option value="의류">의류</option><option value="용품">용품</option></select>
+      <label>컬러</label><input type="text" id="m-color" placeholder="예: Grey" />
+      <label>시즌</label><input type="text" id="m-season" placeholder="예: 25SS" />
+      <label>가격</label><input type="text" id="m-price" placeholder="예: 109,000" oninput="formatPrice(this)" />
+      <label>바코드 (UPC)</label><input type="text" id="m-barcode" placeholder="예: 0123456789012" />
+      <label>BIN 위치</label><input type="text" id="m-bin" placeholder="예: A-01-03" />
+      <div class="modal-btns"><button class="btn" onclick="saveProduct()">저장</button><button class="btn btn-red" onclick="closeModal()">취소</button></div>
     </div>
   </div>
 
@@ -608,16 +520,22 @@
     <div class="modal">
       <h3>🔄 회전요청</h3>
       <div class="modal-info-box" id="transfer-product-info"></div>
-      <label>요청 사이즈</label>
-      <select id="t-size"></select>
-      <label>요청 수량</label>
-      <input type="number" id="t-qty" value="1" min="1" />
-      <label>메시지 (선택)</label>
-      <textarea id="t-message" placeholder="요청 사유나 메모를 입력해주세요..."></textarea>
-      <div class="modal-btns">
-        <button class="btn" onclick="submitTransferRequest()">요청 전송</button>
-        <button class="btn btn-red" onclick="closeTransferModal()">취소</button>
-      </div>
+      <label>요청 사이즈</label><select id="t-size"></select>
+      <label>요청 수량</label><input type="number" id="t-qty" value="1" min="1" />
+      <label>메시지 (선택)</label><textarea id="t-message" placeholder="요청 사유나 메모를 입력해주세요..."></textarea>
+      <div class="modal-btns"><button class="btn" onclick="submitTransferRequest()">요청 전송</button><button class="btn btn-red" onclick="closeTransferModal()">취소</button></div>
+    </div>
+  </div>
+
+  <!-- BIN 추가 모달 -->
+  <div class="modal-overlay" id="bin-modal">
+    <div class="modal">
+      <h3 id="bin-modal-title">BIN 추가</h3>
+      <label>BIN 코드</label><input type="text" id="b-code" placeholder="예: A-01-01" />
+      <label>상품 스타일 번호</label>
+      <input type="text" id="b-style" placeholder="예: M993GL" oninput="searchBinProduct()" />
+      <div id="b-product-found" style="display:none; padding:8px; background:#f0fdf4; border-radius:6px; margin-bottom:14px; font-size:13px; color:#065f46;"></div>
+      <div class="modal-btns"><button class="btn" onclick="saveBin()">저장</button><button class="btn btn-red" onclick="closeBinModal()">취소</button></div>
     </div>
   </div>
 
@@ -625,17 +543,11 @@
   <div class="modal-overlay" id="order-modal">
     <div class="modal">
       <h3>입고 예정 등록</h3>
-      <label>카톤 바코드</label>
-      <input type="text" id="o-box-barcode" readonly style="background:#f0f2f5;" />
-      <label>상품 스타일 번호</label>
-      <input type="text" id="o-style" placeholder="예: M993GL" oninput="searchOrderProduct()" />
+      <label>카톤 바코드</label><input type="text" id="o-box-barcode" readonly style="background:#f0f2f5;" />
+      <label>상품 스타일 번호</label><input type="text" id="o-style" placeholder="예: M993GL" oninput="searchOrderProduct()" />
       <div id="o-product-found" style="display:none; padding:8px; background:#f0fdf4; border-radius:6px; margin-bottom:14px; font-size:13px; color:#065f46;"></div>
-      <label>사이즈별 예정 수량</label>
-      <div id="o-size-grid" style="margin-bottom:14px;"></div>
-      <div class="modal-btns">
-        <button class="btn" onclick="saveOrder()">등록</button>
-        <button class="btn btn-red" onclick="closeOrderModal()">취소</button>
-      </div>
+      <label>사이즈별 예정 수량</label><div id="o-size-grid" style="margin-bottom:14px;"></div>
+      <div class="modal-btns"><button class="btn" onclick="saveOrder()">등록</button><button class="btn btn-red" onclick="closeOrderModal()">취소</button></div>
     </div>
   </div>
 
@@ -650,19 +562,20 @@
     var currentReceivingProduct = null;
     var currentBoxBarcode = null;
     var currentOrderProduct = null;
+    var currentBinProduct = null;
     var selectedOrder = null;
     var currentTransferTarget = null;
     var currentRequestTab = 'received';
-    var html5QrCode = null;
-    var isScanning = false;
-    var productHtml5QrCode = null;
-    var isProductScanning = false;
-    var mainHtml5QrCode = null;
-    var isMainScanning = false;
-    var receivingHtml5QrCode = null;
-    var isReceivingScanning = false;
-    var otherStoreHtml5QrCode = null;
-    var isOtherStoreScanning = false;
+    var binEditMode = false;
+    var allBins = [];
+    var swipedItem = null;
+
+    var html5QrCode = null; var isScanning = false;
+    var productHtml5QrCode = null; var isProductScanning = false;
+    var mainHtml5QrCode = null; var isMainScanning = false;
+    var receivingHtml5QrCode = null; var isReceivingScanning = false;
+    var otherStoreHtml5QrCode = null; var isOtherStoreScanning = false;
+
     var editingProductId = null;
     var allProducts = [];
     var allStores = [];
@@ -680,10 +593,43 @@
       return (SIZES[category] && SIZES[category][gender]) ? SIZES[category][gender] : [];
     }
 
+    // UPC 바코드 파싱 - 앞 10자리로 스타일 매칭
+    function parseUPC(upc) {
+      if (!upc || upc.length < 10) return { style10: upc, colorCode: '', sizeCode: '' };
+      var style10 = upc.substring(0, 10);
+      var rest = upc.substring(10);
+      // 의류: 컬러 2자리 + 사이즈 나머지
+      // 신발: 컬러 2자리 + 사이즈 나머지
+      var colorCode = rest.substring(0, 2);
+      var sizeCode = rest.substring(2);
+      return { style10: style10, colorCode: colorCode, sizeCode: sizeCode };
+    }
+
+    // UPC로 상품 검색 (앞 10자리 매칭)
+    async function findProductByUPC(upc) {
+      var parsed = parseUPC(upc);
+      // 정확한 바코드로 먼저 검색
+      var { data: exact } = await db.from('products').select('*').eq('barcode', upc).single();
+      if (exact) return { product: exact, colorCode: parsed.colorCode, sizeCode: parsed.sizeCode, matchType: 'exact' };
+      // 앞 10자리로 검색
+      var { data: products } = await db.from('products').select('*');
+      if (!products) return null;
+      var matched = products.filter(function(p) {
+        if (!p.barcode) return false;
+        return p.barcode.substring(0, 10) === parsed.style10 || p.style.substring(0, 10) === parsed.style10;
+      });
+      if (matched.length === 0) {
+        // 스타일코드 앞 10자리로도 검색
+        matched = products.filter(function(p) {
+          return p.style.substring(0, 10).toLowerCase() === parsed.style10.toLowerCase();
+        });
+      }
+      if (matched.length > 0) return { product: matched[0], colorCode: parsed.colorCode, sizeCode: parsed.sizeCode, matchType: 'partial', allMatched: matched };
+      return null;
+    }
+
     async function logInventoryChange(storeId, productStyle, productName, size, changeType, changeQty, beforeQty, afterQty, memo) {
-      try {
-        await db.from('inventory_logs').insert({ store_id: storeId, product_style: productStyle, product_name: productName, size: size, change_type: changeType, change_qty: changeQty, before_qty: beforeQty, after_qty: afterQty, memo: memo || '', created_at: new Date().toLocaleString('ko-KR') });
-      } catch(e) {}
+      try { await db.from('inventory_logs').insert({ store_id: storeId, product_style: productStyle, product_name: productName, size: size, change_type: changeType, change_qty: changeQty, before_qty: beforeQty, after_qty: afterQty, memo: memo || '', created_at: new Date().toLocaleString('ko-KR') }); } catch(e) {}
     }
 
     // 로그인
@@ -698,19 +644,13 @@
         document.getElementById('login-page').style.display = 'none';
         document.getElementById('main-page').style.display = 'block';
         document.getElementById('side-store-info').textContent = data.name + ' (' + data.store_id + ')';
-        checkLowStock();
-        checkPendingRequests();
-        loadApiSettings();
-      } else {
-        document.getElementById('error-msg').style.display = 'block';
-      }
+        checkLowStock(); checkPendingRequests(); loadApiSettings();
+      } else { document.getElementById('error-msg').style.display = 'block'; }
     });
 
     document.getElementById('logoutBtn').addEventListener('click', function() {
-      stopAllScans();
-      currentStore = null;
-      document.getElementById('store').value = '';
-      document.getElementById('password').value = '';
+      stopAllScans(); currentStore = null;
+      document.getElementById('store').value = ''; document.getElementById('password').value = '';
       document.getElementById('error-msg').style.display = 'none';
       document.getElementById('main-page').style.display = 'none';
       document.querySelectorAll('.page').forEach(function(p) { p.style.display = 'none'; });
@@ -728,27 +668,22 @@
 
     // API 설정
     function loadApiSettings() {
-      var savedKey = localStorage.getItem('nb_api_key') || '';
-      var savedUrl = localStorage.getItem('nb_api_url') || '';
-      API_CONFIG.key = savedKey;
-      API_CONFIG.url = savedUrl;
-      API_CONFIG.enabled = localStorage.getItem('nb_api_enabled') === 'true' && !!savedKey;
+      API_CONFIG.key = localStorage.getItem('nb_api_key') || '';
+      API_CONFIG.url = localStorage.getItem('nb_api_url') || '';
+      API_CONFIG.enabled = localStorage.getItem('nb_api_enabled') === 'true' && !!API_CONFIG.key;
     }
     function saveApiSettings() {
       var key = document.getElementById('api-key-input').value.trim();
       var url = document.getElementById('api-url-input').value.trim();
-      localStorage.setItem('nb_api_key', key);
-      localStorage.setItem('nb_api_url', url);
-      API_CONFIG.key = key;
-      API_CONFIG.url = url;
+      localStorage.setItem('nb_api_key', key); localStorage.setItem('nb_api_url', url);
+      API_CONFIG.key = key; API_CONFIG.url = url;
       if (key) { document.getElementById('api-toggle').disabled = false; alert('✅ API 설정이 저장되었습니다.'); }
       else { alert('API 키를 입력해주세요.'); }
       updateApiStatusUI();
     }
     function toggleApiConnection() {
-      var toggle = document.getElementById('api-toggle');
-      API_CONFIG.enabled = toggle.checked;
-      localStorage.setItem('nb_api_enabled', toggle.checked);
+      API_CONFIG.enabled = document.getElementById('api-toggle').checked;
+      localStorage.setItem('nb_api_enabled', API_CONFIG.enabled);
       updateApiStatusUI();
     }
     function updateApiStatusUI() {
@@ -774,6 +709,7 @@
       if (pageId === 'settings-page') { renderSettings(); loadApiSettings(); updateApiStatusUI(); }
       if (pageId === 'requests-page') { currentRequestTab = 'received'; loadRequests(); }
       if (pageId === 'other-store-page') resetOtherStoreUI();
+      if (pageId === 'bin-page') { binEditMode = false; updateBinEditUI(); loadBins(); }
     }
 
     function closeSubPage() {
@@ -782,19 +718,15 @@
       document.getElementById('main-page').style.display = 'block';
       document.getElementById('main-search-input').value = '';
       document.getElementById('main-result-content').innerHTML = '<p class="search-hint">📷 바코드를 스캔하거나<br>바코드/품번으로 검색해주세요</p>';
-      checkLowStock();
-      checkPendingRequests();
+      checkLowStock(); checkPendingRequests();
     }
 
-    // 저재고 알림
     async function checkLowStock() {
-      var threshold = 3;
-      var { data } = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).lt('quantity', threshold);
+      var { data } = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).lt('quantity', 3);
       var banner = document.getElementById('alert-banner');
       if (data && data.length > 0) {
-        var names = [...new Set(data.map(function(i) { return i.product_name; }))];
         banner.style.display = 'block';
-        banner.textContent = '⚠️ 저재고 상품: ' + names.join(', ');
+        banner.textContent = '⚠️ 저재고 상품: ' + [...new Set(data.map(function(i) { return i.product_name; }))].join(', ');
       } else { banner.style.display = 'none'; }
     }
 
@@ -805,23 +737,39 @@
       else { badge.style.display = 'none'; }
     }
 
-    // 메인 검색
+    // 메인 검색 (UPC 파싱 적용)
     async function mainSearch() {
-      var keyword = document.getElementById('main-search-input').value.trim().toLowerCase();
+      var keyword = document.getElementById('main-search-input').value.trim();
       if (!keyword) { document.getElementById('main-result-content').innerHTML = '<p class="search-hint">📷 바코드를 스캔하거나<br>바코드/품번으로 검색해주세요</p>'; return; }
-      var { data } = await db.from('products').select('*');
-      if (!data) return;
-      var filtered = data.filter(function(p) {
-        return p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) ||
-               (p.style_name && p.style_name.toLowerCase().includes(keyword)) || (p.barcode && p.barcode.includes(keyword));
-      });
-      await renderMainResults(filtered);
+      var keywordLower = keyword.toLowerCase();
+      var { data: products } = await db.from('products').select('*');
+      if (!products) return;
+
+      // UPC 파싱으로 검색 (바코드 길이가 10자 이상이면 UPC로 간주)
+      var filtered = [];
+      if (keyword.length >= 10) {
+        var parsed = parseUPC(keyword);
+        filtered = products.filter(function(p) {
+          return (p.barcode && p.barcode === keyword) ||
+                 (p.barcode && p.barcode.substring(0, 10) === parsed.style10) ||
+                 (p.style && p.style.substring(0, 10).toLowerCase() === parsed.style10.toLowerCase());
+        });
+      }
+      if (filtered.length === 0) {
+        filtered = products.filter(function(p) {
+          return p.name.toLowerCase().includes(keywordLower) ||
+                 p.style.toLowerCase().includes(keywordLower) ||
+                 (p.barcode && p.barcode.includes(keyword));
+        });
+      }
+      await renderMainResults(filtered, keyword);
     }
 
-    async function renderMainResults(list) {
+    async function renderMainResults(list, searchKeyword) {
       var container = document.getElementById('main-result-content');
       if (list.length === 0) { container.innerHTML = '<p class="no-result">검색 결과가 없습니다.</p>'; return; }
       var html = '';
+      var parsed = searchKeyword && searchKeyword.length >= 10 ? parseUPC(searchKeyword) : null;
       for (var i = 0; i < list.length; i++) {
         var p = list[i];
         var sizes = getSizes(p.category, p.gender);
@@ -830,18 +778,34 @@
         var { data: invData } = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).eq('product_style', p.style);
         if (invData) { invData.forEach(function(inv) { stockMap[inv.size] = { qty: inv.quantity, memo: inv.memo }; totalQty += inv.quantity; }); }
         var threshold = 3;
+
+        // UPC 파싱으로 특정 사이즈 하이라이트
+        var highlightSize = null;
+        if (parsed && parsed.sizeCode) { highlightSize = parsed.sizeCode; }
+
         var stockGridHtml = sizes.map(function(s) {
           var item = stockMap[s];
           var qty = item ? item.qty : '-';
           var memo = item ? item.memo : '';
           var isLow = qty !== '-' && qty < threshold;
-          return '<div class="stock-item"><div class="size-label">' + s + '</div><div class="qty-value' + (isLow ? ' low' : '') + '">' + qty + '</div><div class="qty-unit">' + (qty !== '-' ? '개' : '') + '</div>' + (memo ? '<div style="font-size:10px;color:#3b82f6;">' + memo + '</div>' : '') + '</div>';
+          var isHighlight = highlightSize && s === highlightSize;
+          return '<div class="stock-item" style="' + (isHighlight ? 'border:2px solid #E21836; background:#fff5f5;' : '') + '">' +
+            '<div class="size-label">' + s + '</div>' +
+            '<div class="qty-value' + (isLow ? ' low' : '') + '">' + qty + '</div>' +
+            '<div class="qty-unit">' + (qty !== '-' ? '개' : '') + '</div>' +
+            (memo ? '<div style="font-size:10px;color:#3b82f6;">' + memo + '</div>' : '') +
+            '</div>';
         }).join('');
+
+        // 컬러 코드 표시
+        var colorInfo = parsed && parsed.colorCode ? '<span style="background:#ede9fe;color:#7c3aed;padding:2px 8px;border-radius:10px;font-size:11px;">컬러: ' + parsed.colorCode + '</span>' : '';
+        var sizeInfo = parsed && parsed.sizeCode ? '<span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:10px;font-size:11px;">사이즈: ' + parsed.sizeCode + '</span>' : '';
+
         html += '<div class="result-card">' +
           '<div class="result-card-header">' +
             '<div class="result-style">' + p.name + '</div>' +
             '<div class="result-substyle">' + p.style + '</div>' +
-            '<div class="result-meta-row"><span>' + (p.gender || '') + '</span><span>' + (p.category || '') + '</span><span>' + (p.season || '') + '</span></div>' +
+            '<div class="result-meta-row" style="margin-top:4px;"><span>' + (p.gender || '') + '</span><span>' + (p.category || '') + '</span><span>' + (p.season || '') + '</span>' + colorInfo + sizeInfo + '</div>' +
           '</div>' +
           '<div class="result-card-body">' +
             '<div class="result-info-row"><span class="result-info-label">상품명</span><span class="result-info-value">' + p.name + '</span></div>' +
@@ -862,14 +826,194 @@
     function startMainScan() {
       document.getElementById('main-reader-container').style.display = 'block';
       mainHtml5QrCode = new Html5Qrcode("main-reader");
-      mainHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 } },
-        async function(decodedText) { stopMainScan(); var { data } = await db.from('products').select('*').eq('barcode', decodedText).single(); if (data) { document.getElementById('main-search-input').value = decodedText; await renderMainResults([data]); } else { alert('등록되지 않은 바코드: ' + decodedText); } },
-        function(error) {}
+      mainHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 120 }, aspectRatio: 1.7 },
+        async function(decodedText) {
+          stopMainScan();
+          document.getElementById('main-search-input').value = decodedText;
+          await mainSearch();
+        }, function(error) {}
       ).then(function() { isMainScanning = true; document.getElementById('main-camera-btn').textContent = '⏹'; })
       .catch(function(err) { alert('카메라 접근 실패: ' + err); });
     }
     function stopMainScan() {
       if (mainHtml5QrCode && isMainScanning) { mainHtml5QrCode.stop().catch(function(){}); isMainScanning = false; document.getElementById('main-reader-container').style.display = 'none'; document.getElementById('main-camera-btn').textContent = '📷'; }
+    }
+
+    // BIN 정보 관리
+    function toggleBinEditMode() {
+      binEditMode = !binEditMode;
+      updateBinEditUI();
+      renderBins(allBins);
+    }
+    function updateBinEditUI() {
+      var btn = document.getElementById('bin-edit-toggle');
+      btn.textContent = binEditMode ? '✅ 완료' : '✏️ 수정';
+      btn.style.background = binEditMode ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.2)';
+    }
+
+    async function loadBins() {
+      document.getElementById('bin-list').innerHTML = '<p class="loading">불러오는 중...</p>';
+      var { data } = await db.from('bins').select('*').eq('store_id', currentStore.store_id).order('bin_code');
+      allBins = data || [];
+      renderBins(allBins);
+    }
+
+    function searchBins() {
+      var keyword = document.getElementById('bin-search-input').value.trim().toLowerCase();
+      if (!keyword) { renderBins(allBins); return; }
+      var filtered = allBins.filter(function(b) {
+        return b.bin_code.toLowerCase().includes(keyword) || (b.product_name && b.product_name.toLowerCase().includes(keyword)) || (b.product_style && b.product_style.toLowerCase().includes(keyword));
+      });
+      renderBins(filtered);
+    }
+
+    function renderBins(bins) {
+      var container = document.getElementById('bin-list');
+      if (!bins || bins.length === 0) { container.innerHTML = '<p class="no-result">등록된 BIN이 없습니다.<br>+ BIN 추가 버튼으로 추가해주세요.</p>'; return; }
+
+      // BIN 코드별로 그룹화
+      var grouped = {};
+      bins.forEach(function(b) {
+        if (!grouped[b.bin_code]) grouped[b.bin_code] = [];
+        grouped[b.bin_code].push(b);
+      });
+
+      var html = Object.keys(grouped).sort().map(function(binCode) {
+        var items = grouped[binCode];
+        var productsHtml = items.map(function(item) {
+          return '<div class="bin-product-item" id="bin-item-' + item.id + '" ontouchstart="handleSwipeStart(event, ' + item.id + ')" ontouchend="handleSwipeEnd(event, ' + item.id + ')">' +
+            '<div class="bin-product-info">' +
+              '<div class="bin-product-name">' + (item.product_name || item.product_style) + '</div>' +
+              '<div class="bin-product-style">' + item.product_style + (item.gender ? ' · ' + item.gender : '') + (item.category ? ' · ' + item.category : '') + '</div>' +
+            '</div>' +
+            (binEditMode ? '<button onclick="removeBinProduct(' + item.id + ')" style="background:none;border:none;color:#ef4444;font-size:20px;cursor:pointer;padding:4px;">🗑️</button>' : '') +
+            '<div class="bin-product-delete" onclick="removeBinProduct(' + item.id + ')">삭제</div>' +
+            '</div>';
+        }).join('');
+
+        return '<div class="bin-card">' +
+          '<div class="bin-card-header">' +
+            '<div class="bin-code-title">📍 ' + binCode + '</div>' +
+            '<div style="display:flex;gap:8px;align-items:center;">' +
+              '<span style="font-size:12px;color:#888;">' + items.length + '개 상품</span>' +
+              (binEditMode ? '<button class="bin-edit-btn" onclick="openAddBinModalWithCode(\'' + binCode + '\')">➕</button>' : '') +
+            '</div>' +
+          '</div>' +
+          '<div class="bin-product-list">' + productsHtml + (items.length === 0 ? '<div class="bin-empty">등록된 상품 없음</div>' : '') + '</div>' +
+          '<button class="bin-add-btn" onclick="openAddBinModalWithCode(\'' + binCode + '\')">+ 이 BIN에 상품 추가</button>' +
+          '</div>';
+      }).join('');
+
+      container.innerHTML = html;
+
+      // 터치 스와이프 이벤트 설정
+      setupSwipeEvents();
+    }
+
+    // 스와이프 관련
+    var swipeStartX = 0;
+    var swipeStartY = 0;
+    var swipeItemId = null;
+
+    function handleSwipeStart(e, itemId) {
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+      swipeItemId = itemId;
+    }
+
+    function handleSwipeEnd(e, itemId) {
+      var endX = e.changedTouches[0].clientX;
+      var endY = e.changedTouches[0].clientY;
+      var diffX = swipeStartX - endX;
+      var diffY = Math.abs(swipeStartY - endY);
+
+      if (diffX > 50 && diffY < 30) {
+        // 왼쪽으로 스와이프
+        var item = document.getElementById('bin-item-' + itemId);
+        if (item) {
+          // 이전에 열린 아이템 닫기
+          if (swipedItem && swipedItem !== item) { swipedItem.classList.remove('swiped'); }
+          item.classList.toggle('swiped');
+          swipedItem = item.classList.contains('swiped') ? item : null;
+        }
+      } else if (diffX < -20) {
+        // 오른쪽으로 스와이프 - 닫기
+        var item = document.getElementById('bin-item-' + itemId);
+        if (item) { item.classList.remove('swiped'); }
+      }
+    }
+
+    function setupSwipeEvents() {
+      // 빈 공간 터치시 스와이프 닫기
+      document.getElementById('bin-list').addEventListener('touchstart', function(e) {
+        if (!e.target.closest('.bin-product-item')) {
+          if (swipedItem) { swipedItem.classList.remove('swiped'); swipedItem = null; }
+        }
+      }, { passive: true });
+    }
+
+    async function removeBinProduct(binId) {
+      if (!confirm('이 상품을 BIN에서 제거하시겠습니까?')) return;
+      await db.from('bins').delete().eq('id', binId);
+      await loadBins();
+    }
+
+    function openAddBinModal() {
+      document.getElementById('bin-modal-title').textContent = 'BIN 추가';
+      document.getElementById('b-code').value = '';
+      document.getElementById('b-style').value = '';
+      document.getElementById('b-product-found').style.display = 'none';
+      currentBinProduct = null;
+      document.getElementById('bin-modal').classList.add('active');
+    }
+
+    function openAddBinModalWithCode(binCode) {
+      document.getElementById('bin-modal-title').textContent = binCode + ' 에 상품 추가';
+      document.getElementById('b-code').value = binCode;
+      document.getElementById('b-style').value = '';
+      document.getElementById('b-product-found').style.display = 'none';
+      currentBinProduct = null;
+      document.getElementById('bin-modal').classList.add('active');
+    }
+
+    function closeBinModal() { document.getElementById('bin-modal').classList.remove('active'); }
+
+    async function searchBinProduct() {
+      var style = document.getElementById('b-style').value.trim();
+      if (style.length < 3) return;
+      var { data } = await db.from('products').select('*').ilike('style', '%' + style + '%');
+      if (data && data.length > 0) {
+        currentBinProduct = data[0];
+        document.getElementById('b-product-found').style.display = 'block';
+        document.getElementById('b-product-found').textContent = '✅ ' + data[0].name + ' (' + (data[0].gender || '') + ' / ' + (data[0].category || '') + ')';
+      } else {
+        document.getElementById('b-product-found').style.display = 'none';
+        currentBinProduct = null;
+      }
+    }
+
+    async function saveBin() {
+      var binCode = document.getElementById('b-code').value.trim();
+      var style = document.getElementById('b-style').value.trim();
+      if (!binCode) { alert('BIN 코드를 입력해주세요.'); return; }
+      if (!currentBinProduct) { alert('상품을 먼저 조회해주세요.'); return; }
+
+      // 중복 체크
+      var { data: existing } = await db.from('bins').select('*').eq('store_id', currentStore.store_id).eq('bin_code', binCode).eq('product_style', currentBinProduct.style);
+      if (existing && existing.length > 0) { alert('이미 등록된 상품입니다.'); return; }
+
+      await db.from('bins').insert({
+        store_id: currentStore.store_id, bin_code: binCode,
+        product_style: currentBinProduct.style, product_name: currentBinProduct.name,
+        gender: currentBinProduct.gender, category: currentBinProduct.category,
+        created_at: new Date().toLocaleString('ko-KR')
+      });
+
+      // products 테이블의 bin_location도 업데이트
+      await db.from('products').update({ bin_location: binCode }).eq('style', currentBinProduct.style);
+
+      closeBinModal();
+      await loadBins();
     }
 
     // 타매장 재고 조회
@@ -878,69 +1022,59 @@
       document.getElementById('other-store-product-info').style.display = 'none';
       document.getElementById('other-store-result-content').innerHTML = '<p class="search-hint">📷 바코드를 스캔하거나<br>품번으로 검색해주세요</p>';
     }
-
-    function toggleOtherStoreScan() {
-      if (isOtherStoreScanning) { stopOtherStoreScan(); } else { startOtherStoreScan(); }
-    }
+    function toggleOtherStoreScan() { if (isOtherStoreScanning) { stopOtherStoreScan(); } else { startOtherStoreScan(); } }
     function startOtherStoreScan() {
       document.getElementById('other-store-reader-container').style.display = 'block';
       otherStoreHtml5QrCode = new Html5Qrcode("other-store-reader");
-      otherStoreHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 } },
+      otherStoreHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 120 }, aspectRatio: 1.7 },
         async function(decodedText) { stopOtherStoreScan(); document.getElementById('other-store-search-input').value = decodedText; await searchOtherStore(); },
         function(error) {}
       ).then(function() { isOtherStoreScanning = true; document.getElementById('other-store-scan-btn').style.background = '#ef4444'; })
       .catch(function(err) { alert('카메라 접근 실패: ' + err); });
     }
     function stopOtherStoreScan() {
-      if (otherStoreHtml5QrCode && isOtherStoreScanning) {
-        otherStoreHtml5QrCode.stop().catch(function(){});
-        isOtherStoreScanning = false;
-        document.getElementById('other-store-reader-container').style.display = 'none';
-        document.getElementById('other-store-scan-btn').style.background = '#333';
-      }
+      if (otherStoreHtml5QrCode && isOtherStoreScanning) { otherStoreHtml5QrCode.stop().catch(function(){}); isOtherStoreScanning = false; document.getElementById('other-store-reader-container').style.display = 'none'; document.getElementById('other-store-scan-btn').style.background = '#333'; }
     }
 
     async function searchOtherStore() {
-      var keyword = document.getElementById('other-store-search-input').value.trim().toLowerCase();
+      var keyword = document.getElementById('other-store-search-input').value.trim();
       if (!keyword) { alert('검색어를 입력해주세요.'); return; }
       var container = document.getElementById('other-store-result-content');
       container.innerHTML = '<p class="loading">전국 매장 재고 조회 중...</p>';
       document.getElementById('other-store-product-info').style.display = 'none';
-
-      // 상품 찾기
       var { data: products } = await db.from('products').select('*');
-      var found = products ? products.find(function(p) {
-        return p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) ||
-               (p.barcode && p.barcode.includes(keyword));
-      }) : null;
+      var keywordLower = keyword.toLowerCase();
+      var found = null;
 
+      // UPC 파싱
+      if (keyword.length >= 10) {
+        var parsed = parseUPC(keyword);
+        found = products ? products.find(function(p) {
+          return (p.barcode && p.barcode === keyword) ||
+                 (p.barcode && p.barcode.substring(0, 10) === parsed.style10) ||
+                 (p.style && p.style.substring(0, 10).toLowerCase() === parsed.style10.toLowerCase());
+        }) : null;
+      }
+      if (!found) {
+        found = products ? products.find(function(p) {
+          return p.name.toLowerCase().includes(keywordLower) || p.style.toLowerCase().includes(keywordLower) || (p.barcode && p.barcode.includes(keyword));
+        }) : null;
+      }
       if (!found) { container.innerHTML = '<p class="no-result">상품을 찾을 수 없습니다.</p>'; return; }
 
-      // 상품 정보 표시
       var pInfo = document.getElementById('other-store-product-info');
       pInfo.style.display = 'block';
       document.getElementById('other-store-pname').textContent = found.name;
       document.getElementById('other-store-pstyle').textContent = found.style + (found.style_name ? ' · ' + found.style_name : '');
-      document.getElementById('other-store-pmeta').textContent = (found.gender || '') + ' · ' + (found.category || '') + ' · ' + (found.season || '') + ' · ₩' + Number(found.price).toLocaleString();
+      document.getElementById('other-store-pmeta').textContent = (found.gender || '') + ' · ' + (found.category || '') + ' · ₩' + Number(found.price).toLocaleString();
 
       var sizes = getSizes(found.category, found.gender);
       var threshold = 3;
       var otherStores = allStores.filter(function(s) { return s.store_id !== currentStore.store_id; });
-
-      // 전체 매장 재고 조회
       var { data: allInv } = await db.from('inventory').select('*').eq('product_style', found.style);
       var storeStockMap = {};
-      if (allInv) {
-        allInv.forEach(function(inv) {
-          if (!storeStockMap[inv.store_id]) storeStockMap[inv.store_id] = {};
-          storeStockMap[inv.store_id][inv.size] = inv.quantity;
-        });
-      }
+      if (allInv) { allInv.forEach(function(inv) { if (!storeStockMap[inv.store_id]) storeStockMap[inv.store_id] = {}; storeStockMap[inv.store_id][inv.size] = inv.quantity; }); }
 
-      var html = '';
-      var hasAnyStock = false;
-
-      // 재고 있는 매장 먼저 정렬
       var storesWithStock = [];
       var storesWithoutStock = [];
       otherStores.forEach(function(store) {
@@ -950,57 +1084,33 @@
         else { storesWithoutStock.push({ store: store, stock: sStock, total: 0 }); }
       });
 
-      if (storesWithStock.length > 0) { hasAnyStock = true; }
+      var html = '';
+      var pData = JSON.stringify({ style: found.style, name: found.name, gender: found.gender, category: found.category, sizes: sizes }).replace(/"/g, '&quot;');
 
-      // 재고 있는 매장 표시
       storesWithStock.forEach(function(item) {
-        var store = item.store;
-        var sStock = item.stock;
-        var total = item.total;
         var sizeGridHtml = sizes.map(function(s) {
-          var qty = sStock[s] !== undefined ? sStock[s] : 0;
-          var isLow = qty > 0 && qty < threshold;
-          var isZero = qty === 0;
-          return '<div class="other-store-size-item">' +
-            '<div class="other-store-size-label">' + s + '</div>' +
-            '<div class="other-store-size-qty' + (isLow ? ' low' : '') + (isZero ? ' zero' : '') + '">' + qty + '</div>' +
-            '</div>';
+          var qty = item.stock[s] !== undefined ? item.stock[s] : 0;
+          return '<div class="other-store-size-item"><div class="other-store-size-label">' + s + '</div><div class="other-store-size-qty' + (qty > 0 && qty < threshold ? ' low' : '') + (qty === 0 ? ' zero' : '') + '">' + qty + '</div></div>';
         }).join('');
-        var pData = JSON.stringify({ style: found.style, name: found.name, gender: found.gender, category: found.category, sizes: sizes }).replace(/"/g, '&quot;');
         html += '<div class="other-store-result-card">' +
-          '<div class="other-store-result-header">' +
-            '<span class="other-store-result-name">🟢 ' + store.name + '</span>' +
-            '<span class="other-store-result-total">총 ' + total + '개</span>' +
-          '</div>' +
+          '<div class="other-store-result-header"><span class="other-store-result-name">🟢 ' + item.store.name + '</span><span class="other-store-result-total">총 ' + item.total + '개</span></div>' +
           '<div class="other-store-size-grid">' + sizeGridHtml + '</div>' +
-          '<div class="other-store-actions">' +
-            '<button class="transfer-btn rotation" onclick=\'openTransferModal(' + pData + ', "' + store.store_id + '", "' + store.name + '")\'>🔄 회전요청</button>' +
-          '</div>' +
+          '<div class="other-store-actions"><button class="transfer-btn" onclick=\'openTransferModal(' + pData + ', "' + item.store.store_id + '", "' + item.store.name + '")\'>🔄 회전요청</button></div>' +
           '</div>';
       });
 
-      // 재고 없는 매장 표시
       if (storesWithoutStock.length > 0) {
-        html += '<div style="margin-top:8px; margin-bottom:8px; font-size:12px; color:#aaa; text-align:center;">── 재고 없는 매장 ──</div>';
+        html += '<div style="margin:8px 0; font-size:12px; color:#aaa; text-align:center;">── 재고 없는 매장 ──</div>';
         storesWithoutStock.forEach(function(item) {
-          html += '<div class="other-store-result-card" style="opacity:0.5;">' +
-            '<div class="other-store-result-header">' +
-              '<span class="other-store-result-name">⚪ ' + item.store.name + '</span>' +
-              '<span class="other-store-result-total">재고 없음</span>' +
-            '</div>' +
-            '<div class="no-stock-store">해당 상품 재고 없음</div>' +
-            '</div>';
+          html += '<div class="other-store-result-card" style="opacity:0.5;"><div class="other-store-result-header"><span class="other-store-result-name">⚪ ' + item.store.name + '</span><span class="other-store-result-total">재고 없음</span></div><div style="text-align:center;padding:12px;color:#aaa;font-size:13px;">해당 상품 재고 없음</div></div>';
         });
       }
 
-      if (!hasAnyStock) {
-        html = '<div style="text-align:center; padding:20px; background:white; border-radius:12px; color:#888; font-size:14px;">전국 모든 매장에 재고가 없습니다.</div>' + html;
-      }
-
+      if (storesWithStock.length === 0) html = '<div style="text-align:center;padding:20px;background:white;border-radius:12px;color:#888;font-size:14px;">전국 모든 매장에 재고가 없습니다.</div>' + html;
       container.innerHTML = html;
     }
 
-    // 회전요청 모달
+    // 회전요청
     function openTransferModal(productData, toStoreId, toStoreName) {
       currentTransferTarget = { product: productData, toStoreId: toStoreId, toStoreName: toStoreName };
       document.getElementById('transfer-product-info').innerHTML = '<strong>' + productData.name + '</strong> (' + productData.style + ')<br>대상 매장: <strong>' + toStoreName + '</strong>';
@@ -1013,23 +1123,20 @@
     function closeTransferModal() { document.getElementById('transfer-modal').classList.remove('active'); }
     async function submitTransferRequest() {
       if (!currentTransferTarget) return;
-      var size = document.getElementById('t-size').value;
-      var qty = parseInt(document.getElementById('t-qty').value) || 1;
-      var message = document.getElementById('t-message').value.trim();
       await db.from('transfer_requests').insert({
         request_type: '회전요청', from_store_id: currentStore.store_id, from_store_name: currentStore.name,
         to_store_id: currentTransferTarget.toStoreId, to_store_name: currentTransferTarget.toStoreName,
         product_style: currentTransferTarget.product.style, product_name: currentTransferTarget.product.name,
-        size: size, quantity: qty, status: '요청중', message: message, created_at: new Date().toLocaleString('ko-KR')
+        size: document.getElementById('t-size').value, quantity: parseInt(document.getElementById('t-qty').value) || 1,
+        status: '요청중', message: document.getElementById('t-message').value.trim(), created_at: new Date().toLocaleString('ko-KR')
       });
-      alert('✅ 회전요청이 전송되었습니다!\n' + currentTransferTarget.toStoreName + '에 회전요청을 보냈어요.');
+      alert('✅ 회전요청이 전송되었습니다!');
       closeTransferModal();
     }
 
     // 요청 관리
     function setDateRange(days) {
-      var to = new Date();
-      document.getElementById('filter-date-to').value = to.toISOString().split('T')[0];
+      var to = new Date(); document.getElementById('filter-date-to').value = to.toISOString().split('T')[0];
       if (days === 0) { document.getElementById('filter-date-from').value = ''; }
       else { var from = new Date(); from.setDate(from.getDate() - days); document.getElementById('filter-date-from').value = from.toISOString().split('T')[0]; }
       loadRequests();
@@ -1054,8 +1161,7 @@
           try {
             var numbers = req.created_at.match(/\d+/g);
             if (numbers && numbers.length >= 3) {
-              var year = numbers[0]; var month = numbers[1].length === 1 ? '0' + numbers[1] : numbers[1]; var day = numbers[2].length === 1 ? '0' + numbers[2] : numbers[2];
-              var reqDate = year + '-' + month + '-' + day;
+              var reqDate = numbers[0] + '-' + (numbers[1].length === 1 ? '0' : '') + numbers[1] + '-' + (numbers[2].length === 1 ? '0' : '') + numbers[2];
               return (!dateFrom || reqDate >= dateFrom) && (!dateTo || reqDate <= dateTo);
             }
             return true;
@@ -1067,15 +1173,13 @@
         var statusBadge = req.status === '요청중' ? '<span class="request-status-badge pending">⏳ 요청중</span>'
           : req.status === '승인' ? '<span class="request-status-badge approved">✅ 승인</span>'
           : '<span class="request-status-badge rejected">❌ 거절</span>';
-        var actionBtns = '';
-        if (currentRequestTab === 'received' && req.status === '요청중') {
-          actionBtns = '<div class="request-actions"><button class="btn-sm" style="background:#10b981;" onclick="handleRequest(' + req.id + ', \'승인\')">✅ 승인</button><button class="btn-sm btn-red" onclick="handleRequest(' + req.id + ', \'거절\')">❌ 거절</button></div>';
-        }
+        var actionBtns = currentRequestTab === 'received' && req.status === '요청중'
+          ? '<div class="request-actions"><button class="btn-sm" style="background:#10b981;" onclick="handleRequest(' + req.id + ', \'승인\')">✅ 승인</button><button class="btn-sm btn-red" onclick="handleRequest(' + req.id + ', \'거절\')">❌ 거절</button></div>' : '';
         return '<div class="request-card"><div class="request-card-header"><span class="request-type-badge">🔄 회전요청</span>' + statusBadge + '</div>' +
           '<div class="request-product">' + req.product_name + ' (' + req.product_style + ')</div>' +
           '<div class="request-detail">사이즈: ' + req.size + ' | 수량: ' + req.quantity + '개</div>' +
           '<div class="request-detail">' + (currentRequestTab === 'received' ? '요청 매장: ' + req.from_store_name : '요청 대상: ' + req.to_store_name) + '</div>' +
-          '<div class="request-detail" style="color:#aaa; font-size:11px;">' + (req.created_at || '') + '</div>' +
+          '<div class="request-detail" style="color:#aaa;font-size:11px;">' + (req.created_at || '') + '</div>' +
           (req.message ? '<div class="request-message">"' + req.message + '"</div>' : '') +
           actionBtns + '</div>';
       }).join('');
@@ -1086,29 +1190,28 @@
       if (action === '승인') {
         var { data: req } = await db.from('transfer_requests').select('*').eq('id', requestId).single();
         if (req) {
-          var fromExisting = await db.from('inventory').select('*').eq('store_id', req.from_store_id).eq('product_style', req.product_style).eq('size', req.size).single();
-          if (fromExisting.data) {
-            var newFromQty = Math.max(0, fromExisting.data.quantity - req.quantity);
-            await db.from('inventory').update({ quantity: newFromQty, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', fromExisting.data.id);
-            await logInventoryChange(req.from_store_id, req.product_style, req.product_name, req.size, '회전출고', -req.quantity, fromExisting.data.quantity, newFromQty, '회전출고 → ' + req.to_store_name);
+          var fromEx = await db.from('inventory').select('*').eq('store_id', req.from_store_id).eq('product_style', req.product_style).eq('size', req.size).single();
+          if (fromEx.data) {
+            var newFromQty = Math.max(0, fromEx.data.quantity - req.quantity);
+            await db.from('inventory').update({ quantity: newFromQty, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', fromEx.data.id);
+            await logInventoryChange(req.from_store_id, req.product_style, req.product_name, req.size, '회전출고', -req.quantity, fromEx.data.quantity, newFromQty, '회전출고 → ' + req.to_store_name);
           }
-          var toExisting = await db.from('inventory').select('*').eq('store_id', req.to_store_id).eq('product_style', req.product_style).eq('size', req.size).single();
+          var toEx = await db.from('inventory').select('*').eq('store_id', req.to_store_id).eq('product_style', req.product_style).eq('size', req.size).single();
           var memo = '회전완불건 (' + req.from_store_name + ')';
-          if (toExisting.data) {
-            var newToQty = toExisting.data.quantity + req.quantity;
-            await db.from('inventory').update({ quantity: newToQty, memo: memo, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', toExisting.data.id);
-            await logInventoryChange(req.to_store_id, req.product_style, req.product_name, req.size, '회전입고', req.quantity, toExisting.data.quantity, newToQty, memo);
+          if (toEx.data) {
+            var newToQty = toEx.data.quantity + req.quantity;
+            await db.from('inventory').update({ quantity: newToQty, memo: memo, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', toEx.data.id);
+            await logInventoryChange(req.to_store_id, req.product_style, req.product_name, req.size, '회전입고', req.quantity, toEx.data.quantity, newToQty, memo);
           } else {
-            var { data: productData } = await db.from('products').select('*').eq('style', req.product_style).single();
-            await db.from('inventory').insert({ store_id: req.to_store_id, product_id: productData ? productData.id : null, product_style: req.product_style, product_name: req.product_name, gender: productData ? productData.gender : '', category: productData ? productData.category : '', size: req.size, quantity: req.quantity, memo: memo, updated_at: new Date().toLocaleString('ko-KR') });
+            var { data: pd } = await db.from('products').select('*').eq('style', req.product_style).single();
+            await db.from('inventory').insert({ store_id: req.to_store_id, product_id: pd ? pd.id : null, product_style: req.product_style, product_name: req.product_name, gender: pd ? pd.gender : '', category: pd ? pd.category : '', size: req.size, quantity: req.quantity, memo: memo, updated_at: new Date().toLocaleString('ko-KR') });
             await logInventoryChange(req.to_store_id, req.product_style, req.product_name, req.size, '회전입고', req.quantity, 0, req.quantity, memo);
           }
         }
       }
       await db.from('transfer_requests').update({ status: action, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', requestId);
       alert('✅ ' + action + ' 처리되었습니다.' + (action === '승인' ? '\n재고가 자동으로 반영되었습니다.' : ''));
-      loadRequests();
-      checkPendingRequests();
+      loadRequests(); checkPendingRequests();
     }
 
     // 재고 목록
@@ -1124,31 +1227,26 @@
       for (var i = 0; i < list.length; i++) {
         var p = list[i];
         var sizes = getSizes(p.category, p.gender);
-        var stockMap = {};
-        var totalQty = 0;
+        var stockMap = {}; var totalQty = 0;
         var { data: invData } = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).eq('product_style', p.style);
         if (invData) { invData.forEach(function(inv) { stockMap[inv.size] = { qty: inv.quantity, memo: inv.memo }; totalQty += inv.quantity; }); }
         var threshold = 3;
         var sizeStockHtml = sizes.map(function(s) {
-          var item = stockMap[s];
-          var qty = item ? item.qty : '-';
-          var isLow = qty !== '-' && qty < threshold;
+          var item = stockMap[s]; var qty = item ? item.qty : '-'; var isLow = qty !== '-' && qty < threshold;
           return '<div class="size-stock-item"><div class="s-label">' + s + '</div><div class="s-qty' + (isLow ? ' low' : '') + '">' + qty + '</div></div>';
         }).join('');
         var hasMemo = Object.values(stockMap).some(function(item) { return item && item.memo; });
         html += '<div class="product-card">' +
-          '<div class="product-card-header">' +
-            '<div class="product-card-info">' +
-              '<div class="product-name-main">' + p.name + '</div>' +
-              '<div class="product-style-sub">' + p.style + '</div>' +
-              '<div class="product-meta">' +
-                '<span class="meta-badge red">' + (p.category || '') + '</span>' +
-                '<span class="meta-badge">' + (p.gender || '') + '</span>' +
-                '<span class="meta-badge">' + (p.season || '') + '</span>' +
-                (p.bin_location ? '<span class="meta-badge yellow">📍 ' + p.bin_location + '</span>' : '') +
-                (hasMemo ? '<span class="meta-badge blue">🔄 회전완불건</span>' : '') +
-              '</div>' +
-            '</div>' +
+          '<div class="product-card-header"><div class="product-card-info">' +
+            '<div class="product-name-main">' + p.name + '</div>' +
+            '<div class="product-style-sub">' + p.style + '</div>' +
+            '<div class="product-meta">' +
+              '<span class="meta-badge red">' + (p.category || '') + '</span>' +
+              '<span class="meta-badge">' + (p.gender || '') + '</span>' +
+              '<span class="meta-badge">' + (p.season || '') + '</span>' +
+              (p.bin_location ? '<span class="meta-badge yellow">📍 ' + p.bin_location + '</span>' : '') +
+              (hasMemo ? '<span class="meta-badge blue">🔄 회전완불건</span>' : '') +
+            '</div></div>' +
             '<button class="btn-sm" onclick="openEditModal(' + p.id + ')">수정</button>' +
           '</div>' +
           '<div class="product-price-row"><span class="product-price">₩' + Number(p.price).toLocaleString() + '</span><span style="font-size:12px;color:#888;">총 ' + totalQty + '개</span></div>' +
@@ -1164,27 +1262,18 @@
       var size = document.getElementById('filter-size').value;
       var price = document.getElementById('filter-price').value;
       var filtered = allProducts.filter(function(p) {
-        var keywordMatch = !keyword || p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) || (p.barcode && p.barcode.includes(keyword));
-        var categoryMatch = !category || p.category === category;
-        var genderMatch = !gender || p.gender === gender;
-        var sizeMatch = !size || (p.size && p.size.includes(size));
-        var priceMatch = !price || p.price === parseInt(price);
-        return keywordMatch && categoryMatch && genderMatch && sizeMatch && priceMatch;
+        return (!keyword || p.name.toLowerCase().includes(keyword) || p.style.toLowerCase().includes(keyword) || (p.barcode && p.barcode.includes(keyword))) &&
+               (!category || p.category === category) && (!gender || p.gender === gender) &&
+               (!size || (p.size && p.size.includes(size))) && (!price || p.price === parseInt(price));
       });
       renderProducts(filtered);
     }
     function updateFilterSize() {
-      var category = document.getElementById('filter-category').value || '신발';
-      var gender = document.getElementById('filter-gender').value;
-      var sizes = getSizes(category, gender);
+      var sizes = getSizes(document.getElementById('filter-category').value || '신발', document.getElementById('filter-gender').value);
       document.getElementById('filter-size').innerHTML = '<option value="">전체 사이즈</option>' + sizes.map(function(s) { return '<option value="' + s + '">' + s + '</option>'; }).join('');
     }
     function resetFilters() {
-      document.getElementById('search-input').value = '';
-      document.getElementById('filter-category').value = '';
-      document.getElementById('filter-gender').value = '';
-      document.getElementById('filter-size').value = '';
-      document.getElementById('filter-price').value = '';
+      ['search-input','filter-category','filter-gender','filter-size','filter-price'].forEach(function(id) { document.getElementById(id).value = ''; });
       renderProducts(allProducts);
     }
 
@@ -1222,21 +1311,17 @@
       var productData = { name: name, style: style, style_name: '', gender: document.getElementById('m-gender').value, category: document.getElementById('m-category').value, size: '', color: document.getElementById('m-color').value.trim(), season: document.getElementById('m-season').value.trim(), price: parseInt(document.getElementById('m-price').value.replace(/,/g, '')) || 0, barcode: document.getElementById('m-barcode').value.trim(), bin_location: document.getElementById('m-bin').value.trim() };
       if (editingProductId) { await db.from('products').update(productData).eq('id', editingProductId); }
       else { await db.from('products').insert(productData); }
-      closeModal();
-      loadProducts();
+      closeModal(); loadProducts();
     }
-    function formatPrice(input) {
-      var raw = input.value.replace(/[^0-9]/g, '');
-      input.value = raw ? parseInt(raw).toLocaleString('ko-KR') : '';
-    }
+    function formatPrice(input) { var raw = input.value.replace(/[^0-9]/g, ''); input.value = raw ? parseInt(raw).toLocaleString('ko-KR') : ''; }
 
     // 재고조사
     function resetScanUI() { document.getElementById('scanned-result').style.display = 'none'; currentProduct = null; }
     function toggleScan() { if (isScanning) { stopScan(); } else { startScan(); } }
     function startScan() {
       html5QrCode = new Html5Qrcode("reader");
-      html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } },
-        function(decodedText) { stopScan(); findProductByBarcode(decodedText); }, function(error) {}
+      html5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 200 }, aspectRatio: 1.0 },
+        async function(decodedText) { stopScan(); await findProductByBarcodeForInventory(decodedText); }, function(error) {}
       ).then(function() { isScanning = true; document.getElementById('scanBtn').textContent = '⏹ 스캔 중지'; document.getElementById('scanBtn').classList.add('stop'); })
       .catch(function(err) { alert('카메라 접근 실패: ' + err); });
     }
@@ -1249,16 +1334,24 @@
       if (type === 'other-store') stopOtherStoreScan();
       closeSubPage();
     }
-    async function findProductByBarcode(barcode) {
-      var { data } = await db.from('products').select('*').eq('barcode', barcode).single();
-      if (data) { await showScannedProduct(data); } else { alert('등록되지 않은 바코드: ' + barcode); }
+
+    async function findProductByBarcodeForInventory(barcode) {
+      // UPC 파싱으로 검색
+      var result = await findProductByUPC(barcode);
+      if (result) {
+        await showScannedProduct(result.product, result.sizeCode);
+      } else {
+        alert('등록되지 않은 바코드: ' + barcode);
+      }
     }
+
     function manualSearch() {
       var barcode = document.getElementById('manual-barcode').value.trim();
       if (!barcode) { alert('바코드를 입력해주세요.'); return; }
-      findProductByBarcode(barcode);
+      findProductByBarcodeForInventory(barcode);
     }
-    async function showScannedProduct(product) {
+
+    async function showScannedProduct(product, highlightSize) {
       currentProduct = product;
       var sizes = getSizes(product.category, product.gender);
       document.getElementById('inv-name').textContent = product.name;
@@ -1272,20 +1365,20 @@
       if (invData) { invData.forEach(function(inv) { stockMap[inv.size] = inv.quantity; }); }
       document.getElementById('size-input-grid').innerHTML = sizes.map(function(s) {
         var currentQty = stockMap[s] || 0;
-        return '<div class="size-input-item"><div class="size-name">' + s + '</div><div class="qty-control"><button class="size-qty-btn" onclick="changeSizeQty(\'' + s + '\', -1)">−</button><div class="size-qty-display" id="qty-' + s + '">' + currentQty + '</div><button class="size-qty-btn" onclick="changeSizeQty(\'' + s + '\', 1)">+</button></div></div>';
+        var isHighlight = highlightSize && s === highlightSize;
+        return '<div class="size-input-item" style="' + (isHighlight ? 'border:2px solid #E21836;' : '') + '">' +
+          '<div class="size-name">' + s + (isHighlight ? ' 📍' : '') + '</div>' +
+          '<div class="qty-control"><button class="size-qty-btn" onclick="changeSizeQty(\'' + s + '\', -1)">−</button><div class="size-qty-display" id="qty-' + s + '">' + currentQty + '</div><button class="size-qty-btn" onclick="changeSizeQty(\'' + s + '\', 1)">+</button></div>' +
+          '</div>';
       }).join('');
       document.getElementById('scanned-result').style.display = 'block';
     }
-    function changeSizeQty(size, amount) {
-      var el = document.getElementById('qty-' + size);
-      el.textContent = Math.max(0, parseInt(el.textContent) + amount);
-    }
+    function changeSizeQty(size, amount) { var el = document.getElementById('qty-' + size); el.textContent = Math.max(0, parseInt(el.textContent) + amount); }
     async function saveInventory() {
       if (!currentProduct) return;
       var sizes = getSizes(currentProduct.category, currentProduct.gender);
       for (var i = 0; i < sizes.length; i++) {
-        var s = sizes[i];
-        var qty = parseInt(document.getElementById('qty-' + s).textContent) || 0;
+        var s = sizes[i]; var qty = parseInt(document.getElementById('qty-' + s).textContent) || 0;
         var existing = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).eq('product_style', currentProduct.style).eq('size', s).single();
         var beforeQty = existing.data ? existing.data.quantity : 0;
         var invData = { store_id: currentStore.store_id, product_id: currentProduct.id, product_style: currentProduct.style, product_name: currentProduct.name, gender: currentProduct.gender, color: currentProduct.color, category: currentProduct.category, size: s, quantity: qty, updated_at: new Date().toLocaleString('ko-KR') };
@@ -1293,9 +1386,7 @@
         else { await db.from('inventory').insert(invData); }
         await logInventoryChange(currentStore.store_id, currentProduct.style, currentProduct.name, s, '재고조사', qty - beforeQty, beforeQty, qty, '');
       }
-      alert('✅ 저장 완료!');
-      resetScanUI();
-      document.getElementById('manual-barcode').value = '';
+      alert('✅ 저장 완료!'); resetScanUI(); document.getElementById('manual-barcode').value = '';
     }
 
     // 재고 현황
@@ -1308,31 +1399,17 @@
       var stockMap = {};
       if (invData) { invData.forEach(function(inv) { if (!stockMap[inv.product_style]) stockMap[inv.product_style] = {}; stockMap[inv.product_style][inv.size] = { qty: inv.quantity, memo: inv.memo }; }); }
       var threshold = parseInt(document.getElementById('low-stock-threshold').value) || 3;
-      var count = 0;
-      var html = '';
+      var count = 0; var html = '';
       products.forEach(function(p) {
-        var sizes = getSizes(p.category, p.gender);
-        var pStock = stockMap[p.style] || {};
-        var totalQty = 0;
-        var sizeHtml = sizes.map(function(s) {
-          var item = pStock[s];
-          var qty = item ? item.qty : 0;
-          totalQty += qty;
-          return '<div class="status-size-item"><div class="status-size-label">' + s + '</div><div class="status-size-qty' + (qty < threshold ? ' low' : '') + '">' + qty + '</div></div>';
-        }).join('');
+        var sizes = getSizes(p.category, p.gender); var pStock = stockMap[p.style] || {}; var totalQty = 0;
+        var sizeHtml = sizes.map(function(s) { var item = pStock[s]; var qty = item ? item.qty : 0; totalQty += qty; return '<div class="status-size-item"><div class="status-size-label">' + s + '</div><div class="status-size-qty' + (qty < threshold ? ' low' : '') + '">' + qty + '</div></div>'; }).join('');
         var hasMemo = Object.values(pStock).some(function(item) { return item && item.memo; });
         if (Object.keys(pStock).length > 0) count++;
-        html += '<div class="status-card">' +
-          '<div class="status-card-header"><div class="status-product">' + p.name + (hasMemo ? ' <span class="memo-badge">🔄 회전완불건</span>' : '') + '</div><div class="status-style">' + p.style + ' | ' + (p.gender || '') + (p.bin_location ? ' | 📍 ' + p.bin_location : '') + '</div></div>' +
-          '<div class="status-size-grid">' + sizeHtml + '</div>' +
-          '<div class="status-total"><span>총 가용재고</span><span style="font-weight:bold;">' + totalQty + ' 개</span></div>' +
-          '</div>';
+        html += '<div class="status-card"><div class="status-card-header"><div class="status-product">' + p.name + (hasMemo ? ' <span class="memo-badge">🔄 회전완불건</span>' : '') + '</div><div class="status-style">' + p.style + ' | ' + (p.gender || '') + (p.bin_location ? ' | 📍 ' + p.bin_location : '') + '</div></div><div class="status-size-grid">' + sizeHtml + '</div><div class="status-total"><span>총 가용재고</span><span style="font-weight:bold;">' + totalQty + ' 개</span></div></div>';
       });
-      document.getElementById('status-count').textContent = count;
-      container.innerHTML = html;
+      document.getElementById('status-count').textContent = count; container.innerHTML = html;
     }
 
-    // Excel 내보내기
     async function exportCSV() {
       var { data } = await db.from('inventory').select('*').eq('store_id', currentStore.store_id);
       if (!data || data.length === 0) { alert('내보낼 데이터가 없습니다.'); return; }
@@ -1340,10 +1417,7 @@
       data.forEach(function(item) { rows.push([item.product_name, item.product_style, item.gender, item.category, item.size, item.quantity, item.memo || '', item.updated_at]); });
       var csvContent = '\uFEFF' + rows.map(function(r) { return r.join(','); }).join('\n');
       var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = currentStore.name + '_재고현황.csv';
-      a.click();
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = currentStore.name + '_재고현황.csv'; a.click();
     }
 
     // 입고관리
@@ -1352,7 +1426,7 @@
     function toggleReceivingScan() { if (isReceivingScanning) { stopReceivingScan(); } else { startReceivingScan(); } }
     function startReceivingScan() {
       receivingHtml5QrCode = new Html5Qrcode("receiving-reader");
-      receivingHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } },
+      receivingHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 200 }, aspectRatio: 1.0 },
         async function(decodedText) { stopReceivingScan(); await processBoxBarcode(decodedText); }, function(error) {}
       ).then(function() { isReceivingScanning = true; document.getElementById('receivingScanBtn').textContent = '⏹ 스캔 중지'; document.getElementById('receivingScanBtn').classList.add('stop'); })
       .catch(function(err) { alert('카메라 접근 실패: ' + err); });
@@ -1368,64 +1442,51 @@
     async function processBoxBarcode(barcode) {
       currentBoxBarcode = barcode;
       var { data } = await db.from('receiving_orders').select('*').eq('store_id', currentStore.store_id).eq('order_number', barcode).eq('status', '대기');
-      var section = document.getElementById('receiving-orders-section');
-      var listContainer = document.getElementById('receiving-orders-list');
+      var section = document.getElementById('receiving-orders-section'); var listContainer = document.getElementById('receiving-orders-list');
       section.style.display = 'block';
-      if (!data || data.length === 0) {
-        listContainer.innerHTML = '<p style="color:#888; font-size:14px; margin-bottom:12px;">카톤 바코드 <strong>' + barcode + '</strong> 에 해당하는 입고 예정이 없습니다.</p><button class="btn" onclick="openOrderModal(\'' + barcode + '\')">+ 입고 예정 등록</button>';
-        return;
-      }
+      if (!data || data.length === 0) { listContainer.innerHTML = '<p style="color:#888;font-size:14px;margin-bottom:12px;">카톤 바코드 <strong>' + barcode + '</strong> 에 해당하는 입고 예정이 없습니다.</p><button class="btn" onclick="openOrderModal(\'' + barcode + '\')">+ 입고 예정 등록</button>'; return; }
       var grouped = {};
       data.forEach(function(item) { if (!grouped[item.product_style]) grouped[item.product_style] = { style: item.product_style, name: item.product_name, gender: item.gender, category: item.category, sizes: {} }; grouped[item.product_style].sizes[item.size] = item.expected_qty; });
       listContainer.innerHTML = Object.values(grouped).map(function(g) {
-        var sizesText = Object.entries(g.sizes).map(function(e) { return e[0] + ': ' + e[1] + '개'; }).join(' | ');
-        return '<div class="order-card" onclick="selectOrder(\'' + g.style + '\', ' + JSON.stringify(g).replace(/"/g, '&quot;') + ')"><div class="order-number">카톤: ' + barcode + '</div><div class="order-product">' + g.name + ' (' + g.style + ')</div><div class="order-sizes">' + sizesText + '</div></div>';
-      }).join('') + '<button class="btn" style="margin-top:12px; background:#555;" onclick="openOrderModal(\'' + barcode + '\')">+ 추가 등록</button>';
+        return '<div class="order-card" onclick="selectOrder(\'' + g.style + '\', ' + JSON.stringify(g).replace(/"/g, '&quot;') + ')"><div class="order-number">카톤: ' + barcode + '</div><div class="order-product">' + g.name + ' (' + g.style + ')</div><div class="order-sizes">' + Object.entries(g.sizes).map(function(e) { return e[0] + ': ' + e[1] + '개'; }).join(' | ') + '</div></div>';
+      }).join('') + '<button class="btn" style="margin-top:12px;background:#555;" onclick="openOrderModal(\'' + barcode + '\')">+ 추가 등록</button>';
     }
     async function selectOrder(style, groupData) {
       selectedOrder = groupData;
       document.getElementById('receiving-compare-section').style.display = 'block';
-      document.getElementById('receiving-product-info').innerHTML = '<div style="font-size:15px; font-weight:bold; color:#333;">' + groupData.name + '</div><div style="font-size:13px; color:#888; margin-top:4px;">' + style + ' | ' + (groupData.gender || '') + '</div>';
+      document.getElementById('receiving-product-info').innerHTML = '<div style="font-size:15px;font-weight:bold;color:#333;">' + groupData.name + '</div><div style="font-size:13px;color:#888;margin-top:4px;">' + style + ' | ' + (groupData.gender || '') + '</div>';
       var sizes = Object.keys(groupData.sizes);
       document.getElementById('compare-grid').innerHTML = sizes.map(function(s) {
         var expected = groupData.sizes[s] || 0;
-        return '<div class="compare-item" id="compare-' + s + '"><div class="compare-size">' + s + '</div><div class="compare-values"><span class="compare-expected">예정: ' + expected + '</span><span class="compare-actual">실제: <input type="number" id="actual-' + s + '" value="' + expected + '" style="width:50px; padding:2px 4px; border:1px solid #ddd; border-radius:4px; text-align:center;" oninput="updateCompare(\'' + s + '\', ' + expected + ')" /></span></div><div class="compare-diff" id="diff-' + s + '"></div></div>';
+        return '<div class="compare-item" id="compare-' + s + '"><div class="compare-size">' + s + '</div><div class="compare-values"><span style="color:#888;">예정: ' + expected + '</span><span>실제: <input type="number" id="actual-' + s + '" value="' + expected + '" style="width:50px;padding:2px 4px;border:1px solid #ddd;border-radius:4px;text-align:center;" oninput="updateCompare(\'' + s + '\', ' + expected + ')" /></span></div><div class="compare-diff" id="diff-' + s + '"></div></div>';
       }).join('');
-      document.getElementById('compare-summary').style.background = '#d1fae5';
-      document.getElementById('compare-summary').style.color = '#065f46';
-      document.getElementById('compare-summary').textContent = '✅ 수량을 확인해주세요';
+      document.getElementById('compare-summary').style.background = '#d1fae5'; document.getElementById('compare-summary').style.color = '#065f46'; document.getElementById('compare-summary').textContent = '✅ 수량을 확인해주세요';
     }
     function updateCompare(size, expected) {
-      var actual = parseInt(document.getElementById('actual-' + size).value) || 0;
-      var diff = actual - expected;
-      var item = document.getElementById('compare-' + size);
-      var diffEl = document.getElementById('diff-' + size);
+      var actual = parseInt(document.getElementById('actual-' + size).value) || 0; var diff = actual - expected;
+      var item = document.getElementById('compare-' + size); var diffEl = document.getElementById('diff-' + size);
       if (diff === 0) { item.className = 'compare-item match'; diffEl.textContent = '✅ 일치'; diffEl.className = 'compare-diff'; }
       else { item.className = 'compare-item mismatch'; diffEl.textContent = (diff > 0 ? '+' : '') + diff + '개 차이'; diffEl.className = 'compare-diff ' + (diff > 0 ? 'plus' : 'minus'); }
-      var allSizes = Object.keys(selectedOrder.sizes);
-      var hasError = allSizes.some(function(s) { return (parseInt(document.getElementById('actual-' + s).value) || 0) !== selectedOrder.sizes[s]; });
+      var hasError = Object.keys(selectedOrder.sizes).some(function(s) { return (parseInt(document.getElementById('actual-' + s).value) || 0) !== selectedOrder.sizes[s]; });
       var summary = document.getElementById('compare-summary');
-      if (hasError) { summary.style.background = '#fee2e2'; summary.style.color = '#991b1b'; summary.textContent = '❌ 수량 불일치! 확인 후 입고 완료 처리하세요'; }
+      if (hasError) { summary.style.background = '#fee2e2'; summary.style.color = '#991b1b'; summary.textContent = '❌ 수량 불일치!'; }
       else { summary.style.background = '#d1fae5'; summary.style.color = '#065f46'; summary.textContent = '✅ 전 사이즈 수량 일치!'; }
     }
     async function confirmReceiving() {
       if (!selectedOrder) return;
-      if (!confirm('입고 완료 처리하시겠습니까? 재고에 반영됩니다.')) return;
+      if (!confirm('입고 완료 처리하시겠습니까?')) return;
       var sizes = Object.keys(selectedOrder.sizes);
       for (var i = 0; i < sizes.length; i++) {
-        var s = sizes[i];
-        var actualQty = parseInt(document.getElementById('actual-' + s).value) || 0;
+        var s = sizes[i]; var actualQty = parseInt(document.getElementById('actual-' + s).value) || 0;
         await db.from('receiving').insert({ store_id: currentStore.store_id, product_style: selectedOrder.style, product_name: selectedOrder.name, size: s, received_qty: actualQty, status: '완료', received_at: new Date().toLocaleString('ko-KR') });
         var existing = await db.from('inventory').select('*').eq('store_id', currentStore.store_id).eq('product_style', selectedOrder.style).eq('size', s).single();
         var beforeQty = existing.data ? existing.data.quantity : 0;
         if (existing.data) { await db.from('inventory').update({ quantity: existing.data.quantity + actualQty, updated_at: new Date().toLocaleString('ko-KR') }).eq('id', existing.data.id); }
-        else { var { data: productData } = await db.from('products').select('*').eq('style', selectedOrder.style).single(); await db.from('inventory').insert({ store_id: currentStore.store_id, product_id: productData ? productData.id : null, product_style: selectedOrder.style, product_name: selectedOrder.name, gender: selectedOrder.gender, category: selectedOrder.category, size: s, quantity: actualQty, updated_at: new Date().toLocaleString('ko-KR') }); }
+        else { var { data: pd } = await db.from('products').select('*').eq('style', selectedOrder.style).single(); await db.from('inventory').insert({ store_id: currentStore.store_id, product_id: pd ? pd.id : null, product_style: selectedOrder.style, product_name: selectedOrder.name, gender: selectedOrder.gender, category: selectedOrder.category, size: s, quantity: actualQty, updated_at: new Date().toLocaleString('ko-KR') }); }
         await logInventoryChange(currentStore.store_id, selectedOrder.style, selectedOrder.name, s, '입고', actualQty, beforeQty, beforeQty + actualQty, '카톤 입고');
         await db.from('receiving_orders').update({ status: '완료' }).eq('store_id', currentStore.store_id).eq('order_number', currentBoxBarcode).eq('product_style', selectedOrder.style).eq('size', s);
       }
-      alert('✅ 입고 완료! 재고에 반영되었습니다.');
-      resetReceivingUI();
-      loadReceivingHistory();
+      alert('✅ 입고 완료!'); resetReceivingUI(); loadReceivingHistory();
     }
     function openOrderModal(barcode) { document.getElementById('o-box-barcode').value = barcode; document.getElementById('o-style').value = ''; document.getElementById('o-product-found').style.display = 'none'; document.getElementById('o-size-grid').innerHTML = ''; document.getElementById('order-modal').classList.add('active'); }
     function closeOrderModal() { document.getElementById('order-modal').classList.remove('active'); }
@@ -1433,25 +1494,14 @@
       var style = document.getElementById('o-style').value.trim();
       if (style.length < 3) return;
       var { data } = await db.from('products').select('*').eq('style', style).single();
-      if (data) {
-        currentOrderProduct = data;
-        document.getElementById('o-product-found').style.display = 'block';
-        document.getElementById('o-product-found').textContent = '✅ ' + data.name + ' (' + (data.gender || '') + ' / ' + (data.category || '') + ')';
-        var sizes = getSizes(data.category, data.gender);
-        document.getElementById('o-size-grid').innerHTML = '<div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px;">' + sizes.map(function(s) { return '<div style="display:flex; align-items:center; justify-content:space-between; background:#f8f8f8; padding:8px 12px; border-radius:8px;"><span style="font-size:13px; font-weight:bold;">' + s + '</span><input type="number" id="order-qty-' + s + '" value="0" min="0" style="width:60px; padding:4px 8px; border:1px solid #ddd; border-radius:6px; text-align:center;" /></div>'; }).join('') + '</div>';
-      } else { document.getElementById('o-product-found').style.display = 'none'; document.getElementById('o-size-grid').innerHTML = ''; currentOrderProduct = null; }
+      if (data) { currentOrderProduct = data; document.getElementById('o-product-found').style.display = 'block'; document.getElementById('o-product-found').textContent = '✅ ' + data.name; var sizes = getSizes(data.category, data.gender); document.getElementById('o-size-grid').innerHTML = '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">' + sizes.map(function(s) { return '<div style="display:flex;align-items:center;justify-content:space-between;background:#f8f8f8;padding:8px 12px;border-radius:8px;"><span style="font-size:13px;font-weight:bold;">' + s + '</span><input type="number" id="order-qty-' + s + '" value="0" min="0" style="width:60px;padding:4px 8px;border:1px solid #ddd;border-radius:6px;text-align:center;" /></div>'; }).join('') + '</div>'; }
+      else { document.getElementById('o-product-found').style.display = 'none'; document.getElementById('o-size-grid').innerHTML = ''; currentOrderProduct = null; }
     }
     async function saveOrder() {
       if (!currentOrderProduct) { alert('상품을 먼저 조회해주세요.'); return; }
-      var barcode = document.getElementById('o-box-barcode').value;
-      var sizes = getSizes(currentOrderProduct.category, currentOrderProduct.gender);
-      for (var i = 0; i < sizes.length; i++) {
-        var s = sizes[i];
-        var qty = parseInt(document.getElementById('order-qty-' + s).value) || 0;
-        if (qty > 0) { await db.from('receiving_orders').insert({ store_id: currentStore.store_id, order_number: barcode, product_style: currentOrderProduct.style, product_name: currentOrderProduct.name, gender: currentOrderProduct.gender, category: currentOrderProduct.category, size: s, expected_qty: qty, status: '대기', created_at: new Date().toLocaleString('ko-KR') }); }
-      }
-      closeOrderModal();
-      await processBoxBarcode(barcode);
+      var barcode = document.getElementById('o-box-barcode').value; var sizes = getSizes(currentOrderProduct.category, currentOrderProduct.gender);
+      for (var i = 0; i < sizes.length; i++) { var s = sizes[i]; var qty = parseInt(document.getElementById('order-qty-' + s).value) || 0; if (qty > 0) { await db.from('receiving_orders').insert({ store_id: currentStore.store_id, order_number: barcode, product_style: currentOrderProduct.style, product_name: currentOrderProduct.name, gender: currentOrderProduct.gender, category: currentOrderProduct.category, size: s, expected_qty: qty, status: '대기', created_at: new Date().toLocaleString('ko-KR') }); } }
+      closeOrderModal(); await processBoxBarcode(barcode);
     }
     async function loadReceivingHistory() {
       var container = document.getElementById('receiving-history');
@@ -1459,7 +1509,7 @@
       if (!data || data.length === 0) { container.innerHTML = '<p style="text-align:center;color:#888;padding:20px 0;font-size:14px;">입고 내역이 없습니다.</p>'; return; }
       var grouped = {};
       data.forEach(function(item) { var key = item.product_style + '_' + item.received_at; if (!grouped[key]) grouped[key] = { name: item.product_name, style: item.product_style, at: item.received_at, sizes: [] }; grouped[key].sizes.push(item.size + ': ' + item.received_qty + '개'); });
-      container.innerHTML = Object.values(grouped).map(function(g) { return '<div style="padding:10px 0; border-bottom:1px solid #f0f2f5;"><div style="font-size:14px; font-weight:bold; color:#333;">' + g.name + ' (' + g.style + ')</div><div style="font-size:12px; color:#666; margin-top:2px;">' + g.sizes.join(' | ') + '</div><div style="font-size:11px; color:#aaa; margin-top:2px;">' + g.at + '</div></div>'; }).join('');
+      container.innerHTML = Object.values(grouped).map(function(g) { return '<div style="padding:10px 0;border-bottom:1px solid #f0f2f5;"><div style="font-size:14px;font-weight:bold;color:#333;">' + g.name + ' (' + g.style + ')</div><div style="font-size:12px;color:#666;margin-top:2px;">' + g.sizes.join(' | ') + '</div><div style="font-size:11px;color:#aaa;margin-top:2px;">' + g.at + '</div></div>'; }).join('');
     }
 
     // 재고 목록 스캔
@@ -1467,8 +1517,8 @@
     function startProductScan() {
       document.getElementById('product-reader-container').style.display = 'block';
       productHtml5QrCode = new Html5Qrcode("product-reader");
-      productHtml5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 150 } },
-        async function(decodedText) { stopProductScan(); var { data } = await db.from('products').select('*').eq('barcode', decodedText).single(); if (data) { document.getElementById('search-input').value = decodedText; await renderProducts([data]); } else { alert('등록되지 않은 바코드: ' + decodedText); } },
+      productHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 120 }, aspectRatio: 1.7 },
+        async function(decodedText) { stopProductScan(); var result = await findProductByUPC(decodedText); if (result) { document.getElementById('search-input').value = decodedText; await renderProducts([result.product]); } else { alert('등록되지 않은 바코드: ' + decodedText); } },
         function(error) {}
       ).then(function() { isProductScanning = true; document.getElementById('product-scan-btn').style.background = '#ef4444'; })
       .catch(function(err) { alert('카메라 접근 실패: ' + err); });
@@ -1490,10 +1540,7 @@
       updateApiStatusUI();
     }
     async function clearInventory() {
-      if (confirm('정말 재고 데이터를 초기화하시겠습니까?')) {
-        await db.from('inventory').delete().eq('store_id', currentStore.store_id);
-        alert('초기화 완료');
-      }
+      if (confirm('정말 재고 데이터를 초기화하시겠습니까?')) { await db.from('inventory').delete().eq('store_id', currentStore.store_id); alert('초기화 완료'); }
     }
   </script>
 </body>
