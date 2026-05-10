@@ -18,6 +18,7 @@
     }
   </script>
   <script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@latest/umd/index.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -269,7 +270,7 @@
       </div>
       <button class="camera-btn" id="main-camera-btn" onclick="toggleMainScan()">📷</button>
     </div>
-    <div id="main-reader-container"><div id="main-reader"></div><button class="stop-scan-btn" onclick="toggleMainScan()">⏹ 스캔 중지</button></div>
+    <div id="main-reader-container"><div id="main-reader"><video id="main-reader-video" style="width:100%; border-radius:8px;"></video></div><button class="stop-scan-btn" onclick="toggleMainScan()">⏹ 스캔 중지</button></div>
     <div class="main-results">
       <div class="alert-banner" id="alert-banner"></div>
       <div id="main-result-content"><p class="search-hint">📷 바코드를 스캔하거나<br>바코드/품번으로 검색해주세요</p></div>
@@ -320,7 +321,7 @@
       <button class="filter-reset-btn" onclick="resetFilters()">초기화</button>
     </div>
     <div id="product-reader-container" style="display:none; padding:0 16px 12px;">
-      <div id="product-reader" style="width:100%; border-radius:8px; overflow:hidden;"></div>
+      <div id="product-reader" style="width:100%; border-radius:8px; overflow:hidden;"><video id="product-reader-video" style="width:100%; border-radius:8px;"></video></div>
       <button onclick="toggleProductScan()" style="width:100%; margin-top:8px; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; cursor:pointer;">⏹ 스캔 중지</button>
     </div>
     <div class="page-content" id="product-list"></div>
@@ -332,7 +333,7 @@
     <div class="page-content">
       <div class="scan-section">
         <h3>📷 바코드 스캔</h3>
-        <div id="reader"></div>
+        <div id="reader"><video id="reader-video" style="width:100%; border-radius:8px;"></video></div>
         <button class="scan-btn" id="scanBtn" onclick="toggleScan()">스캔 시작</button>
         <div class="manual-input"><input type="text" id="manual-barcode" placeholder="바코드 직접 입력..." /><button class="btn-sm" onclick="manualSearch()">조회</button></div>
       </div>
@@ -374,7 +375,7 @@
         <button class="btn-sm" id="other-store-scan-btn" onclick="toggleOtherStoreScan()" style="background:#333; font-size:16px;">📷</button>
       </div>
       <div id="other-store-reader-container" style="display:none; margin-top:12px;">
-        <div id="other-store-reader" style="width:100%; border-radius:8px; overflow:hidden;"></div>
+        <div id="other-store-reader" style="width:100%; border-radius:8px; overflow:hidden;"><video id="other-store-reader-video" style="width:100%; border-radius:8px;"></video></div>
         <button onclick="toggleOtherStoreScan()" style="width:100%; margin-top:8px; padding:10px; background:#ef4444; color:white; border:none; border-radius:8px; cursor:pointer;">⏹ 스캔 중지</button>
       </div>
     </div>
@@ -410,7 +411,7 @@
     <div class="page-content">
       <div class="receiving-step">
         <h3>📦 STEP 1. 카톤 바코드 스캔</h3>
-        <div id="receiving-reader"></div>
+        <div id="receiving-reader"><video id="receiving-reader-video" style="width:100%; border-radius:8px;"></video></div>
         <button class="scan-btn" id="receivingScanBtn" onclick="toggleReceivingScan()">스캔 시작</button>
         <div class="manual-input"><input type="text" id="receiving-manual-barcode" placeholder="카톤 바코드 입력..." /><button class="btn-sm" onclick="receivingManualSearch()">조회</button></div>
       </div>
@@ -581,6 +582,64 @@
     var allStores = [];
 
     var API_CONFIG = { enabled: false, key: '', url: '' };
+
+    // ZXing 바코드 스캐너 공통 함수
+    var zxingStreams = {};
+    var codeReader = null;
+
+    async function startZxingScan(elementId, onSuccess, onStop) {
+      try {
+        if (typeof ZXing === 'undefined') {
+          alert('스캐너 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.');
+          return;
+        }
+        codeReader = new ZXing.BrowserMultiFormatReader();
+        codeReader.hints = new Map();
+        var formats = [
+          ZXing.BarcodeFormat.CODE_128,
+          ZXing.BarcodeFormat.CODE_39,
+          ZXing.BarcodeFormat.EAN_13,
+          ZXing.BarcodeFormat.EAN_8,
+          ZXing.BarcodeFormat.UPC_A,
+          ZXing.BarcodeFormat.UPC_E,
+          ZXing.BarcodeFormat.QR_CODE
+        ];
+        codeReader.hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
+        codeReader.hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+
+        var videoEl = document.getElementById(elementId);
+        if (!videoEl) {
+          // video 엘리먼트가 없으면 생성
+          var container = document.getElementById(elementId);
+          videoEl = document.createElement('video');
+          videoEl.id = elementId + '-video';
+          videoEl.style.width = '100%';
+          videoEl.style.borderRadius = '8px';
+          if (container) container.appendChild(videoEl);
+        }
+
+        await codeReader.decodeFromVideoDevice(null, elementId + '-video', function(result, err) {
+          if (result) {
+            onSuccess(result.getText());
+          }
+        });
+        zxingStreams[elementId] = codeReader;
+      } catch(err) {
+        alert('카메라 접근 실패: ' + err);
+        if (onStop) onStop();
+      }
+    }
+
+    function stopZxingScan(elementId) {
+      if (zxingStreams[elementId]) {
+        try { zxingStreams[elementId].reset(); } catch(e) {}
+        delete zxingStreams[elementId];
+      }
+      if (codeReader) {
+        try { codeReader.reset(); } catch(e) {}
+        codeReader = null;
+      }
+    }
 
     var SIZES = {
       '신발': { '여성': ['220','225','230','235','240','245','250','255'], '남성': ['250','255','260','265','270','275','280','285','290'] },
@@ -825,18 +884,19 @@
     function toggleMainScan() { if (isMainScanning) { stopMainScan(); } else { startMainScan(); } }
     function startMainScan() {
       document.getElementById('main-reader-container').style.display = 'block';
-      mainHtml5QrCode = new Html5Qrcode("main-reader");
-      mainHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 120 }, aspectRatio: 1.7 },
-        async function(decodedText) {
-          stopMainScan();
-          document.getElementById('main-search-input').value = decodedText;
-          await mainSearch();
-        }, function(error) {}
-      ).then(function() { isMainScanning = true; document.getElementById('main-camera-btn').textContent = '⏹'; })
-      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      startZxingScan('main-reader', async function(decodedText) {
+        stopMainScan();
+        document.getElementById('main-search-input').value = decodedText;
+        await mainSearch();
+      });
+      isMainScanning = true;
+      document.getElementById('main-camera-btn').textContent = '⏹';
     }
     function stopMainScan() {
-      if (mainHtml5QrCode && isMainScanning) { mainHtml5QrCode.stop().catch(function(){}); isMainScanning = false; document.getElementById('main-reader-container').style.display = 'none'; document.getElementById('main-camera-btn').textContent = '📷'; }
+      stopZxingScan('main-reader');
+      isMainScanning = false;
+      document.getElementById('main-reader-container').style.display = 'none';
+      document.getElementById('main-camera-btn').textContent = '📷';
     }
 
     // BIN 정보 관리
@@ -1025,15 +1085,19 @@
     function toggleOtherStoreScan() { if (isOtherStoreScanning) { stopOtherStoreScan(); } else { startOtherStoreScan(); } }
     function startOtherStoreScan() {
       document.getElementById('other-store-reader-container').style.display = 'block';
-      otherStoreHtml5QrCode = new Html5Qrcode("other-store-reader");
-      otherStoreHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 120 }, aspectRatio: 1.7 },
-        async function(decodedText) { stopOtherStoreScan(); document.getElementById('other-store-search-input').value = decodedText; await searchOtherStore(); },
-        function(error) {}
-      ).then(function() { isOtherStoreScanning = true; document.getElementById('other-store-scan-btn').style.background = '#ef4444'; })
-      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      startZxingScan('other-store-reader', async function(decodedText) {
+        stopOtherStoreScan();
+        document.getElementById('other-store-search-input').value = decodedText;
+        await searchOtherStore();
+      });
+      isOtherStoreScanning = true;
+      document.getElementById('other-store-scan-btn').style.background = '#ef4444';
     }
     function stopOtherStoreScan() {
-      if (otherStoreHtml5QrCode && isOtherStoreScanning) { otherStoreHtml5QrCode.stop().catch(function(){}); isOtherStoreScanning = false; document.getElementById('other-store-reader-container').style.display = 'none'; document.getElementById('other-store-scan-btn').style.background = '#333'; }
+      stopZxingScan('other-store-reader');
+      isOtherStoreScanning = false;
+      document.getElementById('other-store-reader-container').style.display = 'none';
+      document.getElementById('other-store-scan-btn').style.background = '#333';
     }
 
     async function searchOtherStore() {
@@ -1319,14 +1383,23 @@
     function resetScanUI() { document.getElementById('scanned-result').style.display = 'none'; currentProduct = null; }
     function toggleScan() { if (isScanning) { stopScan(); } else { startScan(); } }
     function startScan() {
-      html5QrCode = new Html5Qrcode("reader");
-      html5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 200 }, aspectRatio: 1.0 },
-        async function(decodedText) { stopScan(); await findProductByBarcodeForInventory(decodedText); }, function(error) {}
-      ).then(function() { isScanning = true; document.getElementById('scanBtn').textContent = '⏹ 스캔 중지'; document.getElementById('scanBtn').classList.add('stop'); })
-      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      startZxingScan('reader', function(decodedText) {
+        stopScan();
+        findProductByBarcodeForInventory(decodedText);
+      }, function() {
+        isScanning = false;
+        document.getElementById('scanBtn').textContent = '스캔 시작';
+        document.getElementById('scanBtn').classList.remove('stop');
+      });
+      isScanning = true;
+      document.getElementById('scanBtn').textContent = '⏹ 스캔 중지';
+      document.getElementById('scanBtn').classList.add('stop');
     }
     function stopScan() {
-      if (html5QrCode && isScanning) { html5QrCode.stop().catch(function(){}); isScanning = false; document.getElementById('scanBtn').textContent = '스캔 시작'; document.getElementById('scanBtn').classList.remove('stop'); }
+      stopZxingScan('reader');
+      isScanning = false;
+      document.getElementById('scanBtn').textContent = '스캔 시작';
+      document.getElementById('scanBtn').classList.remove('stop');
     }
     function stopScanAndGoBack(type) {
       if (type === 'inventory') stopScan();
@@ -1425,14 +1498,19 @@
     function resetReceivingStep2() { document.getElementById('receiving-compare-section').style.display = 'none'; selectedOrder = null; }
     function toggleReceivingScan() { if (isReceivingScanning) { stopReceivingScan(); } else { startReceivingScan(); } }
     function startReceivingScan() {
-      receivingHtml5QrCode = new Html5Qrcode("receiving-reader");
-      receivingHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 200 }, aspectRatio: 1.0 },
-        async function(decodedText) { stopReceivingScan(); await processBoxBarcode(decodedText); }, function(error) {}
-      ).then(function() { isReceivingScanning = true; document.getElementById('receivingScanBtn').textContent = '⏹ 스캔 중지'; document.getElementById('receivingScanBtn').classList.add('stop'); })
-      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      startZxingScan('receiving-reader', async function(decodedText) {
+        stopReceivingScan();
+        await processBoxBarcode(decodedText);
+      });
+      isReceivingScanning = true;
+      document.getElementById('receivingScanBtn').textContent = '⏹ 스캔 중지';
+      document.getElementById('receivingScanBtn').classList.add('stop');
     }
     function stopReceivingScan() {
-      if (receivingHtml5QrCode && isReceivingScanning) { receivingHtml5QrCode.stop().catch(function(){}); isReceivingScanning = false; document.getElementById('receivingScanBtn').textContent = '스캔 시작'; document.getElementById('receivingScanBtn').classList.remove('stop'); }
+      stopZxingScan('receiving-reader');
+      isReceivingScanning = false;
+      document.getElementById('receivingScanBtn').textContent = '스캔 시작';
+      document.getElementById('receivingScanBtn').classList.remove('stop');
     }
     async function receivingManualSearch() {
       var barcode = document.getElementById('receiving-manual-barcode').value.trim();
@@ -1516,15 +1594,20 @@
     function toggleProductScan() { if (isProductScanning) { stopProductScan(); } else { startProductScan(); } }
     function startProductScan() {
       document.getElementById('product-reader-container').style.display = 'block';
-      productHtml5QrCode = new Html5Qrcode("product-reader");
-      productHtml5QrCode.start({ facingMode: "environment" }, { fps: 30, qrbox: { width: 200, height: 120 }, aspectRatio: 1.7 },
-        async function(decodedText) { stopProductScan(); var result = await findProductByUPC(decodedText); if (result) { document.getElementById('search-input').value = decodedText; await renderProducts([result.product]); } else { alert('등록되지 않은 바코드: ' + decodedText); } },
-        function(error) {}
-      ).then(function() { isProductScanning = true; document.getElementById('product-scan-btn').style.background = '#ef4444'; })
-      .catch(function(err) { alert('카메라 접근 실패: ' + err); });
+      startZxingScan('product-reader', async function(decodedText) {
+        stopProductScan();
+        var result = await findProductByUPC(decodedText);
+        if (result) { document.getElementById('search-input').value = decodedText; await renderProducts([result.product]); }
+        else { alert('등록되지 않은 바코드: ' + decodedText); }
+      });
+      isProductScanning = true;
+      document.getElementById('product-scan-btn').style.background = '#ef4444';
     }
     function stopProductScan() {
-      if (productHtml5QrCode && isProductScanning) { productHtml5QrCode.stop().catch(function(){}); isProductScanning = false; document.getElementById('product-reader-container').style.display = 'none'; document.getElementById('product-scan-btn').style.background = '#333'; }
+      stopZxingScan('product-reader');
+      isProductScanning = false;
+      document.getElementById('product-reader-container').style.display = 'none';
+      document.getElementById('product-scan-btn').style.background = '#333';
     }
 
     // 설정
