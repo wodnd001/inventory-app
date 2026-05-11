@@ -630,42 +630,127 @@
     var zxingStreams = {};
     var codeReader = null;
 
-   // 삑 소리 생성 (Web Audio API)
+   // 캐셔 바코드 리더 삑 소리
     function playBeep() {
       try {
         var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        var oscillator = audioCtx.createOscillator();
-        var gainNode = audioCtx.createGain();
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.type = 'square';
-        oscillator.frequency.setValueAtTime(1800, audioCtx.currentTime);
-        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-        oscillator.start(audioCtx.currentTime);
-        oscillator.stop(audioCtx.currentTime + 0.15);
+
+        // 첫번째 톤
+        var osc1 = audioCtx.createOscillator();
+        var gain1 = audioCtx.createGain();
+        osc1.connect(gain1);
+        gain1.connect(audioCtx.destination);
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(950, audioCtx.currentTime);
+        osc1.frequency.linearRampToValueAtTime(1050, audioCtx.currentTime + 0.06);
+        gain1.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain1.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.01);
+        gain1.gain.setValueAtTime(0.5, audioCtx.currentTime + 0.06);
+        gain1.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.12);
+        osc1.start(audioCtx.currentTime);
+        osc1.stop(audioCtx.currentTime + 0.12);
+
+        // 두번째 톤 (살짝 높게)
+        var osc2 = audioCtx.createOscillator();
+        var gain2 = audioCtx.createGain();
+        osc2.connect(gain2);
+        gain2.connect(audioCtx.destination);
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(1150, audioCtx.currentTime + 0.1);
+        gain2.gain.setValueAtTime(0, audioCtx.currentTime + 0.1);
+        gain2.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 0.12);
+        gain2.gain.setValueAtTime(0.4, audioCtx.currentTime + 0.18);
+        gain2.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.22);
+        osc2.start(audioCtx.currentTime + 0.1);
+        osc2.stop(audioCtx.currentTime + 0.22);
       } catch(e) {}
     }
 
-    // 형광 초록 스캔 성공 라인 표시
-    function showScanSuccessLine(elementId) {
+    // Canvas에 바코드 위치 위로 형광 라인 그리기
+    function showScanSuccessLine(elementId, resultPoints) {
+      var videoEl = document.getElementById(elementId + '-video');
       var container = document.getElementById(elementId);
       if (!container) return;
-      var existing = container.querySelector('.scan-success-line');
-      if (existing) existing.remove();
-      var line = document.createElement('div');
-      line.className = 'scan-success-line';
-      line.style.cssText = 'position:absolute; left:0; right:0; top:50%; height:3px; background:#39ff14; box-shadow:0 0 8px #39ff14, 0 0 16px #39ff14; z-index:99; pointer-events:none; animation:scanLine 0.6s ease forwards;';
+
+      // 기존 캔버스 제거
+      var existingCanvas = container.querySelector('.scan-canvas');
+      if (existingCanvas) existingCanvas.remove();
+
+      // 캔버스 생성
+      var canvas = document.createElement('canvas');
+      canvas.className = 'scan-canvas';
+      canvas.style.cssText = 'position:absolute; top:0; left:0; width:100%; height:100%; z-index:99; pointer-events:none; border-radius:8px;';
       container.style.position = 'relative';
-      container.appendChild(line);
-      // 애니메이션 스타일 추가
-      if (!document.getElementById('scan-success-style')) {
-        var style = document.createElement('style');
-        style.id = 'scan-success-style';
-        style.textContent = '@keyframes scanLine { 0% { opacity:1; transform:scaleX(0); } 30% { opacity:1; transform:scaleX(1); } 70% { opacity:1; transform:scaleX(1); } 100% { opacity:0; transform:scaleX(1); } }';
-        document.head.appendChild(style);
+      container.appendChild(canvas);
+
+      var ctx = canvas.getContext('2d');
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+
+      if (resultPoints && resultPoints.length >= 2 && videoEl) {
+        // 비디오와 컨테이너 비율 계산
+        var scaleX = canvas.width / (videoEl.videoWidth || canvas.width);
+        var scaleY = canvas.height / (videoEl.videoHeight || canvas.height);
+
+        // 바코드 좌표 변환
+        var points = resultPoints.map(function(p) {
+          return { x: p.x * scaleX, y: p.y * scaleY };
+        });
+
+        // 바코드 위아래 Y좌표 계산
+        var minY = Math.min.apply(null, points.map(function(p) { return p.y; }));
+        var maxY = Math.max.apply(null, points.map(function(p) { return p.y; }));
+        var minX = Math.min.apply(null, points.map(function(p) { return p.x; }));
+        var maxX = Math.max.apply(null, points.map(function(p) { return p.x; }));
+        var midY = (minY + maxY) / 2;
+
+        // 형광 초록 라인 그리기
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.shadowColor = '#39ff14';
+        ctx.shadowBlur = 12;
+        ctx.strokeStyle = '#39ff14';
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(minX - 10, midY);
+        ctx.lineTo(maxX + 10, midY);
+        ctx.stroke();
+
+        // 양 끝 수직 마커
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(minX - 10, minY - 6);
+        ctx.lineTo(minX - 10, maxY + 6);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(maxX + 10, minY - 6);
+        ctx.lineTo(maxX + 10, maxY + 6);
+        ctx.stroke();
+
+      } else {
+        // 좌표 없으면 화면 중앙에 라인
+        var midY = canvas.height / 2;
+        ctx.shadowColor = '#39ff14';
+        ctx.shadowBlur = 14;
+        ctx.strokeStyle = '#39ff14';
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(20, midY);
+        ctx.lineTo(canvas.width - 20, midY);
+        ctx.stroke();
       }
-      setTimeout(function() { if (line.parentNode) line.remove(); }, 700);
+
+      // 0.7초 후 페이드아웃
+      var opacity = 1;
+      var fadeInterval = setInterval(function() {
+        opacity -= 0.08;
+        canvas.style.opacity = opacity;
+        if (opacity <= 0) {
+          clearInterval(fadeInterval);
+          if (canvas.parentNode) canvas.remove();
+        }
+      }, 40);
     }
 
     async function startZxingScan(elementId, onSuccess, onStop) {
@@ -688,7 +773,9 @@
         codeReader = new ZXing.BrowserMultiFormatReader(hints);
         await codeReader.decodeFromVideoDevice(null, elementId + '-video', function(result, err) {
           if (result) {
-            showScanSuccessLine(elementId);
+            var points = null;
+            try { points = result.getResultPoints(); } catch(e) {}
+            showScanSuccessLine(elementId, points);
             playBeep();
             onSuccess(result.getText());
           }
