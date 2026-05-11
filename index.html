@@ -249,6 +249,16 @@
 </head>
 <body>
 
+  <!-- 스플래시 스크린 -->
+  <div id="splash-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#E21836; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+    <div id="splash-logo" style="text-align:center; opacity:0; transform:scale(0.5); transition: opacity 0.6s ease, transform 0.6s ease;">
+      <div style="font-size:72px; font-weight:900; color:white; letter-spacing:-2px; font-style:italic;">NB</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); letter-spacing:6px; margin-top:8px;">New Balance</div>
+      <div style="width:40px; height:3px; background:white; margin:16px auto 0; border-radius:2px; opacity:0; transition: opacity 0.4s ease 0.4s;" id="splash-line"></div>
+      <div style="font-size:11px; color:rgba(255,255,255,0.7); letter-spacing:3px; margin-top:10px; opacity:0; transition: opacity 0.4s ease 0.6s;" id="splash-sub">재고관리 시스템</div>
+    </div>
+  </div>
+
   <!-- 로그인 -->
   <div id="login-page">
     <div class="login-box">
@@ -553,6 +563,39 @@
   </div>
 
   <script>
+    // 스플래시 스크린 애니메이션
+    window.addEventListener('load', function() {
+      var logo = document.getElementById('splash-logo');
+      var line = document.getElementById('splash-line');
+      var sub = document.getElementById('splash-sub');
+      var splash = document.getElementById('splash-screen');
+
+      // 로고 등장
+      setTimeout(function() {
+        logo.style.opacity = '1';
+        logo.style.transform = 'scale(1)';
+      }, 100);
+
+      // 라인 등장
+      setTimeout(function() {
+        line.style.opacity = '1';
+      }, 500);
+
+      // 서브텍스트 등장
+      setTimeout(function() {
+        sub.style.opacity = '1';
+      }, 700);
+
+      // 페이드아웃 후 제거
+      setTimeout(function() {
+        splash.style.transition = 'opacity 0.5s ease';
+        splash.style.opacity = '0';
+        setTimeout(function() {
+          splash.style.display = 'none';
+        }, 500);
+      }, 2000);
+    });
+
     const SUPABASE_URL = 'https://qxrtzfkhccxjzihxrrpi.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_pELeow83FpEghcttnIOlSA_XRk4bUMF';
     const { createClient } = supabase;
@@ -587,7 +630,45 @@
     var zxingStreams = {};
     var codeReader = null;
 
-   async function startZxingScan(elementId, onSuccess, onStop) {
+   // 삑 소리 생성 (Web Audio API)
+    function playBeep() {
+      try {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        var oscillator = audioCtx.createOscillator();
+        var gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(1800, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+        oscillator.start(audioCtx.currentTime);
+        oscillator.stop(audioCtx.currentTime + 0.15);
+      } catch(e) {}
+    }
+
+    // 형광 초록 스캔 성공 라인 표시
+    function showScanSuccessLine(elementId) {
+      var container = document.getElementById(elementId);
+      if (!container) return;
+      var existing = container.querySelector('.scan-success-line');
+      if (existing) existing.remove();
+      var line = document.createElement('div');
+      line.className = 'scan-success-line';
+      line.style.cssText = 'position:absolute; left:0; right:0; top:50%; height:3px; background:#39ff14; box-shadow:0 0 8px #39ff14, 0 0 16px #39ff14; z-index:99; pointer-events:none; animation:scanLine 0.6s ease forwards;';
+      container.style.position = 'relative';
+      container.appendChild(line);
+      // 애니메이션 스타일 추가
+      if (!document.getElementById('scan-success-style')) {
+        var style = document.createElement('style');
+        style.id = 'scan-success-style';
+        style.textContent = '@keyframes scanLine { 0% { opacity:1; transform:scaleX(0); } 30% { opacity:1; transform:scaleX(1); } 70% { opacity:1; transform:scaleX(1); } 100% { opacity:0; transform:scaleX(1); } }';
+        document.head.appendChild(style);
+      }
+      setTimeout(function() { if (line.parentNode) line.remove(); }, 700);
+    }
+
+    async function startZxingScan(elementId, onSuccess, onStop) {
       try {
         if (typeof ZXing === 'undefined') {
           alert('스캐너 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.');
@@ -606,7 +687,11 @@
         hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
         codeReader = new ZXing.BrowserMultiFormatReader(hints);
         await codeReader.decodeFromVideoDevice(null, elementId + '-video', function(result, err) {
-          if (result) { onSuccess(result.getText()); }
+          if (result) {
+            showScanSuccessLine(elementId);
+            playBeep();
+            onSuccess(result.getText());
+          }
         });
         zxingStreams[elementId] = codeReader;
       } catch(err) {
