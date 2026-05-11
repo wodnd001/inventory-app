@@ -587,15 +587,14 @@
     var zxingStreams = {};
     var codeReader = null;
 
-    async function startZxingScan(elementId, onSuccess, onStop) {
+   async function startZxingScan(elementId, onSuccess, onStop) {
       try {
         if (typeof ZXing === 'undefined') {
           alert('스캐너 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.');
           return;
         }
-        codeReader = new ZXing.BrowserMultiFormatReader();
-        codeReader.hints = new Map();
-        var formats = [
+        var hints = new Map();
+        hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [
           ZXing.BarcodeFormat.CODE_128,
           ZXing.BarcodeFormat.CODE_39,
           ZXing.BarcodeFormat.EAN_13,
@@ -603,25 +602,11 @@
           ZXing.BarcodeFormat.UPC_A,
           ZXing.BarcodeFormat.UPC_E,
           ZXing.BarcodeFormat.QR_CODE
-        ];
-        codeReader.hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
-        codeReader.hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
-
-        var videoEl = document.getElementById(elementId);
-        if (!videoEl) {
-          // video 엘리먼트가 없으면 생성
-          var container = document.getElementById(elementId);
-          videoEl = document.createElement('video');
-          videoEl.id = elementId + '-video';
-          videoEl.style.width = '100%';
-          videoEl.style.borderRadius = '8px';
-          if (container) container.appendChild(videoEl);
-        }
-
+        ]);
+        hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+        codeReader = new ZXing.BrowserMultiFormatReader(hints);
         await codeReader.decodeFromVideoDevice(null, elementId + '-video', function(result, err) {
-          if (result) {
-            onSuccess(result.getText());
-          }
+          if (result) { onSuccess(result.getText()); }
         });
         zxingStreams[elementId] = codeReader;
       } catch(err) {
@@ -629,7 +614,7 @@
         if (onStop) onStop();
       }
     }
-
+    
     function stopZxingScan(elementId) {
       if (zxingStreams[elementId]) {
         try { zxingStreams[elementId].reset(); } catch(e) {}
@@ -640,6 +625,8 @@
         codeReader = null;
       }
     }
+
+
 
     var SIZES = {
       '신발': { '여성': ['220','225','230','235','240','245','250','255'], '남성': ['250','255','260','265','270','275','280','285','290'] },
