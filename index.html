@@ -29,7 +29,6 @@
     .login-box { background: transparent; padding: 40px 32px; width: 100%; max-width: 380px; display: flex; flex-direction: column; align-items: center; }
     .login-logo { text-align: center; margin-bottom: 48px; }
     .login-logo h1 { font-size: 36px; font-weight: 900; color: white; letter-spacing: -1px; font-style: italic; }
-    .login-logo p { font-size: 14px; color: rgba(255,255,255,0.85); letter-spacing: 4px; margin-top: 4px; }
     .input-wrapper { width: 100%; position: relative; margin-bottom: 16px; }
     .input-wrapper .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #888; }
     .login-input { width: 100%; padding: 14px 16px 14px 44px; border: none; border-radius: 30px; font-size: 15px; outline: none; background: white; }
@@ -269,7 +268,10 @@
   <!-- 로그인 -->
   <div id="login-page">
     <div class="login-box">
-      <div class="login-logo"><h1>NB</h1><p>New Balance</p></div>
+      <div class="login-logo">
+        <img src="/nb-logo.png" style="width:200px; display:block; margin:0 auto 12px;" onerror="this.style.display='none'; document.getElementById('login-nb-text').style.display='block';" />
+        <div id="login-nb-text" style="display:none; font-size:36px; font-weight:900; color:white; letter-spacing:-1px; font-style:italic;">NB</div>
+      </div>
       <div class="input-wrapper"><span class="input-icon">👤</span><input type="text" id="store" class="login-input" placeholder="매장 아이디" /></div>
       <div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" id="password" class="login-input" placeholder="비밀번호" /></div>
       <button class="login-btn" id="loginBtn">로그인</button>
