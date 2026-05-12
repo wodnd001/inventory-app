@@ -259,9 +259,20 @@
   <!-- 스플래시 -->
   <div id="splash-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#E21836; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
     <div id="splash-logo" style="text-align:center; opacity:0; transform:scale(0.5); transition: opacity 0.6s ease, transform 0.6s ease;">
-      <div style="font-size:72px; font-weight:900; color:white; letter-spacing:-2px; font-style:italic;">NB</div>
-      <div style="font-size:13px; color:rgba(255,255,255,0.9); letter-spacing:6px; margin-top:8px;">New Balance</div>
-      <div style="width:40px; height:3px; background:white; margin:16px auto 0; border-radius:2px; opacity:0; transition: opacity 0.4s ease 0.4s;" id="splash-line"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="280" style="display:block; margin:0 auto;">
+        <!-- N -->
+        <path d="M10 20 L10 140 L50 140 L50 75 L110 140 L150 140 L150 20 L110 20 L110 85 L50 20 Z" fill="white"/>
+        <!-- B -->
+        <path d="M170 20 L170 140 L250 140 Q290 140 290 110 Q290 88 268 82 Q290 76 290 52 Q290 20 250 20 Z
+                 M210 55 L245 55 Q255 55 255 65 Q255 75 245 75 L210 75 Z
+                 M210 100 L248 100 Q260 100 260 112 Q260 124 248 124 L210 124 Z" fill="white"/>
+        <!-- 속도선 -->
+        <line x1="310" y1="60" x2="395" y2="60" stroke="white" stroke-width="14" stroke-linecap="round"/>
+        <line x1="320" y1="85" x2="395" y2="85" stroke="white" stroke-width="14" stroke-linecap="round"/>
+        <line x1="305" y1="110" x2="395" y2="110" stroke="white" stroke-width="14" stroke-linecap="round"/>
+      </svg>
+      <div style="font-size:13px; color:rgba(255,255,255,0.9); letter-spacing:6px; margin-top:12px; font-weight:300;">new balance</div>
+      <div style="width:40px; height:2px; background:white; margin:16px auto 0; border-radius:2px; opacity:0; transition: opacity 0.4s ease 0.4s;" id="splash-line"></div>
       <div style="font-size:11px; color:rgba(255,255,255,0.7); letter-spacing:3px; margin-top:10px; opacity:0; transition: opacity 0.4s ease 0.6s;" id="splash-sub">재고관리 시스템</div>
     </div>
   </div>
