@@ -140,6 +140,7 @@
     .header { background-color: #E21836; color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
     .header h2 { font-size: 18px; }
     .back-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .back-btn:first-child { font-size: 28px; font-weight: 300; padding: 2px 10px; line-height: 1; }
     .btn { width: 100%; padding: 13px; background-color: #E21836; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
     .btn-green { background: #10b981; }
     .btn-red { background: #ef4444; }
@@ -316,11 +317,9 @@
   <!-- 재고 목록 -->
   <div id="products-page" class="page">
     <div class="header">
+      <button class="back-btn" onclick="closeSubPage()">‹</button>
       <h2>📦 재고 목록</h2>
-      <div style="display:flex; gap:8px;">
-        <button class="back-btn" onclick="exportCSV()">📥 Excel</button>
-        <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
-      </div>
+      <button class="back-btn" onclick="exportCSV()">📥 Excel</button>
     </div>
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="🔍 상품명, 스타일번호 검색..." oninput="searchProducts()" />
@@ -351,18 +350,16 @@
   <!-- 상품 상세 -->
   <div id="product-detail-page" class="page">
     <div class="header">
+      <button class="back-btn" onclick="closeDetailPage()">‹</button>
       <h2 id="detail-title">상품 상세</h2>
-      <div style="display:flex; gap:8px;">
-        <button class="back-btn" id="detail-edit-btn" onclick="openEditModalFromDetail()">✏️ 수정</button>
-        <button class="back-btn" onclick="closeDetailPage()">← 뒤로</button>
-      </div>
+      <button class="back-btn" id="detail-edit-btn" onclick="openEditModalFromDetail()">✏️ 수정</button>
     </div>
     <div class="page-content" id="product-detail-content"></div>
   </div>
 
   <!-- 재고조사 -->
   <div id="inventory-page" class="page">
-    <div class="header"><h2>🔍 재고조사</h2><button class="back-btn" onclick="stopScanAndGoBack('inventory')">← 뒤로</button></div>
+    <div class="header"><button class="back-btn" onclick="stopScanAndGoBack('inventory')">‹</button><h2>🔍 재고조사</h2><div style="width:44px;"></div></div>
     <div class="page-content">
       <div class="scan-section">
         <h3>📷 바코드 스캔</h3>
@@ -388,7 +385,7 @@
 
   <!-- 타매장 재고 조회 -->
   <div id="other-store-page" class="page">
-    <div class="header"><h2>🏪 타매장 재고 조회</h2><button class="back-btn" onclick="stopScanAndGoBack('other-store')">← 뒤로</button></div>
+    <div class="header"><button class="back-btn" onclick="stopScanAndGoBack('other-store')">‹</button><h2>🏪 타매장 재고 조회</h2><div style="width:44px;"></div></div>
     <div style="padding:16px 20px; background:white; border-bottom:1px solid #eee;">
       <div style="display:flex; gap:8px;">
         <input type="text" id="other-store-search-input" placeholder="바코드/품번으로 검색..." style="flex:1; padding:10px 16px; border:1px solid #ddd; border-radius:8px; font-size:15px; outline:none;" />
@@ -413,11 +410,9 @@
   <!-- BIN 정보 -->
   <div id="bin-page" class="page">
     <div class="header">
+      <button class="back-btn" onclick="closeSubPage()">‹</button>
       <h2>📍 BIN 정보</h2>
-      <div style="display:flex; gap:8px;">
-        <button class="back-btn" id="bin-edit-toggle" onclick="toggleBinEditMode()">✏️ 수정</button>
-        <button class="back-btn" onclick="closeSubPage()">← 뒤로</button>
-      </div>
+      <button class="back-btn" id="bin-edit-toggle" onclick="toggleBinEditMode()">✏️ 수정</button>
     </div>
     <div class="bin-search-bar">
       <input type="text" id="bin-search-input" placeholder="🔍 BIN 코드 또는 상품명 검색..." oninput="searchBins()" />
@@ -428,7 +423,7 @@
 
   <!-- 입고관리 -->
   <div id="receiving-page" class="page">
-    <div class="header"><h2>📥 입고관리</h2><button class="back-btn" onclick="stopScanAndGoBack('receiving')">← 뒤로</button></div>
+    <div class="header"><button class="back-btn" onclick="stopScanAndGoBack('receiving')">‹</button><h2>📥 입고관리</h2><div style="width:44px;"></div></div>
     <div class="page-content">
       <div class="receiving-step">
         <h3>📦 STEP 1. 카톤 바코드 스캔</h3>
@@ -463,7 +458,7 @@
 
   <!-- 요청 관리 -->
   <div id="requests-page" class="page">
-    <div class="header"><h2>🔄 요청 관리</h2><button class="back-btn" onclick="closeSubPage()">← 뒤로</button></div>
+    <div class="header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>🔄 요청 관리</h2><div style="width:44px;"></div></div>
     <div class="request-tab">
       <button class="request-tab-btn active" onclick="switchRequestTab('received')">받은 요청</button>
       <button class="request-tab-btn" onclick="switchRequestTab('sent')">보낸 요청</button>
@@ -488,7 +483,7 @@
 
   <!-- 설정 -->
   <div id="settings-page" class="page">
-    <div class="header"><h2>⚙️ 설정</h2><button class="back-btn" onclick="closeSubPage()">← 뒤로</button></div>
+    <div class="header"><button class="back-btn" onclick="closeSubPage()">‹</button><h2>⚙️ 설정</h2><div style="width:44px;"></div></div>
     <div class="page-content">
       <div class="settings-card">
         <h3>매장 정보</h3>
