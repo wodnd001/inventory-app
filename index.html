@@ -622,15 +622,52 @@
 
     async function findProductByUPC(upc) {
       var parsed = parseUPC(upc);
+
+      // 1. 정확한 바코드 매칭
       var { data: exact } = await db.from('products').select('*').eq('barcode', upc).single();
       if (exact) return { product: exact, colorCode: parsed.colorCode, sizeCode: parsed.sizeCode, matchType: 'exact' };
+
+      // 2. 앞 10자리 스타일 매칭
       var { data: products } = await db.from('products').select('*');
       if (!products) return null;
+
+      // NB 스타일 번호 파싱으로 성별 포함 매칭
+      var nbStyle = parseNBStyle(parsed.style10);
+      var genderFromUPC = nbStyle ? GENDER_CODES[nbStyle.gender] : null;
+
       var matched = products.filter(function(p) {
-        return (p.barcode && p.barcode.substring(0, 10) === parsed.style10) ||
-               (p.style && p.style.substring(0, 10).toLowerCase() === parsed.style10.toLowerCase());
+        var styleMatch = (p.barcode && p.barcode.substring(0, 10) === parsed.style10) ||
+                         (p.style && p.style.substring(0, 10).toLowerCase() === parsed.style10.toLowerCase());
+        if (!styleMatch) return false;
+        // 성별 일치 우선 매칭
+        if (genderFromUPC && p.gender) {
+          return p.gender === genderFromUPC;
+        }
+        return true;
       });
-      if (matched.length > 0) return { product: matched[0], colorCode: parsed.colorCode, sizeCode: parsed.sizeCode, matchType: 'partial' };
+
+      // 성별 매칭 실패시 스타일만으로 매칭
+      if (matched.length === 0) {
+        matched = products.filter(function(p) {
+          return (p.barcode && p.barcode.substring(0, 10) === parsed.style10) ||
+                 (p.style && p.style.substring(0, 10).toLowerCase() === parsed.style10.toLowerCase());
+        });
+      }
+
+      if (matched.length > 0) {
+        // 상품 정보에 스타일 번호 파싱 정보 추가
+        var product = matched[0];
+        var styleInfo = parseNBStyle(product.style);
+        return {
+          product: product,
+          colorCode: parsed.colorCode,
+          sizeCode: parsed.sizeCode,
+          matchType: 'partial',
+          itemType: styleInfo ? ITEM_CODES[styleInfo.itemCode] : null,
+          genderInfo: styleInfo ? GENDER_CODES[styleInfo.gender] : null,
+          seasonInfo: styleInfo ? SEASON_CODES[styleInfo.season] : null
+        };
+      }
       return null;
     }
 
@@ -680,6 +717,55 @@
       ['main-reader','reader','receiving-reader','other-store-reader','product-reader'].forEach(function(id) { stopZxingScan(id); });
       isScanning = false; isProductScanning = false; isMainScanning = false; isReceivingScanning = false; isOtherStoreScanning = false;
     }
+
+    // 바코드 중복 인식 방지
+    var lastScannedBarcode = null;
+    var lastScannedTime = 0;
+    var SCAN_COOLDOWN = 2000; // 2초 쿨다운
+
+    function isCooldown(barcode) {
+      var now = Date.now();
+      if (barcode === lastScannedBarcode && now - lastScannedTime < SCAN_COOLDOWN) {
+        return true;
+      }
+      lastScannedBarcode = barcode;
+      lastScannedTime = now;
+      return false;
+    }
+
+    // NB 스타일 번호 파싱
+    // 예: NBMDF11013 → 브랜드:NB, 아이템:MD, 연도:F, 시즌:1, 컨셉:10, 순번:1, 성별:3
+    function parseNBStyle(style) {
+      if (!style || style.length < 10) return null;
+      var brand = style.substring(0, 2);       // NB
+      var itemCode = style.substring(2, 4);     // 아이템코드 (MD, NE, NA 등)
+      var year = style.substring(4, 5);         // 연도 (F=2025)
+      var season = style.substring(5, 6);       // 시즌 (1=봄, 2=여름)
+      var concept = style.substring(6, 8);      // 컨셉코드
+      var gender = style.substring(9, 10);      // 성별 (1=남성, 2=여성, 3=남녀공용)
+      return { brand, itemCode, year, season, concept, gender };
+    }
+
+    // 아이템코드 → 상품 종류 변환
+    var ITEM_CODES = {
+      'MD': '운동복상의', 'ML': '운동복하의', 'NA': '우븐자켓',
+      'NC': '맨투맨(우븐)', 'N0': '후드티', 'ND': '긴팔티',
+      'NE': '반팔티', 'NF': '폴로티', 'NG': '나시티',
+      'N9': '브라탑', 'NJ': '베스트', 'NK': '원피스',
+      'NP': '다운점퍼', 'NQ': '패딩점퍼', 'NS': '레깅스',
+      'NT': '우븐팬츠', 'NV': '반바지', 'NW': '스커트'
+    };
+
+    var GENDER_CODES = { '1': '남성', '2': '여성', '3': '남녀공용' };
+    var SEASON_CODES = { '1': '봄', '2': '여름', '3': '가을', '4': '겨울' };
+    var YEAR_CODES = { 'F': '2025년' };
+    var CONCEPT_CODES = {
+      '1': 'LIFESTYLE(UNI)', '2': 'LIFESTYLE(UNI)',
+      'W': 'WOMENS', 'V': 'WOMENS',
+      '5': 'PERFORMANCE', '6': 'PERFORMANCE',
+      'M': 'MENS(THE TRACK)', '9': 'COLLABORATION',
+      'A': 'ONLINE', 'S': '신학기 용품'
+    };
 
     // ZXing
     function playBeep() {
@@ -749,10 +835,12 @@
         codeReader = new ZXing.BrowserMultiFormatReader(hints);
         await codeReader.decodeFromVideoDevice(null, elementId + '-video', function(result, err) {
           if (result) {
+            var barcode = result.getText();
+            if (isCooldown(barcode)) return; // 중복 인식 방지
             var points = null; try { points = result.getResultPoints(); } catch(e) {}
             showScanSuccessLine(elementId, points);
             playBeep();
-            onSuccess(result.getText());
+            onSuccess(barcode);
           }
         });
         zxingStreams[elementId] = codeReader;
@@ -951,6 +1039,19 @@
         var highlightSize = parsed && parsed.sizeCode ? parsed.sizeCode : null;
         var colorInfo = parsed && parsed.colorCode ? '<span style="background:#ede9fe;color:#7c3aed;padding:2px 8px;border-radius:10px;font-size:11px;">컬러: ' + parsed.colorCode + '</span>' : '';
         var sizeInfo = parsed && parsed.sizeCode ? '<span style="background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:10px;font-size:11px;">사이즈: ' + parsed.sizeCode + '</span>' : '';
+        // NB 스타일 파싱 정보 표시
+        var nbStyleInfo = '';
+        if (p.style && p.style.length >= 10) {
+          var nbParsed = parseNBStyle(p.style);
+          if (nbParsed) {
+            var itemName = ITEM_CODES[nbParsed.itemCode] || nbParsed.itemCode;
+            var genderName = GENDER_CODES[nbParsed.gender] || '';
+            var seasonName = SEASON_CODES[nbParsed.season] || '';
+            var yearName = YEAR_CODES[nbParsed.year] || nbParsed.year;
+            nbStyleInfo = (itemName ? '<span style="background:#f0fdf4;color:#15803d;padding:2px 8px;border-radius:10px;font-size:11px;">' + itemName + '</span>' : '') +
+                          (yearName ? '<span style="background:#f0f9ff;color:#0369a1;padding:2px 8px;border-radius:10px;font-size:11px;">' + yearName + ' ' + seasonName + '</span>' : '');
+          }
+        }
         var stockGridHtml = sizes.map(function(s) {
           var item = stockMap[s]; var qty = item ? item.qty : '-'; var memo = item ? item.memo : '';
           var isLow = qty !== '-' && qty < threshold; var isHighlight = highlightSize && s === highlightSize;
@@ -960,7 +1061,7 @@
             (memo ? '<div style="font-size:10px;color:#3b82f6;">' + memo + '</div>' : '') + '</div>';
         }).join('');
         html += '<div class="result-card">' +
-          '<div class="result-card-header"><div class="result-style">' + p.name + '</div><div class="result-substyle">' + p.style + '</div><div class="result-meta-row" style="margin-top:4px;"><span>' + (p.gender || '') + '</span><span>' + (p.category || '') + '</span><span>' + (p.season || '') + '</span>' + colorInfo + sizeInfo + '</div></div>' +
+          '<div class="result-card-header"><div class="result-style">' + p.name + '</div><div class="result-substyle">' + p.style + '</div><div class="result-meta-row" style="margin-top:4px;"><span>' + (p.gender || '') + '</span><span>' + (p.category || '') + '</span><span>' + (p.season || '') + '</span>' + colorInfo + sizeInfo + nbStyleInfo + '</div></div>' +
           '<div class="result-card-body"><div class="result-info-row"><span class="result-info-label">상품명</span><span>' + p.name + '</span></div><div class="result-info-row"><span class="result-info-label">스타일</span><span>' + p.style + '</span></div></div>' +
           '<div class="result-card-price"><span class="price-label">정상가</span><span class="price-value">₩' + Number(p.price).toLocaleString() + '</span></div>' +
           (p.bin_location ? '<div class="bin-location-row"><span class="bin-label">📍 BIN</span><span class="bin-value">' + p.bin_location + '</span></div>' : '') +
